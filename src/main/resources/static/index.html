@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="UTF-8">
+    <title>We Are club!!</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+    <header>
+        <div id="header-top">
+            <a th:href="@{}" id="header-logo-link">
+                <img id="header-logo" src="/img/club.svg" alt="x">
+            </a>
+            <!--검색창-->
+            <form id="header-search" th:action="" method="post">
+                <img id="header-search-icon" src="/img/search.svg" alt="x">
+                <input id="header-search-bar" name="total-search" type="text">
+            </form>
+        </div>
+        <div id="header-nav">
+            <ul id="nav-box">
+                <li class="nav-item">
+                    <div>
+                        <a class="nav-link" th:href="@{}">
+                            <span>자유 게시판</span>
+                            <img class="nav-logo" src="/img/club.svg" alt="x">
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div>
+                        <a class="nav-link" th:href="@{}">
+                            <span>풋살 게시판</span>
+                            <img class="nav-logo" src="/img/club.svg" alt="x">
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div>
+                        <a class="nav-link" th:href="@{}">
+                            <span>~~ 게시판</span>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div>
+                        <a class="nav-link" th:href="@{}">
+                            <span>~~ 게시판</span>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div>
+                        <a class="nav-link" th:href="@{}">
+                            <span>~~ 게시판</span>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div>
+            <div></div>
+            <div></div>
+        </div>
+        <div></div>
+        <div></div>
+    </main>
+</body>
+</html>

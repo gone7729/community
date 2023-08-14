@@ -1,0 +1,110 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, img, ins, kbd, q, s, samp,
+small, strike, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*------------ reset end-------------- */
+#header-top{
+    display: flex;
+    justify-content: center;
+    height: 160px;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px #f3bd86 solid;
+}
+
+#header-search{
+    padding: 90px 0px 0px 0px;
+}
+
+#header-search-icon{
+    position: absolute;
+    padding: 10px 0px 0px 16px;
+    width: 28px;
+    height: 28px;
+}
+
+#header-search-bar{
+    width: 295px;
+    height: 40px;
+    letter-span: -1%;
+    font-size: 16px;
+    color: black;
+    border-radius: 30px;
+    border: 2px #ffa264 solid;
+    padding-left: 45px;
+    outline: none;
+}
+
+#nav-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    border-bottom: 3px #e79141 solid;
+}
+
+.nav-item > div {
+    text-align: center;
+    width: 184px;
+    height: 42px;
+    border-radius: 7px;
+    border-right: 2px #e79141 solid;
+}
+
+.nav-item > div > a > span{
+    line-height: 40px;
+    letter-spacing: -1px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #e79243;
+}
+
+.nav-logo{
+    width:48px;
+
+}
+
