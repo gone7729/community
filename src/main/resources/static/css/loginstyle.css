@@ -1,0 +1,182 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, img, ins, kbd, q, s, samp,
+small, strike, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*------------ reset end-------------- */
+
+#login-box{
+    display: flex;
+    width: 798px;
+    margin: 183px auto 0 auto;
+    justify-content: center;
+}
+
+.email-login-box{
+    width: 398px;
+    height: 360px;
+    border: 3px #e79141 solid;
+    border-radius: 7px;
+}
+
+#email-login-title{
+    width: 50px;
+    height: 22px;
+    margin: 13px 0px 50px 37px;
+    color: #E79141;
+    font-weight: 550;
+    letter-spacing: -1px;
+}
+
+#email-pw-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+#email-box{
+    display: flex;
+    gap: 22px;
+    align-items: center;
+    letter-spacing: -1px;
+}
+
+#email{
+    width: 276px;
+    height: 27px;
+    border-radius: 12px;
+    outline: none;
+    border: 1px #b7b0b0 solid;
+    padding-left: 8px;
+}
+
+#email-box > span{
+    color: #EBA769;
+}
+
+#pw-box{
+    display: flex;
+    gap: 7px;
+    align-items: center;
+    letter-spacing: -1px;
+}
+
+#pw{
+    width: 276px;
+    height: 27px;
+    border-radius: 12px;
+    outline: none;
+    border: 1px #b7b0b0 solid;
+    padding-left: 8px;
+}
+
+#pw-box > span{
+    color: #EBA769;
+}
+
+#find-box{
+    margin: 6px 0px 18px 228px;
+    letter-spacing: -1px;
+}
+
+#find{
+    color: #ACACAC;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+#save-box{
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    letter-spacing: -1px;
+    margin-right: 18px;
+}
+
+#sns-login-box{
+    width: 399px;
+}
+
+#login-btn-box{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.login-btn{
+    width: 108px;
+    height: 31px;
+    margin-left: 60px;
+    margin-top: 42px;
+    border-radius: 7px;
+    border: 1px #afafaf solid;
+    background-color: white;
+    letter-spacing: -1px;
+    color: #eba769;
+    font-size: 16px;
+}
+
+#sns-login-title{
+    height: 22px;
+    margin: 13px 0px 50px 37px;
+    color: #E79141;
+    font-weight: 550;
+    letter-spacing: -1px;
+}
+
+#sns-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#sns-login-img{
+    width: 240px;
+    height: 140px;
+}
+
+

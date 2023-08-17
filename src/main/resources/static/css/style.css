@@ -47,64 +47,217 @@ table {
 	border-spacing: 0;
 }
 /*------------ reset end-------------- */
-#header-top{
+#main-top{
     display: flex;
-    justify-content: center;
-    height: 160px;
-    align-items: center;
+    margin-top: 16px;
     gap: 16px;
-    border-bottom: 1px #f3bd86 solid;
 }
 
-#header-search{
-    padding: 90px 0px 0px 0px;
+#main-top-bannerBox{
+    width: 884px;
+    height: 240px;
+    border-radius: 7px;
+    border: 1px solid #D6D6D6;
 }
 
-#header-search-icon{
-    position: absolute;
-    padding: 10px 0px 0px 16px;
-    width: 28px;
-    height: 28px;
-}
-
-#header-search-bar{
-    width: 295px;
-    height: 40px;
-    letter-span: -1%;
-    font-size: 16px;
-    color: black;
-    border-radius: 30px;
-    border: 2px #ffa264 solid;
-    padding-left: 45px;
-    outline: none;
-}
-
-#nav-box{
+#login-box{
     display: flex;
+    width: 284px;
+    height: 120px;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 48px;
-    border-bottom: 3px #e79141 solid;
+    gap: 24px;
+    border-radius: 12px;
+    border: 1px solid #E79141;
 }
 
-.nav-item > div {
-    text-align: center;
-    width: 184px;
-    height: 26px;
-    border-radius: 7px;
-    border-right: 2px #e79141 solid;
+#login-btn{
+    display: flex;
+    height: 31px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    border: 1px solid #929292;
+    width: 116px;
+    background: white;
 }
 
-.nav-item > div > a > span{
+#create-act{
+    display: flex;
+    height: 31px;
+    padding: 6px 29px 6px 28px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    border: 1px solid #929292;
+    background: white;
+}
 
+#login-box > button > span {
+    font-weight: 550;
     letter-spacing: -1px;
+}
+
+#main-mid{
+    display: flex;
+    gap: 16px;
+}
+
+#main-mid-news{
+    width: 884px;
+    height: 300px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    border-bottom: 2px solid #E79141;
+}
+
+#news-top{
+    display:flex;
+}
+
+#news-title{
+    display: inline-flex;
+    padding: 0px 48px;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #E79141;
     font-size: 18px;
-    font-weight: bold;
-    color: #e79243;
+    font-weight: 550;
+    letter-spacing: -1px;
 }
 
-.nav-logo{
-    width:40px;
-
+#news-ctg{
+    margin-top: 12px;
+    margin-left: 32px;
+    margin: 10px 0px 0px 32px;
 }
 
+.news-ctg-btn{
+    display: inline-flex;
+    padding: 4px 19px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    border-right: 1px solid #EEA561;
+    background: #ffffff;
+    border-top: none;
+    border-left: none;
+    border-bottom: none;
+    font-weight: 550;
+    letter-spacing: -1px;
+}
+
+
+.news-item-title{
+    display: flex;
+    height: 42px;
+    align-items: flex-end;
+    border-bottom: 1px solid #b3b3b3;
+}
+
+.item-link{
+    padding: 0px 0px 8px 16px;
+    letter-spacing: -1px;
+}
+
+#mid-news-box{
+    margin-top: 24px;
+    padding: 0px 8px 0px 8px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 52px;
+    grid-row-gap: 6px;
+}
+
+#main-mid-hotTopic{
+    width: 284px;
+    height: 300px;
+    border-radius: 12px;
+    border: 2px solid #E79141;
+}
+
+#mid-hotTopic-title{
+    display: flex;
+    width: 61px;
+    height: 31px;
+    border-bottom: 1px solid #E79141;
+    margin: 8px 0px 0px 8px;
+    align-items: center;
+    justify-content: center;
+    font-weight: 550;
+    letter-spacing: -1px;
+}
+
+#ht-box{
+    margin-top: 10px;
+    padding: 0px 8px;
+}
+
+#ht-box > ul{
+    display: grid;
+    grid-template-columns: 1fr 2fr 0.7fr;
+    padding: 6px;
+    border-bottom: 1px #818181 solid;
+    color: #818181;
+    font-size: 14px;
+    letter-spacing: -1px;
+}
+
+#main-btm{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.main-btm-boardBox{
+    width: 984px;
+    height: 240px;
+    margin: 0 auto;
+    border-bottom: 2px #e8974b solid;
+    border-radius: 5px;
+}
+
+.boardBox-top{
+    display: flex;
+    justify-content: space-between;
+    margin: 16px 16px 16px 16px;
+    letter-spacing: -1px;
+}
+
+.boardBox-title{
+    width: 184px;
+    height: 42px;
+    border-bottom: 1px #e79141 solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.boardBox-title > span{
+    padding: 0px 48px;
+    font-weight: 550;
+}
+
+.board-more{
+    display: flex;
+    align-items: flex-end;
+}
+
+.board-more > span{
+    font-size: 12px;
+    color: #5E5D5D;
+}
+
+.board-list{
+    display: grid;
+    grid-template-columns: 0.7fr 4fr 1fr 1fr 1fr 1fr;
+    gap: 8px;
+    height: 32px;
+    padding: 0px 0px 0px 16px;
+    font-size: 14px;
+    align-items: center;
+    border-bottom: 1px #c3c2c2 solid;
+    margin: 0px 6px;
+    letter-spacing: -1px;
+}

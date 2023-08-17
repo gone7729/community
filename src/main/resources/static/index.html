@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <title>We Are club!!</title>
     <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/H&Fstyle.css"/>
 </head>
 <body>
     <header>
         <div id="header-top">
-            <a th:href="@{}" id="header-logo-link">
+            <a th:href="@{/}" id="header-logo-link">
                 <img id="header-logo" src="/img/club.svg" alt="x">
             </a>
             <!--검색창-->
-            <form id="header-search" th:action="" method="post">
+            <form id="header-search" th:action="@{/}" method="post">
                 <img id="header-search-icon" src="/img/search.svg" alt="x">
                 <input id="header-search-bar" name="total-search" type="text">
             </form>
@@ -21,7 +22,7 @@
             <ul id="nav-box">
                 <li class="nav-item">
                     <div>
-                        <a class="nav-link" th:href="@{}">
+                        <a class="nav-link" th:href="@{/}">
                             <span>자유 게시판</span>
                             <img class="nav-logo" src="/img/club.svg" alt="x">
                         </a>
@@ -29,33 +30,13 @@
                 </li>
                 <li class="nav-item">
                     <div>
-                        <a class="nav-link" th:href="@{}">
+                        <a class="nav-link" th:href="@{/}">
                             <span>풋살 게시판</span>
                             <img class="nav-logo" src="/img/club.svg" alt="x">
                         </a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <div>
-                        <a class="nav-link" th:href="@{}">
-                            <span>~~ 게시판</span>
-                        </a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <div>
-                        <a class="nav-link" th:href="@{}">
-                            <span>~~ 게시판</span>
-                        </a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <div>
-                        <a class="nav-link" th:href="@{}">
-                            <span>~~ 게시판</span>
-                        </a>
-                    </div>
-                </li>
+
             </ul>
         </div>
     </header>
@@ -63,13 +44,17 @@
         <div id="main-top">
             <div id="main-top-bannerBox"></div>
             <div id="main-top-loginBox">
-                <form>
-                    <input id="login-id" type="text" placeholder="이메일" name="email">
-                    <input id="login-pw" type="password" placeholder="비밀번호" name="password">
+                <form id="login-box">
+                    <button id="login-btn" formaction ="/login">
+                        <span>로그인</span>
+                    </button>
+                    <button id="create-act">
+                        <span>회원 가입</span>
+                    </button>
                 </form>
-            </div>
-            <div id="main-top-logoBox">
-                <img id="main-top-logo" src="/img/club.svg" alt="x">
+                <div id="main-top-logoBox">
+                    <img id="main-top-logo" src="/img/club.svg" alt="x">
+                </div>
             </div>
         </div>
         <div id="main-mid">
@@ -84,45 +69,83 @@
                         <button class="news-ctg-btn">종목</button>
                         <button class="news-ctg-btn">종목</button>
                     </form>
-                    <div id="mid-news-box">
-                        <ul id="news-box">
-                            <li class="news-item-title">
-                                <a id="item-link"></a>
-                            </li>
-                        </ul>
-                    </div>
+                </div>
+                <div id="mid-news-box">
+                    <ul>
+                        <li class="news-item-title">
+                            <a class="item-link">뉴스 기사 링크</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div id="main-mid-hotTopic">
                 <div id="mid-hotTopic-title">
                     <span>화제글</span>
                 </div>
-                <ul id="ht-box">
-                    <li class="item-ctg"></li>
-                    <li class="item-title"></li>
-                    <li class="item-up-point"></li>
-                </ul>
+                <div id="ht-box">
+                    <ul>
+                        <li class="item-ctg">[게시판]</li>
+                        <li class="item-title">[제목]</li>
+                        <li class="item-up-point">[0]</li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div id="main-btm">
             <div class="main-btm-boardBox">
-                <div id=""></div>
+                <div class="boardBox-top">
+                    <div class="boardBox-title">
+                        <span>자유 게시판</span>
+                    </div>
+                    <div class="board-more">
+                        <span>더보기 +</span>
+                    </div>
+                </div>
+                <div class="board-list-box">
+                    <ul class="board-list">
+                        <li class="list-ctg">[카테고리]</li>
+                        <li class="list-title">[제목]</li>
+                        <li class="list-regdate">[날짜]</li>
+                        <li class="list-writer">[작성자]</li>
+                        <li class="list-view">[조회수]</li>
+                        <li class="list-up">[추천수]</li>
+                    </ul>
+                </div>
             </div>
-            <div class="main-btm-boardBox"></div>
+            <div class="main-btm-boardBox">
+                <div class="boardBox-top">
+                    <div class="boardBox-title">
+                        <span>풋살 게시판</span>
+                    </div>
+                    <div class="board-more">
+                        <span>더보기 +</span>
+                    </div>
+                </div>
+                <div class="board-list-box">
+                    <ul class="board-list">
+                        <li class="list-ctg">[카테고리]</li>
+                        <li class="list-title">[제목]</li>
+                        <li class="list-regdate">[날짜]</li>
+                        <li class="list-writer">[작성자]</li>
+                        <li class="list-view">[조회수]</li>
+                        <li class="list-up">[추천수]</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </main>
     <footer>
         <div id="footer-box">
-            <img id="footer-logo">
+            <img id="footer-logo" src="img/club.svg" alt="x">
             <ul id="footer-item-box">
                 <li class="footer-item">
-                    <a class="footer-item-link"></a>
+                    <a class="footer-item-link">문의 하기</a>
                 </li>
                 <li class="footer-item">
-                    <a class="footer-item-link"></a>
+                    <a class="footer-item-link">이용 약관</a>
                 </li>
                 <li class="footer-item">
-                    <a class="footer-item-link"></a>
+                    <a class="footer-item-link">개인정보처리방침</a>
                 </li>
             </ul>
         </div>
