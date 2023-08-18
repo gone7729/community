@@ -162,7 +162,7 @@ table {
 
 #sns-login-title{
     height: 22px;
-    margin: 13px 0px 50px 37px;
+    margin: 13px 0px 28px 37px;
     color: #E79141;
     font-weight: 550;
     letter-spacing: -1px;
@@ -172,11 +172,31 @@ table {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 8px;
 }
 
 #sns-login-img{
-    width: 240px;
-    height: 140px;
+    width: 160px;
+    height: 100px;
 }
 
+.sns-btn{
+    background-color: white;
+    border: 1px #bdbdbd solid;
+    width: 310px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+}
 
+.sns-btn-img{
+    margin-right: 8px;
+}
+
+.sns-btn-text{
+    font-size: 16px;
+    color: #737070;
+    letter-spacing: -1px;
+}

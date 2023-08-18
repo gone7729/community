@@ -1,0 +1,205 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, img, ins, kbd, q, s, samp,
+small, strike, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*------------ reset end-------------- */
+
+#account-title{
+    width: 200px;
+    height: 51px;
+    border-bottom: 1px #ffa264 solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 56px 184px 32px 184px;
+}
+
+#account-title > span{
+    font-size: 24px;
+    letter-spacing: -1px;
+}
+
+#TermsofUse{
+    width: 816px;
+    height: 506px;
+    border: 1px #8d8888 solid;
+    border-radius: 7px;
+    margin: 0px 184px 8px 184px;
+}
+
+#account-box{
+    margin: 0px 184px;
+}
+
+#tou-check{
+    margin-bottom: 24px;
+}
+
+#tou-check > :nth-child(2){
+    font-size: 18px;
+    letter-spacing: -1px;
+}
+
+.failed{
+    font-size: 14px;
+    color: red;
+    letter-spacing: -2px;
+    margin-left: 18px;
+}
+
+#account-email, #account-code, #account-pw, #account-pw-check, #account-nick{
+    margin-top: 8px;
+    padding-bottom: 16px;
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    border-bottom: 1px #f3bd86 solid;
+}
+
+#account-email-title{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-bottom: 6px;
+}
+
+#account-code-title{
+    display: flex;
+    align-items: flex-end;
+}
+
+#account-pw-title{
+    display: flex;
+    align-items: flex-end;
+}
+
+#account-pw-title > :nth-child(2){
+    font-size: 14px;
+    letter-spacing: -2px;
+}
+
+#account-pw-check-title{
+    display: flex;
+    align-items: flex-end;
+}
+
+#account-nick-title{
+    display: flex;
+    align-items: flex-end;
+}
+
+.account-input-title{
+    font-size: 18px;
+    letter-spacing: -2px;
+}
+
+.account-input-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.account{
+    width: 500px;
+    height: 36px;
+    font-size: 18px;
+    border-radius: 12px;
+    outline: none;
+    border: 1px #8d8888 solid;
+    padding-left: 8px;
+}
+
+.validation-btn{
+    width: 80px;
+    height: 28px;
+    background-color: white;
+    border-radius: 12px;
+    border: 1px #8d8888 solid;
+    letter-spacing: -2px;
+    font-size: 14px;
+}
+
+.validation-btn:hover{
+	cursor: pointer;
+	background-color: #eeeded;
+}
+
+.validation-btn:active{
+	background-color: #dddddd;
+	box-shadow: inset 1px 1px 1px 1px #898989;
+}
+
+#account-btn-box{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+#account-btn{
+    width: 216px;
+    height: 46px;
+    font-size: 20px;
+    letter-spacing: -1px;
+    font-weight: 550;
+    border-radius: 30px;
+    border: 1px #E79141 solid;
+    background-color: white;
+}
+
+.title-box{
+    width:110px;
+}
+
+#account-btn:hover{
+	cursor: pointer;
+	background-color: #ffd2a9;
+}
+
+#account-btn:active{
+	background-color: #f3af72;
+	box-shadow: inset 1px 1px 1px 1px #c36b1b;
+}

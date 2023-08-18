@@ -22,7 +22,7 @@
             <ul id="nav-box">
                 <li class="nav-item">
                     <div>
-                        <a class="nav-link" th:href="@{/}">
+                        <a class="nav-link" href="/freeboard">
                             <span>자유 게시판</span>
                             <img class="nav-logo" src="/img/club.svg" alt="x">
                         </a>
@@ -48,7 +48,7 @@
                     <button id="login-btn" formaction ="/login">
                         <span>로그인</span>
                     </button>
-                    <button id="create-act">
+                    <button formaction="/account" id="create-act">
                         <span>회원 가입</span>
                     </button>
                 </form>

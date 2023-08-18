@@ -1,0 +1,178 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, img, ins, kbd, q, s, samp,
+small, strike, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*------------ reset end-------------- */
+
+#main-top{
+    display: flex;
+    margin: 31px 199px 0px 100px;
+    justify-content: space-between;
+}
+
+#main-top-box{
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+#main-top-title{
+    display: flex;
+    align-items: center;
+    width: 200px;
+    height: 51px;
+    border-bottom: 1px #f3bd86 solid;
+    justify-content: center;
+    font-size: 24px;
+    letter-spacing: -1px;
+}
+
+#main-top-btn{
+    width: 84px;
+    height: 30px;
+    background-color: white;
+    border-radius: 12px;
+    border: 1px #a1a0a0 solid;
+    font-weight: 550;
+    margin-top: 22px;
+}
+
+#main-top-profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 13px;
+}
+
+#profile-img-box{
+    width: 143px;
+    height: 143px;
+    border: 1px black solid;
+}
+
+#profile-img{
+    width: 143px;
+    height: 143px;
+}
+
+#profile-btn{
+    width: 84px;
+    height: 30px;
+    background-color: white;
+    border-radius: 12px;
+    border: 1px #a1a0a0 solid;
+    font-weight: 550;
+    letter-spacing: -1px;
+}
+
+#main-nav{
+    display: flex;
+    width: 1016px;
+    height: 51px;
+    margin: 14px auto;
+    border-bottom: 1px #E79141 solid;
+    align-items: center;
+}
+
+.nav-item-box{
+    display: flex;
+    width: 100px;
+    height: 28px;
+    border-right: 1px #f3bd86 solid;
+    border-radius: 7px;
+    align-items: center;
+}
+
+.nav-item{
+    margin-left: 19px;
+    color: #E79141;
+}
+
+#main-ct-ctn{
+    width: 984px;
+    height: 355px;
+    margin: 0 auto;
+    border: 1px #c7c7c7 solid;
+    border-radius: 7px;
+}
+
+#main-ct-box{
+    display: flex;
+    width: 816px;
+    margin: 24px auto;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.main-ct{
+    display: flex;
+    flex-direction: column;
+}
+
+.ct-title{
+    color: #535353;
+}
+
+.ct-box{
+    display: flex;
+    width: 816px;
+    height: 40px;
+    align-items: center;
+    border-bottom: 1px #E79141 solid;
+}
+
+.ct{
+    margin-left: 16px;
+    font-weight: 550;
+}
+
+#main-ct-btn{
+    width: 84px;
+    height: 30px;
+    margin: 32px 0px 0px 816px;
+    background-color: white;
+}

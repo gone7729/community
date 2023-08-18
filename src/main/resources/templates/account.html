@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="UTF-8">
+    <title>회원 가입</title>
+    <link rel="stylesheet" href="/css/accountstyle.css"/>
+    <link rel="stylesheet" href="/css/H&Fstyle.css"/>
+</head>
+<body>
+    <header th:replace="layout :: header"></header>
+    <main>
+      <div id="account-title">
+          <span>회원 가입</span>
+      </div>
+        <div id="TermsofUse"></div>
+      <form id="account-box">
+          <div id="tou-check">
+              <input type="checkbox" id="check" name="check">
+              <span>이용 약관을 읽었으며 동의합니다.</span>
+              <span class="failed">유효성 검사 실패시 문장 출력</span>
+          </div>
+          <div id="account-email">
+              <div id="account-email-title">
+                  <div class="title-box">
+                      <span class="account-input-title">이메일</span>
+                  </div>
+                  <span class="failed">유효성 검사 실패시 문장 출력</span>
+              </div>
+              <div class="account-input-box">
+                  <input class="account" type="text" name="email">
+                  <button class="validation-btn">
+                      <span>코드 전송</span>
+                  </button>
+              </div>
+          </div>
+          <div id="account-code">
+              <div id="account-code-title">
+                  <div class="title-box">
+                      <span class="account-input-title">이메일 코드</span>
+                  </div>
+                  <span class="failed">유효성 검사 실패시 문장 출력</span>
+              </div>
+              <div class="account-input-box">
+                  <input class="account" type="text" name="code">
+                  <button class="validation-btn">
+                      <span>확 인</span>
+                  </button>
+              </div>
+          </div>
+          <div id="account-pw">
+              <div id="account-pw-title">
+                  <div class="title-box">
+                      <span class="account-input-title">비밀번호</span>
+                  </div>
+                  <span>/6자리 이상, 특수문자 포함</span>
+              </div>
+              <div class="account-input-box">
+                  <input class="account" type="password" name="pw">
+              </div>
+          </div>
+          <div id="account-pw-check">
+              <div id="account-pw-check-title">
+                  <div class="title-box">
+                      <span class="account-input-title">비밀번호 확인</span>
+                  </div>
+                  <span class="failed">유효성 검사 실패시 문장 출력</span>
+              </div>
+              <div class="account-input-box">
+                  <input class="account" type="password" name="pw-check">
+                  <button class="validation-btn">
+                      <span>확 인</span>
+                  </button>
+              </div>
+          </div>
+          <div id="account-nick">
+              <div id="account-nick-title">
+                  <div class="title-box">
+                      <span class="account-input-title">닉네임</span>
+                  </div>
+                  <span class="failed">유효성 검사 실패시 문장 출력</span>
+              </div>
+              <div class="account-input-box">
+                  <input class="account" type="text" name="nick">
+                  <button class="validation-btn">
+                      <span>중복 확인</span>
+                  </button>
+              </div>
+          </div>
+          <div id="account-btn-box">
+              <button id="account-btn">
+                  <span>가입 하기</span>
+              </button>
+          </div>
+      </form>
+    </main>
+    <footer th:replace="layout :: footer"></footer>
+</body>
+</html>

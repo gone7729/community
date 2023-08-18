@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th=”http://www.thymeleaf.org”>
+<head>
+  <meta charset="UTF-8">
+  <title>회원 정보</title>
+  <link rel="stylesheet" href="/css/memberstyle.css"/>
+  <link rel="stylesheet" href="/css/H&Fstyle.css"/>
+</head>
+<body>
+<header th:replace="layout :: header"></header>
+<main>
+  <div id="main-top">
+    <div id="main-top-box">
+      <div id="main-top-title">
+        <span>회원 정보</span>
+      </div>
+      <button id="main-top-btn">변경 하기</button>
+    </div>
+    <div id="main-top-profile">
+      <div id="profile-img-box">
+        <img id="profile-img" src="" alt="x">
+      </div>
+      <button id="profile-btn">변경 하기</button>
+    </div>
+  </div>
+  <div id="main-nav">
+    <ul id="main-nav-box">
+      <li class="nav-item-box">
+        <div class="nav-item">
+          <span>회원 정보</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <form id="main-ct">
+    <div id="main-ct-ctn">
+      <div id="main-ct-box">
+        <div class="main-ct">
+          <span class="ct-title">이메일</span>
+          <div class="ct-box">
+            <span class="ct">email@email.com</span>
+            <input class="ct-input" type="hidden" name="email">
+          </div>
+        </div>
+        <div class="main-ct">
+          <span class="ct-title">닉네임</span>
+          <div class="ct-box">
+            <span class="ct">닉네임</span>
+            <input class="ct-input" type="hidden" name="email">
+          </div>
+        </div>
+        <div class="main-ct">
+          <span class="ct-title">가입일자</span>
+          <div class="ct-box">
+            <span class="ct">2023.08.18</span>
+            <input class="ct-input" type="hidden" name="email">
+          </div>
+        </div>
+      </div>
+      <button></button>
+    </div>
+  </form>
+</main>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>
