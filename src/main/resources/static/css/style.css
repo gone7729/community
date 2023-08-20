@@ -86,6 +86,7 @@ table {
 #create-act{
     display: flex;
     height: 31px;
+    width: 116px;
     padding: 6px 29px 6px 28px;
     justify-content: center;
     align-items: center;

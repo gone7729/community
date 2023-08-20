@@ -9,8 +9,142 @@
 <body>
   <header th:replace="layout :: header"></header>
   <main>
-
+    <div id="main-top">
+      <div id="main-top-title">
+        <span>자유 게시판</span>
+      </div>
+      <div id="main-top-loginBox">
+        <form id="login-box">
+          <button id="login-btn" formaction ="/login">
+            <span>로그인</span>
+          </button>
+          <button formaction="/account" id="create-act">
+            <span>회원 가입</span>
+          </button>
+        </form>
+      </div>
+    </div>
+    <div id="top-ct-ctn">
+      <div class="top-ct-box">
+        <div class="top-ct-title">
+          <span>추천수</span>
+        </div>
+        <div class="top-topic-box">
+          <ul class="top-topic-item">
+            <li class="topic-title">제목</li>
+            <li class="topic-regdate">날짜</li>
+            <li class="topic-writer">작성자</li>
+            <li class="topic-point">추천수</li>
+          </ul>
+        </div>
+      </div>
+      <div class="top-ct-box">
+        <div class="top-ct-title">
+          <span>조회수</span>
+        </div>
+        <div class="top-topic-box">
+          <ul class="top-topic-item">
+            <li class="topic-title">제목</li>
+            <li class="topic-regdate">날짜</li>
+            <li class="topic-writer">작성자</li>
+            <li class="topic-point">조회수</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="main-content">
+      <div id="board-box">
+        <ul id="guide-list">
+          <li class="guide-list-item">카테고리</li>
+          <li class="guide-list-item">제목</li>
+          <li class="guide-list-item">날짜</li>
+          <li class="guide-list-item">작성자</li>
+          <li class="guide-list-item">조회수</li>
+          <li class="guide-list-item">추천수</li>
+        </ul>
+        <ul class="board-list">
+          <li>카테고리</li>
+          <li>제목</li>
+          <li>날짜</li>
+          <li>작성자</li>
+          <li>조회수</li>
+          <li>추천수</li>
+        </ul>
+      </div>
+      <div id="main-side">
+        <div id="side-banner-box">
+          <img id="side-banner" src="" alt="x">
+        </div>
+        <div id="main-mid-hotTopic">
+          <div id="mid-hotTopic-title">
+            <span>화제글</span>
+          </div>
+          <div id="ht-box">
+            <ul>
+              <li class="item-ctg">[게시판]</li>
+              <li class="item-title">[제목]</li>
+              <li class="item-up-point">[0]</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form id="search" th:action="@{boardpaging}"  method="post">
+      <div id="page">
+        <ul id="page-box">
+          <li class="page-btn-box">
+            <a id="pp-btn" th:href="@{/boardpaging(nowPage=${paging.startPage})}" >
+              <img src="" alt="첫페이지">
+            </a>
+          </li>
+          <li class="page-btn-box">
+            <a id="p-btn" th:href="@{/boardpaging(nowPage=${paging.nowPage - 1})}" th:unless="${paging.nowPage - 1 < 1}">
+              <img src="" alt="이전">
+            </a>
+          </li>
+          <li clss="page-num-box" th:each="num : ${#numbers.sequence(paging.startPage, paging.endPage)}">
+            <a class="page-num" th:href="@{/boardpaging(nowPage=${num})}">
+              <span th:unless="${num == paging.nowPage}" th:text="${num}"></span>
+            </a>
+          </li>
+          <li class="page-btn-box">
+            <a id="n-btn" th:href="@{/boardpaging(nowPage=${paging.nowPage + 1})}" th:unless="${paging.nowPage + 1 > paging.lastPage}">
+              <img src="" alt="다음">
+            </a>
+          </li>
+          <li class="page-btn-box">
+            <a id="nn-btn" th:href="@{/boardpaging(nowPage=${paging.endPage})}" th:if="${paging.endPage >= 1}">
+              <img src="" alt="끝페이지">
+            </a>
+          </li>
+        </ul>
+        <div id="write-btn">
+          <button th:formaction="@{go-write}">Is It Now?</button>
+        </div>
+      </div>
+      <div id="search-box">
+        <div id="search-category">
+          <button id="category-btn" type="button">
+            <p>Writer</p>
+            <img src="/img/page/arrow_drop_down_24px.svg" alt="x">
+          </button>
+          <ul id="category-box" style="height: 0px;">
+            <li class="category-item">
+              <p>Text</p>
+            </li>
+            <li class="category-item">
+              <p>Title</p>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <input id="search-bar" type="text" name="search" placeholder="What you want?">
+        </div>
+      </div>
+    </form>
   </main>
   <footer th:replace="layout :: footer"></footer>
+
+  <script src="/js/SearchCtg.js"></script>
 </body>
 </html>

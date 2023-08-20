@@ -176,3 +176,19 @@ table {
     margin: 32px 0px 0px 816px;
     background-color: white;
 }
+
+#btn-box{
+    display: flex;
+    width: 816px;
+    margin: 0 auto;
+    justify-content: flex-end;
+}
+
+#btn{
+    width: 84px;
+    height: 30px;
+    border-radius: 12px;
+    background-color: white;
+    border: 1px #a1a0a0 solid;
+    letter-spacing: -1px;
+}
