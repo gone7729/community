@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="UTF-8">
+    <title>글쓰기</title>
+    <link rel="stylesheet" href="/css/writestyle.css"/>
+    <link rel="stylesheet" href="/css/H&Fstyle.css"/>
+    <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.core.css">
+</head>
+<body>
+    <header th:replace="layout :: header"></header>
+    <main>
+        <div id="main-top">
+            <div id="main-top-title">
+                <span>작성</span>
+            </div>
+        </div>
+        <div id="caution-box">
+            <span>※작성 시 주의 사항</span>
+            <p>정보통신망에서 불법촬영물등을 유통할 경우 「전기통신사업법」 제22조의 5 제1항에 따른 삭제.접속차단 등 유통방지에</br>
+                필요한 조치가 취해지며 「성폭력처벌법」 제14조 「청소년성보호법」 제11조에 따라 형사처벌을 받을수 있습니다.</p>
+        </div>
+        <form id="main-content-box" th:action="@{/write}" method="post">
+            <div id="content-top">
+                <div id = "category-box">
+                    <div id = "items">
+                        <button id = "item-btn" type = "button">
+                            <p>카테고리</p>
+                        </button>
+                        <ul id = "item-box" style="height: 0px;">
+                            <li value="1" class = "option-item">잡담</li>
+                            <li value="2" class = "option-item">질문</li>
+                            <li value="3" class = "option-item">모집</li>
+                            <li value="4" class = "option-item">정보</li>
+                        </ul>
+                        <input type="hidden" id="category" name="category" value="">
+                    </div>
+                </div>
+                <div id = "title-box">
+                    <input type = "text" name = "title" placeholder = "제목" id = "input-title">
+                </div>
+            </div>
+            <input id="content-mid" type="hidden" name="content" value="">
+            <div id="editor-box">
+                <div id="editor">
+                </div>
+            </div>
+            <div id="cmt-box">
+                <input id="cmt-check" type="checkbox" name="cmt">
+                <span>댓글 허용</span>
+            </div>
+            <div id="content-btm">
+                <button class="btm-btn" th:formaction="@{/boardpaging}">
+                    <span>취소</span>
+                </button>
+                <button class="btm-btn" onclick="set();">
+                    <span>작성</span>
+                </button>
+            </div>
+        </form>
+    </main>
+    <footer th:replace="layout :: footer"></footer>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <!-- Initialize Quill editor -->
+    <script>
+            var toolbarOptions = [
+              ['bold', 'italic'],        // toggled buttons
+              ['underline', 'strike'],        // toggled buttons
+              ['blockquote', 'code-block'],
+
+              [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+              [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+              //[{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+              [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+              //[{ 'direction': 'rtl' }],                         // text direction
+
+
+
+              [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+              //[{ 'font': [] }],
+              [{ 'align': [] }],
+
+              [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+
+              ['image']
+              //['clean']                                         // remove formatting button
+            ];
+
+            var quill = new Quill('#editor', {
+              modules: {
+                toolbar: toolbarOptions
+              },
+              theme: 'snow'
+            });
+
+             var italic = Quill.import('formats/italic');
+              italic.tagName = 'i';
+              Quill.register(italic, true);
+    </script>
+
+    <script src="/js/write.js"></script>
+</body>
+</html>

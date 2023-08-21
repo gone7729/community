@@ -16,7 +16,19 @@ public class BoardDao {
         this.boardMapper = boardMapper;
     }
 
-    public void findBoardList(BoardDto boardDto){
-        findBoardList(boardDto);
+    public List<BoardDto> findAllBoard(){
+        return boardMapper.findAllBoard();
+    }
+
+    public void insertBoard(BoardDto boardDto){
+        boardMapper.insertBoard(boardDto);
+    }
+
+    public int countBoard(){
+        return boardMapper.countBoard();
+    }
+
+    public List<BoardDto> findBoardList(BoardDto boardDto){
+        return boardMapper.findBoardList(boardDto);
     }
 }

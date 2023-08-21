@@ -8,5 +8,11 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
 
-    List<BoardDto> findBoardList();
+    List<BoardDto> findAllBoard();
+
+    void insertBoard(BoardDto boardDto);
+
+    int countBoard();
+
+    List<BoardDto> findBoardList(Object obj);
 }

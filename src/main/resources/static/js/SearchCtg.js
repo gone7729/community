@@ -13,17 +13,17 @@ catBtn.addEventListener("click", ()=> {
 
 catItems.forEach((item) => {
     item.addEventListener("click", () =>{
-        if(catBtn.firstElementChild.textContent == "Writer" ){
+        if(catBtn.firstElementChild.textContent == "작성자" ){
             catBtn.firstElementChild.textContent = item.firstElementChild.textContent;
-            item.firstElementChild.textContent = "Writer";
+            item.firstElementChild.textContent = "작성자";
             catBox.style.height = "0px";
-        }else if(catBtn.firstElementChild.textContent == "Title"){
+        }else if(catBtn.firstElementChild.textContent == "제목"){
             catBtn.firstElementChild.textContent = item.firstElementChild.textContent;
-            item.firstElementChild.textContent = "Title";
+            item.firstElementChild.textContent = "제목";
             catBox.style.height = "0px";
         }else{
             catBtn.firstElementChild.textContent = item.firstElementChild.textContent;
-            item.firstElementChild.textContent = "Text";
+            item.firstElementChild.textContent = "내용";
             catBox.style.height = "0px";
         }
     });

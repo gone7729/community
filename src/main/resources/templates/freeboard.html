@@ -89,56 +89,59 @@
         </div>
       </div>
     </div>
-    <form id="search" th:action="@{boardpaging}"  method="post">
+    <!--페이징-->
+    <form id="search" th:action="@{/}"  method="post">
       <div id="page">
         <ul id="page-box">
           <li class="page-btn-box">
-            <a id="pp-btn" th:href="@{/boardpaging(nowPage=${paging.startPage})}" >
-              <img src="" alt="첫페이지">
+            <a id="pp-btn" th:href="@{/}" >
+              <img src="/img/start.svg" alt="첫페이지">
             </a>
           </li>
           <li class="page-btn-box">
-            <a id="p-btn" th:href="@{/boardpaging(nowPage=${paging.nowPage - 1})}" th:unless="${paging.nowPage - 1 < 1}">
-              <img src="" alt="이전">
+            <a id="p-btn" th:href="@{/}" >
+              <img src="/img/left.svg" alt="이전">
             </a>
           </li>
-          <li clss="page-num-box" th:each="num : ${#numbers.sequence(paging.startPage, paging.endPage)}">
-            <a class="page-num" th:href="@{/boardpaging(nowPage=${num})}">
-              <span th:unless="${num == paging.nowPage}" th:text="${num}"></span>
-            </a>
-          </li>
-          <li class="page-btn-box">
-            <a id="n-btn" th:href="@{/boardpaging(nowPage=${paging.nowPage + 1})}" th:unless="${paging.nowPage + 1 > paging.lastPage}">
-              <img src="" alt="다음">
+          <li clss="page-num-box" >
+            <a class="page-num" th:href="@{/}">
+              <span></span>
             </a>
           </li>
           <li class="page-btn-box">
-            <a id="nn-btn" th:href="@{/boardpaging(nowPage=${paging.endPage})}" th:if="${paging.endPage >= 1}">
-              <img src="" alt="끝페이지">
+            <a id="n-btn" th:href="@{/}" >
+              <img src="/img/right.svg" alt="다음">
+            </a>
+          </li>
+          <li class="page-btn-box">
+            <a id="nn-btn" th:href="@{/}">
+              <img src="/img/end.svg" alt="끝페이지">
             </a>
           </li>
         </ul>
         <div id="write-btn">
-          <button th:formaction="@{go-write}">Is It Now?</button>
+          <button th:formaction="@{/}">
+            <span>글쓰기</span>
+          </button>
         </div>
       </div>
       <div id="search-box">
         <div id="search-category">
           <button id="category-btn" type="button">
-            <p>Writer</p>
-            <img src="/img/page/arrow_drop_down_24px.svg" alt="x">
+            <p>작성자</p>
           </button>
           <ul id="category-box" style="height: 0px;">
             <li class="category-item">
-              <p>Text</p>
+              <p>내용</p>
             </li>
             <li class="category-item">
-              <p>Title</p>
+              <p>제목</p>
             </li>
           </ul>
         </div>
-        <div>
-          <input id="search-bar" type="text" name="search" placeholder="What you want?">
+        <div id="s-box">
+          <img id="search-img" src="/img/Search.svg" alt="x">
+          <input id="search-bar" type="text" name="search">
         </div>
       </div>
     </form>
@@ -146,5 +149,6 @@
   <footer th:replace="layout :: footer"></footer>
 
   <script src="/js/SearchCtg.js"></script>
+
 </body>
 </html>

@@ -89,6 +89,8 @@ table {
     align-items: center;
     height: 48px;
     margin-left:100px;
+    width: 1184px;
+    margin: 0 auto;
 }
 
 .nav-item > div {
