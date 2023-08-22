@@ -1,9 +1,10 @@
-package project.community.service;
+package project.community.board.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import project.community.dao.BoardDao;
-import project.community.dto.BoardDto;
+import project.community.board.dto.BoardDto;
+import project.community.board.dao.BoardDao;
+import project.community.board.dto.BoardDto;
 
 import java.util.List;
 
@@ -32,4 +33,5 @@ public class BoardService {
     public List<BoardDto> findBoardList(BoardDto boardDto){
         return boardDao.findBoardList(boardDto);
     }
+
 }

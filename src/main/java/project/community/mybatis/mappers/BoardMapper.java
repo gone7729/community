@@ -1,7 +1,7 @@
 package project.community.mybatis.mappers;
 
 import org.apache.ibatis.annotations.Mapper;
-import project.community.dto.BoardDto;
+import project.community.board.dto.BoardDto;
 
 import java.util.List;
 

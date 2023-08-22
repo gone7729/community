@@ -1,4 +1,4 @@
-package project.community.service;
+package project.community.user.service;
 
 import org.springframework.stereotype.Service;
 

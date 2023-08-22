@@ -1,4 +1,4 @@
-package test.testPage.util;
+package project.community.util;
 
 import lombok.Data;
 
