@@ -21,7 +21,7 @@
             <p>정보통신망에서 불법촬영물등을 유통할 경우 「전기통신사업법」 제22조의 5 제1항에 따른 삭제.접속차단 등 유통방지에</br>
                 필요한 조치가 취해지며 「성폭력처벌법」 제14조 「청소년성보호법」 제11조에 따라 형사처벌을 받을수 있습니다.</p>
         </div>
-        <form id="main-content-box" th:action="@{/write}" method="post">
+        <form id="main-content-box" th:action="@{do-write}" method="post">
             <div id="content-top">
                 <div id = "category-box">
                     <div id = "items">
@@ -45,10 +45,6 @@
             <div id="editor-box">
                 <div id="editor">
                 </div>
-            </div>
-            <div id="cmt-box">
-                <input id="cmt-check" type="checkbox" name="cmt">
-                <span>댓글 허용</span>
             </div>
             <div id="content-btm">
                 <button class="btm-btn" th:formaction="@{/boardpaging}">

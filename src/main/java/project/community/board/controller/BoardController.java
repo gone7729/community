@@ -20,11 +20,11 @@ public class BoardController {
         this.boardService =boardService;
     }
 
-    @RequestMapping("write")
-    public String insert(BoardDto boardDto){
-
+    @RequestMapping("do-write")
+    public String insert(@ModelAttribute BoardDto boardDto){
+        System.out.println(boardDto);
         boardService.insertBoard(boardDto);
-        return "redirect:/boardpaging?nowPage=1";
+        return "write";
     }
 
     @RequestMapping("boardpaging")

@@ -29,6 +29,13 @@ catItems.forEach((item) => {
     });
 });
 
+catBtn.addEventListener("click", ()=> {
+    if(catBox.style.height == "0px"){
+        catBox.style.height = catBox.scrollHeight + "px";
+    }else{
+        catBox.style.height = "0px";
+    }
+});
 
 
 

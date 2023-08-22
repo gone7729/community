@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="UTF-8">
+    <title>자유 게시판</title>
+    <link rel="stylesheet" href="/css/boardstyle.css"/>
+    <link rel="stylesheet" href="/css/poststyle.css"/>
+    <link rel="stylesheet" href="/css/H&Fstyle.css"/>
+</head>
+<body>
+<header th:replace="layout :: header"></header>
+<main>
+    <div id="main-top">
+        <div id="main-top-title">
+            <span>게시글</span>
+        </div>
+        <div id="main-top-loginBox">
+            <form id="login-box">
+                <button id="login-btn" formaction ="/login">
+                    <span>로그인</span>
+                </button>
+                <button formaction="/account" id="create-act">
+                    <span>회원 가입</span>
+                </button>
+            </form>
+        </div>
+    </div>
+    <div id="post-top-box">
+        <ul id="post-top-item-box">
+            <li class="post-top-item">
+                <span>작성자</span>
+            </li>
+            <li class="post-top-item">
+                <span>날짜</span>
+            </li>
+            <li class="post-top-item">
+                <span>0</span>
+            </li>
+            <li class="post-top-item">
+                <span>0</span>
+            </li>
+        </ul>
+    </div>
+    <div id="post-top-title-box">
+        <span id="post-top-ctg">카테고리</span>
+        <span id="post-top-title">제목</span>
+    </div>
+    <div id="post-mid-content-box">
+        <p id="post-mid-content">내용</p>
+    </div>
+    <form id="post-btm-box">
+        <button class="post-btm-btn">
+            <span>주소 복사</span>
+        </button>
+        <div id="up-down-btn">
+            <button class="post-btm-btn">
+                <img class="btm-btn-img" src="/img/up.svg" alt="x">
+            </button>
+            <button class="post-btm-btn">
+                <img class="btm-btn-img" src="/img/down.svg" alt="x">
+            </button>
+        </div>
+    </form>
+    <div id="post-cmt-box">
+        <form id="cmt-box">
+            <div id="cmt-top">
+                <div id="cmt-top-title">
+                    <span>댓글</span>
+                </div>
+                <button type="button" id="cmt-top-btn">
+                    <span>작성</span>
+                </button>
+            </div>
+            <div id="cmt-write-box" style="height: 0px;">
+                <textarea id="cmt-write"></textarea>
+                <input id="input-cmt" type="hidden" name="cmt">
+                <button id="cmt-btn">
+                    <span>댓글 달기</span>
+                </button>
+            </div>
+            <div id="cmt-main-box">
+                <div class="cmt-main">
+                    <div class="cmt-main-left">
+                        <div class="cmt-main-nick">
+                            <span>닉네임</span>
+                        </div>
+                        <button class="cmt-main-update">
+                            <span>수정</span>
+                        </button>
+                        <button class="cmt-main-del">
+                            <span>삭제</span>
+                        </button>
+                    </div>
+                    <div class="cmt-main-num">
+                        <span>0</span>
+                    </div>
+                </div>
+                <div class="cmt-main-content-box">
+                    <div class="cmt-main-content">
+                        <p>내용</p>
+                    </div>
+                    <div class="cmt-main-btn-box">
+                        <button class="cmt-main-btn">
+                            <img class="cmt-up-img" src="/img/minup.svg" alt="x">
+                        </button>
+                        <button class="cmt-main-btn">
+                            <img class="cmt-down-img" src="/img/mindown.svg" alt="x">
+                        </button>
+                        <button class="cmt-main-btn">
+                            <span>답글</span>
+                        </button>
+                        <button class="cmt-main-btn">
+                            <span>신고</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="cmt-cmt-box">
+                <div class="cmt-main">
+                    <div class="cmt-main-left">
+                        <div class="cmt-main-nick">
+                            <span>닉네임</span>
+                        </div>
+                        <button class="cmt-main-update">
+                            <span>수정</span>
+                        </button>
+                        <button class="cmt-main-del">
+                            <span>삭제</span>
+                        </button>
+                    </div>
+                    <div class="cmt-main-num">
+                        <span>0</span>
+                    </div>
+                </div>
+                <div class="cmt-main-content-box">
+                    <div class="cmt-main-content">
+                        <p>내용</p>
+                    </div>
+                    <div class="cmt-main-btn-box">
+                        <button class="cmt-main-btn">
+                            <img class="cmt-up-img" src="/img/minup.svg" alt="x">
+                        </button>
+                        <button class="cmt-main-btn">
+                            <img class="cmt-down-img" src="/img/mindown.svg" alt="x">
+                        </button>
+                        <button class="cmt-main-btn">
+                            <span>답글</span>
+                        </button>
+                        <button class="cmt-main-btn">
+                            <span>신고</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div th:replace="boardlayout :: content"></div>
+</main>
+<footer th:replace="layout :: footer"></footer>
+
+<script src="/js/SearchCtg.js"></script>
+<script src="/js/cmt.js"></script>
+
+</body>
+</html>

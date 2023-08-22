@@ -1,4 +1,4 @@
-package project.community.controller;
+package project.community.home.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,17 +6,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import project.community.dto.BoardDto;
-import project.community.service.BoardService;
+import project.community.board.dto.BoardDto;
+import project.community.home.service.HomeService;
 
 @Controller
 public class HomeController {
 
-    BoardService boardService;
+    HomeService homeService;
 
     @Autowired
-    public HomeController(BoardService boardService){
-        this.boardService = boardService;
+    public HomeController(HomeService homeService){
+        this.homeService = homeService;
     }
 
     @RequestMapping("login")
@@ -38,8 +38,13 @@ public class HomeController {
         return "freeboard";
     }
 
-    @RequestMapping("write")
+    @RequestMapping("go-write")
     public String write(){
         return "write";
+    }
+
+    @RequestMapping("post")
+    public String post(){
+        return "post";
     }
 }
