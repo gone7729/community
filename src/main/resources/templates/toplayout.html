@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th=”http://www.thymeleaf.org”>
+<head>
+  <meta charset="UTF-8">
+  <title>게시판</title>
+  <link rel="stylesheet" href="/css/topstyle.css"/>
+</head>
+<body>
+<header th:replace="layout :: header"></header>
+<main>
+  <div th:fragment="content">
+      <div id="main-top-loginBox">
+        <form id="login-box">
+          <button id="login-btn" formaction ="/login">
+            <span>로그인</span>
+          </button>
+          <button formaction="/account" id="create-act">
+            <span>회원 가입</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

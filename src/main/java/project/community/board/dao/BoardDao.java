@@ -3,6 +3,7 @@ package project.community.board.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import project.community.board.dto.BoardDto;
+import project.community.board.dto.ListSetDto;
 import project.community.mybatis.mappers.Mapper;
 
 import java.util.List;
@@ -28,7 +29,10 @@ public class BoardDao {
         return mapper.countBoard();
     }
 
-    public List<BoardDto> findBoardList(BoardDto boardDto){
+    public List<BoardDto> findBoardList(BoardDto boardDto) {
         return mapper.findBoardList(boardDto);
+    }
+    public List<BoardDto> findBoard(BoardDto boardDto){
+        return mapper.findBoard(boardDto);
     }
 }

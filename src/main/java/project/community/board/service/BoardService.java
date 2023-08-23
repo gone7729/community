@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.community.board.dto.BoardDto;
 import project.community.board.dao.BoardDao;
+import project.community.board.dto.ListSetDto;
 
 import java.util.List;
 
@@ -31,6 +32,10 @@ public class BoardService {
 
     public List<BoardDto> findBoardList(BoardDto boardDto){
         return boardDao.findBoardList(boardDto);
+    }
+
+    public List<BoardDto> findBoard(BoardDto boardDto){
+        return boardDao.findBoard(boardDto);
     }
 
 }

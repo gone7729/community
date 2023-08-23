@@ -1,0 +1,98 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, img, ins, kbd, q, s, samp,
+small, strike, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*------------ reset end-------------- */
+
+#main-side{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: absolute;
+    right: 0;
+    top: 156px;
+}
+
+#side-banner-box{
+    width: 284px;
+    height: 310px;
+    border: 1px #b9b9b9 solid;
+}
+
+#main-mid-hotTopic{
+    width: 284px;
+    height: 300px;
+    border-radius: 12px;
+    border: 2px solid #E79141;
+}
+
+#mid-hotTopic-title{
+    display: flex;
+    width: 61px;
+    height: 31px;
+    border-bottom: 1px solid #E79141;
+    margin: 8px 0px 0px 8px;
+    align-items: center;
+    justify-content: center;
+    font-weight: 550;
+    letter-spacing: -1px;
+}
+
+#ht-box{
+    margin-top: 10px;
+    padding: 0px 8px;
+}
+
+#ht-box > ul{
+    display: grid;
+    grid-template-columns: 1fr 2fr 0.7fr;
+    padding: 6px;
+    border-bottom: 1px #818181 solid;
+    color: #818181;
+    font-size: 14px;
+    letter-spacing: -1px;
+}

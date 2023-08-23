@@ -179,6 +179,15 @@ table {
     border-bottom: 1px black solid;
 }
 
+.board-list > li{
+     font-size: 14px;
+}
+
+.board-list > :nth-child(2) > a{
+    text-decoration: none;
+    color: black;
+}
+
 #main-side{
     display: flex;
     flex-direction: column;

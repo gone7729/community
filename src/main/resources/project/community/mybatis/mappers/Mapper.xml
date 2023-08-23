@@ -13,14 +13,24 @@
         SELECT COUNT(*) FROM board_tb
     </select>
 
-    <select id="findBoardList" resultType="project.community.board.dto.ListSetDto">
-        SELECT * FROM board_tb ORDER BY board_tb.uid DESC
-        LIMIT 15 OFFSET #{offset}
+    <select id="findBoardList" resultType="project.community.board.dto.BoardDto">
+        SELECT board_tb.uid, category_tb.category, board_tb.writer, board_tb.title, board_tb.content, board_tb.regdate, board_tb.view, board_tb.up_point
+        FROM board_tb
+        INNER JOIN category_tb ON category_tb.uid = board_tb.category
+        ORDER BY board_tb.uid DESC
+        LIMIT 15 OFFSET #{offSet}
     </select>
 
     <insert id="insertBoard">
         INSERT INTO board_tb(title, content, category)
         VALUES(#{title}, #{content}, #{category})
     </insert>
+
+    <select id="findBoard" resultType="project.community.board.dto.BoardDto">
+        SELECT board_tb.uid, category_tb.category, board_tb.writer, board_tb.title, board_tb.content, board_tb.regdate, board_tb.view, board_tb.up_point
+        FROM board_tb
+        INNER JOIN category_tb ON category_tb.uid = board_tb.category
+        WHERE board_tb.uid = #{uid};
+    </select>
 
 </mapper>

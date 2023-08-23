@@ -11,5 +11,6 @@ public interface Mapper {
     void insertBoard(BoardDto boardDto);
     int countBoard();
     List<BoardDto> findBoardList(Object obj);
+    List<BoardDto> findBoard(Object obj);
     //user
 }

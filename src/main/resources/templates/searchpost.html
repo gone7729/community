@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="UTF-8">
+    <title>자유 게시판</title>
+    <link rel="stylesheet" href="/css/searchpoststyle.css"/>
+    <link rel="stylesheet" href="/css/asidestyle.css"/>
+    <link rel="stylesheet" href="/css/boardstyle.css"/>
+    <link rel="stylesheet" href="/css/H&Fstyle.css"/>
+    <link rel="stylesheet" href="/css/topstyle.css"/>
+</head>
+<body>
+<header th:replace="layout :: header"></header>
+<main>
+    <div id="main-top">
+        <div id="main-top-title">
+            <span>통합 검색</span>
+        </div>
+        <div th:replace="toplayout :: content"></div>
+    </div>
+
+    <div th:replace="asidelayout :: content"></div>
+
+</main>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>

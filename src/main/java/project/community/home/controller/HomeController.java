@@ -35,7 +35,7 @@ public class HomeController {
 
     @GetMapping("freeboard")
     public String freeBoard(){
-        return "freeboard";
+        return "boardpaging";
     }
 
     @RequestMapping("go-write")
@@ -46,5 +46,15 @@ public class HomeController {
     @RequestMapping("post")
     public String post(){
         return "post";
+    }
+
+    @RequestMapping("searchpost")
+    public String searchPost(){
+        return "searchpost";
+    }
+
+    @RequestMapping("update")
+    public String update(){
+        return "update";
     }
 }

@@ -1,19 +1,24 @@
 package project.community.board.dto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class BoardDto {
     private int uid;
-    private int category;
+    private String category;
     private String writer;
     private String title;
     private String content;
-    private LocalDate regdate;
+    private LocalDateTime regdate;
     private int view;
     private int upPoint;
     private int downPoint;
     private int reporting;
+    private int offSet;
+
 }

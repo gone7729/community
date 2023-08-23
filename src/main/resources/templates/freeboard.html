@@ -62,13 +62,13 @@
           <li class="guide-list-item">조회수</li>
           <li class="guide-list-item">추천수</li>
         </ul>
-        <ul class="board-list">
-          <li>카테고리</li>
-          <li>제목</li>
-          <li>날짜</li>
-          <li>작성자</li>
-          <li>조회수</li>
-          <li>추천수</li>
+        <ul class="board-list" th:each="pagingList, stat : ${boardPagingList}">
+          <li th:text="${pagingList.category}"></li>
+          <li th:text="${pagingList.title}"></li>
+          <li th:text="${@TimeT.getTimeT(pagingList.regdate.toString())}"></li>
+          <li th:text="${pagingList.writer}"></li>
+          <li th:text="${pagingList.view}"></li>
+          <li th:text="${pagingList.upPoint}"></li>
         </ul>
       </div>
       <div id="main-side">
@@ -90,37 +90,37 @@
       </div>
     </div>
     <!--페이징-->
-    <form id="search" th:action="@{/}"  method="post">
+    <form id="search" th:action="@{boardpaging}"  method="post">
       <div id="page">
         <ul id="page-box">
           <li class="page-btn-box">
-            <a id="pp-btn" th:href="@{/}" >
+            <a id="pp-btn" th:href="@{/boardpaging(nowPage=${paging.startPage})}" >
               <img src="/img/start.svg" alt="첫페이지">
             </a>
           </li>
           <li class="page-btn-box">
-            <a id="p-btn" th:href="@{/}" >
+            <a id="p-btn" th:href="@{/boardpaging(nowPage=${paging.nowPage - 1})}" th:unless="${paging.nowPage - 1 < 1}">
               <img src="/img/left.svg" alt="이전">
             </a>
           </li>
-          <li clss="page-num-box" >
-            <a class="page-num" th:href="@{/}">
-              <span></span>
+          <li clss="page-num-box" th:each="num : ${#numbers.sequence(paging.startPage, paging.endPage)}">
+            <a class="page-num" th:href="@{/boardpaging(nowPage=${num})}">
+              <span th:unless="${num == paging.nowPage}" th:text="${num}"></span>
             </a>
           </li>
           <li class="page-btn-box">
-            <a id="n-btn" th:href="@{/}" >
+            <a id="n-btn" th:href="@{/boardpaging(nowPage=${paging.nowPage + 1})}" th:unless="${paging.nowPage + 1 > paging.lastPage}">
               <img src="/img/right.svg" alt="다음">
             </a>
           </li>
           <li class="page-btn-box">
-            <a id="nn-btn" th:href="@{/}">
+            <a id="nn-btn" th:href="@{/boardpaging(nowPage=${paging.endPage})}" th:if="${paging.endPage >= 1}">
               <img src="/img/end.svg" alt="끝페이지">
             </a>
           </li>
         </ul>
         <div id="write-btn">
-          <button th:formaction="@{/}">
+          <button th:formaction="@{go-write}">
             <span>글쓰기</span>
           </button>
         </div>
