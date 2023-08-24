@@ -52,9 +52,4 @@ public class HomeController {
     public String searchPost(){
         return "searchpost";
     }
-
-    @RequestMapping("update")
-    public String update(){
-        return "update";
-    }
 }

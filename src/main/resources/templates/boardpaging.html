@@ -65,7 +65,7 @@
       <ul class="board-list" th:each="pagingList, stat : ${boardPagingList}">
         <li th:text="${pagingList.category}"></li>
         <li>
-          <a th:text="${pagingList.title}" th:href="@{/posting(uid = ${pagingList.uid})}"></a>
+          <a class="post-link" th:text="${pagingList.title}" th:href="@{/posting(uid = ${pagingList.uid})}"></a>
         </li>
         <li th:text="${@TimeT.getTimeT(pagingList.regdate.toString())}"></li>
         <li th:text="${pagingList.writer}"></li>

@@ -13,7 +13,7 @@
           <span>회원 가입</span>
       </div>
         <div id="TermsofUse"></div>
-      <form id="account-box">
+      <form id="account-box" th:action="@{newAccount}" method="post">
           <div id="tou-check">
               <input type="checkbox" id="check" name="check">
               <span>이용 약관을 읽었으며 동의합니다.</span>

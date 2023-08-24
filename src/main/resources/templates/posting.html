@@ -35,17 +35,18 @@
       </li>
     </ul>
   </div>
-  <div id="post-top-title-box">
-    <span id="post-top-ctg" th:text="${posting.category}"></span>
-    <span id="post-top-title" th:text="${posting.title}"></span>
+  <div id="post-top-title-box" >
+    <span id="post-top-ctg" th:utext="${posting.category}"></span>
+    <span id="post-top-title" th:utext="${posting.title}"></span>
   </div>
   <div id="post-mid-content-box">
-    <p id="post-mid-content" th:text="${posting.content}"></p>
+    <p id="post-mid-content" th:utext="${posting.content}"></p>
   </div>
-  <form id="update-box" th:action="@{/update}" method="post">
-    <button id="update-btn">
-      <span>수정</span>
-    </button>
+  <form id="update-box" method="post">
+    <div id="update-btn">
+      <a role="button" th:href="@{/update(uid = ${posting.uid})}">수정</a>
+      <a id="delete-btn" th:href="@{/delete(uid = ${posting.uid})}">삭제</a>
+    </div>
   </form>
   <form id="post-btm-box">
     <button class="post-btm-btn">

@@ -162,12 +162,15 @@ border-radius: 7px;
 
 #input-title{
     width: 962px;
-    height: 35px;
+    height: 27px;
     border-radius: 12px;
     border: 2px #E79141 solid;
     outline: none;
     padding-left: 16px;
     letter-spacing: -2px;
+    padding-top: 8px;
+    font-size: 16px;
+    resize: none;
 }
 
 #editor-box{

@@ -1,6 +1,7 @@
 package project.community.mybatis.mappers;
 
 import project.community.board.dto.BoardDto;
+import project.community.user.dto.MemberDto;
 
 import java.util.List;
 
@@ -11,6 +12,9 @@ public interface Mapper {
     void insertBoard(BoardDto boardDto);
     int countBoard();
     List<BoardDto> findBoardList(Object obj);
-    List<BoardDto> findBoard(Object obj);
+    BoardDto findBoard(Object obj);
+    void updateBoard(Object obj);
+    void deleteBoard(Object obj);
     //user
+    void insertMember(MemberDto memberDto);
 }

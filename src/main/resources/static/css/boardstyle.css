@@ -176,7 +176,7 @@ table {
     padding-left: 12px;
     height: 51px;
     align-items: center;
-    border-bottom: 1px black solid;
+    border-bottom: 1px #a7a7a7 solid;
 }
 
 .board-list > li{
@@ -238,9 +238,10 @@ table {
 
 #page{
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     gap: 165px;
     margin-top: 24px;
+    width: 872px;
 }
 
 #page-box{
@@ -250,7 +251,6 @@ table {
 }
 
 #write-btn > :first-child:hover{
-    box-shadow: 0px 0px 15px #f5d8bc;
     cursor: pointer;
     transition-duration:0.3s;
 }
@@ -260,15 +260,17 @@ table {
 }
 
 #write-btn > :first-child{
-    width: 84px;
+    width: 80px;
     height: 30px;
     border-radius: 12px;
     border: 1px #9b9b9b solid;
     background-color: white;
-    font-size: 20px;
+    font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
+    letter-spacing: -2px;
+    margin-left: 130px;
 }
 
 #search{
@@ -284,8 +286,8 @@ table {
 }
 
 #category-btn{
-    width: 103px;
-    height: 36px;
+    width: 65px;
+    height: 35px;
     border: none;
     background-color: white;
     border-radius: 7px;
@@ -293,7 +295,7 @@ table {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    font-size: 16px;
+    font-size: 14px;
     color: #6c6b6b;
     font-weight: bold;
 }
@@ -365,9 +367,10 @@ table {
 
 #search-box{
     display: flex;
-    gap: 16px;
-    justify-content: center;
+    justify-content: flex-end;
     padding-right: 46px;
+    width: 872px;
+    gap: 24px;
 }
 
 #pp-btn{

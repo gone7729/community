@@ -33,4 +33,19 @@
         WHERE board_tb.uid = #{uid};
     </select>
 
+    <update id="updateBoard">
+        UPDATE board_tb
+        SET title = #{title}, category = #{categoryNo}, content = #{content}
+        WHERE uid = #{uid};
+    </update>
+
+    <delete id="deleteBoard">
+        DELETE FROM board_tb
+        WHERE uid= #{uid};
+    </delete>
+
+    <insert id="insertMember">
+        INSERT INTO member_tb(email, nickname, password)
+        VALUES(#{email}, #{nick}, #{pw})
+    </insert>
 </mapper>

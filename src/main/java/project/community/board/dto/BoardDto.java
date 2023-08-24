@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 public class BoardDto {
     private int uid;
     private String category;
+    private int categoryNo;
     private String writer;
     private String title;
     private String content;

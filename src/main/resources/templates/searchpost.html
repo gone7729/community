@@ -10,18 +10,18 @@
     <link rel="stylesheet" href="/css/topstyle.css"/>
 </head>
 <body>
-<header th:replace="layout :: header"></header>
+<header th:replace="/layout/layout :: header"></header>
 <main>
     <div id="main-top">
         <div id="main-top-title">
             <span>통합 검색</span>
         </div>
-        <div th:replace="toplayout :: content"></div>
+        <div th:replace="/layout/toplayout :: content"></div>
     </div>
 
-    <div th:replace="asidelayout :: content"></div>
+    <div th:replace="/layout/asidelayout :: content"></div>
 
 </main>
-<footer th:replace="layout :: footer"></footer>
+<footer th:replace="/layout/layout :: footer"></footer>
 </body>
 </html>

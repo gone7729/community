@@ -1,7 +1,7 @@
 const itemBtn = document.querySelector("#item-btn");
 const optionItems = document.querySelectorAll(".option-item");
 const itemBox = document.querySelector("#item-box");
-var editor = document.querySelector(".ql-editor");
+const any = document.querySelector(".ql-editor");
 
 
 
@@ -20,7 +20,7 @@ optionItems.forEach((item) => {
   });
 });
 
-editor.addEventListener("click", ()=>{
+any.addEventListener("click", ()=>{
     if(itemBox.style.height != "0px"){
         itemBox.style. height = "0px";
     }

@@ -47,7 +47,7 @@ table {
 	border-spacing: 0;
 }
 /*------------ reset end-------------- */
-main{
+main {
     position: relative;
 }
 
@@ -63,7 +63,9 @@ main{
     align-items: center;
     border-top: 1px #EDAD70 solid;
     border-bottom: 2px #EDAD70 solid;
-    font-weight: 550;
+    font-weight: 400;
+    letter-spacing: -1px;
+    font-size: 18px;
 }
 
 .post-top-item{
@@ -82,11 +84,13 @@ main{
 #post-top-ctg{
     margin-bottom: 6px;
     font-size: 14px;
+    letter-spacing: -1px;
 }
 
 #post-top-title{
     font-size: 24px;
     font-weight: 550;
+    letter-spacing: -1px;
 }
 
 #post-mid-content-box{
@@ -96,7 +100,7 @@ main{
     margin-top: 16px;
     border-top: 1px #BDBDBD solid;
     padding: 24px 16px;
-    letter-spacing: -1px;
+    letter-spacing: -2px;
 }
 
 #post-btm-box{
@@ -277,10 +281,25 @@ main{
 }
 
 #update-btn{
-    width: 70px;
-    height: 30px;
     margin-bottom: 16px;
     background-color: white;
-    border: 1px #a6a1a1 solid;
+    display: flex;
+    gap: 16px;
+}
+
+#update-btn > a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 24px;
+    text-decoration: none;
+    color: black;
+    border: 1px #b2b2b2 solid;
     border-radius: 7px;
+}
+
+#update-btn >:active{
+	border-color: #fbecdd;
+	background-color: #fbecdd;
 }

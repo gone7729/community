@@ -34,8 +34,13 @@ public class BoardService {
         return boardDao.findBoardList(boardDto);
     }
 
-    public List<BoardDto> findBoard(BoardDto boardDto){
+    public BoardDto findBoard(BoardDto boardDto){
         return boardDao.findBoard(boardDto);
     }
-
+    public void updateBoard(BoardDto boardDto){
+        this.boardDao.updateBoard(boardDto);
+    }
+    public void deleteBoard(BoardDto boardDto){
+        this.boardDao.deleteBoard(boardDto);
+    }
 }
