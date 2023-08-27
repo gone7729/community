@@ -17,4 +17,7 @@ public interface Mapper {
     void deleteBoard(Object obj);
     //user
     void insertMember(MemberDto memberDto);
+    MemberDto memberInfo(MemberDto memberDto);
+
+    boolean findEmail();
 }

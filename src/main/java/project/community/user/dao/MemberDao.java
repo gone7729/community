@@ -16,4 +16,11 @@ public class MemberDao {
     public void insertMember(MemberDto memberDto){
         this.mapper.insertMember(memberDto);
     }
+    public MemberDto memberInfo(MemberDto memberDto){
+        return mapper.memberInfo(memberDto);
+    }
+
+    public boolean findEmail(String email){
+        return mapper.findEmail();
+    }
 }

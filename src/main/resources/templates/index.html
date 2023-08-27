@@ -44,17 +44,12 @@
         <div id="main-top">
             <div id="main-top-bannerBox"></div>
             <div id="main-top-loginBox">
-                <form id="login-box">
-                    <button id="login-btn" formaction ="/login">
-                        <span>로그인</span>
-                    </button>
-                    <button formaction="/account" id="create-act">
-                        <span>회원 가입</span>
-                    </button>
+                <form id="login-box" th:action="login">
+                    <button id="login-btn">로그인</button>
                 </form>
-                <div id="main-top-logoBox">
-                    <img id="main-top-logo" src="/img/club.svg" alt="x">
-                </div>
+                <form id="account-box" th:action="account">
+                    <button id="create-act">회원 가입</button>
+                </form>
             </div>
         </div>
         <div id="main-mid">

@@ -48,4 +48,14 @@
         INSERT INTO member_tb(email, nickname, password)
         VALUES(#{email}, #{nick}, #{pw})
     </insert>
+
+    <select id="memberInfo" resultType="project.community.user.dto.MemberDto">
+        SELECT * FROM member_tb
+        WHERE email = #{email};
+    </select>
+
+    <select id="findEmail">
+        SELECT email from member_tb
+        WHERE email = #{email};
+    </select>
 </mapper>

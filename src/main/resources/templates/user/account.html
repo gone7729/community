@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="/css/H&Fstyle.css"/>
 </head>
 <body>
-    <header th:replace="layout :: header"></header>
+    <header th:replace="/layout/layout :: header"></header>
     <main>
       <div id="account-title">
           <span>회원 가입</span>
       </div>
         <div id="TermsofUse"></div>
-      <form id="account-box" th:action="@{newAccount}" method="post">
+      <form id="account-box" th:object="${memberDto}" th:action="@{newAccount}" method="post">
           <div id="tou-check">
               <input type="checkbox" id="check" name="check">
               <span>이용 약관을 읽었으며 동의합니다.</span>
@@ -24,16 +24,16 @@
                   <div class="title-box">
                       <span class="account-input-title">이메일</span>
                   </div>
-                  <span class="failed">유효성 검사 실패시 문장 출력</span>
+                  <span class="failed" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
               </div>
               <div class="account-input-box">
-                  <input class="account" type="text" name="email">
+                  <input class="account" type="text" name="email" th:field="*{email}">
                   <button class="validation-btn">
-                      <span>코드 전송</span>
+                      <span>중복 확인</span>
                   </button>
               </div>
           </div>
-          <div id="account-code">
+          <div style="display: none;" id="account-code">
               <div id="account-code-title">
                   <div class="title-box">
                       <span class="account-input-title">이메일 코드</span>
@@ -55,7 +55,7 @@
                   <span>/6자리 이상, 특수문자 포함</span>
               </div>
               <div class="account-input-box">
-                  <input class="account" type="password" name="pw">
+                  <input class="account" type="password" name="pw" th:field="*{pw}">
               </div>
           </div>
           <div id="account-pw-check">
@@ -63,7 +63,7 @@
                   <div class="title-box">
                       <span class="account-input-title">비밀번호 확인</span>
                   </div>
-                  <span class="failed">유효성 검사 실패시 문장 출력</span>
+                  <span class="failed" th:if="${#fields.hasErrors('pw')}" th:errors="*{pw}"></span>
               </div>
               <div class="account-input-box">
                   <input class="account" type="password" name="pw-check">
@@ -77,10 +77,10 @@
                   <div class="title-box">
                       <span class="account-input-title">닉네임</span>
                   </div>
-                  <span class="failed">유효성 검사 실패시 문장 출력</span>
+                  <span class="failed" th:if="${#fields.hasErrors('nick')}" th:errors="*{nick}"></span>
               </div>
               <div class="account-input-box">
-                  <input class="account" type="text" name="nick">
+                  <input class="account" type="text" name="nick" th:field="*{nick}">
                   <button class="validation-btn">
                       <span>중복 확인</span>
                   </button>
@@ -93,6 +93,6 @@
           </div>
       </form>
     </main>
-    <footer th:replace="layout :: footer"></footer>
+    <footer th:replace="/layout/layout :: footer"></footer>
 </body>
 </html>

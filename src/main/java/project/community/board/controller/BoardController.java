@@ -26,7 +26,7 @@ public class BoardController {
     public String insert(BoardDto boardDto){
 
         boardService.insertBoard(boardDto);
-        return "redirect:/boardpaging?nowPage=1";
+        return "redirect:/board/boardpaging?nowPage=1";
     }
 
     @RequestMapping("boardpaging")
@@ -42,7 +42,7 @@ public class BoardController {
         model.addAttribute("boardPagingList", boardService.findBoardList(boardDto));
         model.addAttribute("paging", paging);
         System.out.println(boardService.findBoardList(boardDto));
-        return "boardpaging";
+        return "/board/boardpaging";
     }
 
     @RequestMapping("posting")
@@ -59,7 +59,7 @@ public class BoardController {
         model.addAttribute("boardPagingList", boardService.findBoardList(boardDto));
         model.addAttribute("paging", paging);
         model.addAttribute("posting", boardService.findBoard(boardDto));
-        return "posting";
+        return "/board/posting";
     }
 
     @RequestMapping("update")
@@ -69,7 +69,7 @@ public class BoardController {
         boardDto.setUid(uid);
 
         model.addAttribute("posting", boardService.findBoard(boardDto));
-        return "update";
+        return "/board/update";
     }
 
     @PostMapping("postUpdate")
@@ -88,7 +88,7 @@ public class BoardController {
         model.addAttribute("boardPagingList", boardService.findBoardList(boardDto));
         model.addAttribute("paging", paging);
         model.addAttribute("posting", boardService.findBoard(boardDto));
-        return "posting";
+        return "/board/posting";
     }
 
     @GetMapping("/delete")
@@ -106,6 +106,6 @@ public class BoardController {
         boardService.deleteBoard(boardDto);
         model.addAttribute("boardPagingList", boardService.findBoardList(boardDto));
         model.addAttribute("paging", paging);
-        return "boardpaging";
+        return "/board/boardpaging";
     }
 }

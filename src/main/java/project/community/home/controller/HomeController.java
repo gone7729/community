@@ -19,28 +19,25 @@ public class HomeController {
         this.homeService = homeService;
     }
 
-    @RequestMapping("login")
-    public String login(){
-        return "login";
-    }
-    @RequestMapping("account")
-    public String NewAccount(){
-        return "account";
+    @GetMapping("login")
+    public String logIn(){
+        return "/user/login";
     }
 
-    @RequestMapping("member")
+
+    @RequestMapping("/user/member")
     public String member(){
-        return "member";
+        return "/user/member";
     }
 
-    @GetMapping("freeboard")
+    @GetMapping("/public/freeboard")
     public String freeBoard(){
         return "boardpaging";
     }
 
-    @RequestMapping("go-write")
+    @RequestMapping("/user/go-write")
     public String write(){
-        return "write";
+        return "/board/write";
     }
 
     @RequestMapping("post")

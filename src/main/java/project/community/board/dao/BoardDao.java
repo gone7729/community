@@ -22,7 +22,7 @@ public class BoardDao {
     }
 
     public void insertBoard(BoardDto boardDto){
-        mapper.insertBoard(boardDto);
+        this.mapper.insertBoard(boardDto);
     }
 
     public int countBoard(){
