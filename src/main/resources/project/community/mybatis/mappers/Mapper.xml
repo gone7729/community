@@ -45,8 +45,8 @@
     </delete>
 
     <insert id="insertMember">
-        INSERT INTO member_tb(email, nickname, password)
-        VALUES(#{email}, #{nick}, #{pw})
+        INSERT INTO member_tb(terms, email, nickname, password)
+        VALUES(#{terms}, #{email}, #{nick}, #{pw})
     </insert>
 
     <select id="memberInfo" resultType="project.community.user.dto.MemberDto">
@@ -54,8 +54,13 @@
         WHERE email = #{email};
     </select>
 
-    <select id="findEmail">
-        SELECT email from member_tb
+    <select id="findEmail" resultType="int">
+        SELECT count(*) from member_tb
         WHERE email = #{email};
+    </select>
+
+    <select id="findNick" resultType="int">
+        SELECT count(*) from member_tb
+        WHERE nickname = #{nick};
     </select>
 </mapper>

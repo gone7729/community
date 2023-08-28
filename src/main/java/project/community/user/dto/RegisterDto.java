@@ -1,14 +1,17 @@
 package project.community.user.dto;
 
 import lombok.Data;
+import org.springframework.context.annotation.Bean;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
 @Data
-public class MemberDto {
+public class RegisterDto {
     @NotBlank(message = "이메일을 입력해 주세요.")
+    @Email(message = "")
     private String email;
     @NotBlank(message = "닉네임을 입력해 주세요.")
     private String nick;

@@ -13,24 +13,25 @@
           <span>회원 가입</span>
       </div>
         <div id="TermsofUse"></div>
-      <form id="account-box" th:object="${memberDto}" th:action="@{newAccount}" method="post">
+      <form id="account-box" th:object="${registerDto}" th:action="@{accountValidTest}" method="post">
           <div id="tou-check">
-              <input type="checkbox" id="check" name="check">
+              <input type="checkbox" id="check" name="terms">
               <span>이용 약관을 읽었으며 동의합니다.</span>
-              <span class="failed">유효성 검사 실패시 문장 출력</span>
+              <!--/*이용 약관 체크*/-->
+              <span class="failed" th:if="${#fields.hasErrors('terms')}" th:errors="*{terms}"></span>
           </div>
           <div id="account-email">
               <div id="account-email-title">
                   <div class="title-box">
                       <span class="account-input-title">이메일</span>
                   </div>
+                  <!--/*공백 감지시*/-->
                   <span class="failed" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                  <span id="email-validation-message"></span>
               </div>
               <div class="account-input-box">
                   <input class="account" type="text" name="email" th:field="*{email}">
-                  <button class="validation-btn">
-                      <span>중복 확인</span>
-                  </button>
+                  <button type="button" id="email-check">중복 확인</button>
               </div>
           </div>
           <div style="display: none;" id="account-code">
@@ -53,6 +54,7 @@
                       <span class="account-input-title">비밀번호</span>
                   </div>
                   <span>/6자리 이상, 특수문자 포함</span>
+                  <span class="failed" th:if="${#fields.hasErrors('pw')}" th:errors="*{pw}"></span>
               </div>
               <div class="account-input-box">
                   <input class="account" type="password" name="pw" th:field="*{pw}">
@@ -63,10 +65,10 @@
                   <div class="title-box">
                       <span class="account-input-title">비밀번호 확인</span>
                   </div>
-                  <span class="failed" th:if="${#fields.hasErrors('pw')}" th:errors="*{pw}"></span>
+                  <span class="failed" th:if="${#fields.hasErrors('pwCheck')}" th:errors="*{pwCheck}"></span>
               </div>
               <div class="account-input-box">
-                  <input class="account" type="password" name="pw-check">
+                  <input class="account" type="password" name="pwCheck" th:field="*{pwCheck}">
                   <button class="validation-btn">
                       <span>확 인</span>
                   </button>
@@ -94,5 +96,9 @@
       </form>
     </main>
     <footer th:replace="/layout/layout :: footer"></footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:inline="javascript">
+    </script>
 </body>
 </html>

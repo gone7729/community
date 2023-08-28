@@ -20,7 +20,10 @@ public class MemberDao {
         return mapper.memberInfo(memberDto);
     }
 
-    public boolean findEmail(String email){
-        return mapper.findEmail();
+    public int findEmail(String email) {
+        return mapper.findEmail(email);
+    }
+    public int findNick(String nick){
+        return mapper.findNick(nick);
     }
 }

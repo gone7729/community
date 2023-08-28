@@ -19,5 +19,6 @@ public interface Mapper {
     void insertMember(MemberDto memberDto);
     MemberDto memberInfo(MemberDto memberDto);
 
-    boolean findEmail();
+    int findEmail(String email);
+    int findNick(String nick);
 }
