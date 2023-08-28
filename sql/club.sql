@@ -35,18 +35,10 @@ CREATE TABLE IF NOT EXISTS `board_tb` (
   KEY `FK_board_tb_category_tb` (`category`),
   KEY `FK_board_tb_member_tb` (`writer`),
   CONSTRAINT `FK_board_tb_category_tb` FOREIGN KEY (`category`) REFERENCES `category_tb` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_board_tb_member_tb` FOREIGN KEY (`writer`) REFERENCES `member_tb` (`nickname`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `FK_board_tb_member_tb` FOREIGN KEY (`writer`) REFERENCES `member_tb` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 테이블 데이터 club_cmn.board_tb:~7 rows (대략적) 내보내기
-INSERT INTO `board_tb` (`uid`, `writer`, `category`, `title`, `content`, `regdate`, `view`, `up_point`, `down_point`, `reporting`) VALUES
-	(3, 'kim', 1, '2', '<p><br></p>', '2023-08-23 14:03:58', 0, 0, 0, 0),
-	(4, 'kim', 1, '3', '<p>3</p>', '2023-08-23 14:04:30', 0, 0, 0, 0),
-	(5, 'kim', 3, 'ㅕㅕㅕㅕㄹ', '<p>3dddd</p>', '2023-08-23 14:05:05', 0, 0, 0, 0),
-	(6, 'kim', 2, '4', '<p>4</p>', '2023-08-23 14:05:08', 0, 0, 0, 0),
-	(7, 'kim', 3, '5', '<p>5</p>', '2023-08-23 14:05:25', 0, 0, 0, 0),
-	(8, NULL, 2, '질문', '<h1>있을까</h1>', '2023-08-24 12:47:57', 0, 0, 0, 0),
-	(10, NULL, 1, 'ㅇㅇㅇ', '<h2>잡담</h2>', '2023-08-24 12:50:05', 0, 0, 0, 0);
+-- 테이블 데이터 club_cmn.board_tb:~0 rows (대략적) 내보내기
 
 -- 테이블 club_cmn.category_tb 구조 내보내기
 CREATE TABLE IF NOT EXISTS `category_tb` (
@@ -76,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `comment_tb` (
   KEY `FK_comment_tb_board_tb` (`board_uid`),
   KEY `FK_comment_tb_member_tb` (`writer`),
   CONSTRAINT `FK_comment_tb_board_tb` FOREIGN KEY (`board_uid`) REFERENCES `board_tb` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_comment_tb_member_tb` FOREIGN KEY (`writer`) REFERENCES `member_tb` (`nickname`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `FK_comment_tb_member_tb` FOREIGN KEY (`writer`) REFERENCES `member_tb` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- 테이블 데이터 club_cmn.comment_tb:~0 rows (대략적) 내보내기
@@ -97,15 +89,22 @@ CREATE TABLE IF NOT EXISTS `member_add_tb` (
 CREATE TABLE IF NOT EXISTS `member_tb` (
   `nickname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `terms` int(11) NOT NULL,
   `password` varchar(255) NOT NULL,
   `createdate` date NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`nickname`) USING BTREE
+  PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 테이블 데이터 club_cmn.member_tb:~2 rows (대략적) 내보내기
-INSERT INTO `member_tb` (`nickname`, `email`, `password`, `createdate`) VALUES
-	('Gone', 'rhkdehd0301@naver.com', 'qlqjs7729@', '2023-08-24'),
-	('kim', 'rhkdehd97@gmail.com', '1234', '2023-08-23');
+-- 테이블 데이터 club_cmn.member_tb:~8 rows (대략적) 내보내기
+INSERT INTO `member_tb` (`nickname`, `email`, `terms`, `password`, `createdate`) VALUES
+	('1234', '123', 1, '123', '2023-08-28'),
+	('1', '41414141', 1, '1', '2023-08-28'),
+	('4422', 'latlat1234@naver.com', 0, '123', '2023-08-28'),
+	('testest', 'test', 1, 'test', '2023-08-28'),
+	('test2', 'test2', 1, 'test2', '2023-08-28'),
+	('test3', 'test3', 1, 'test3', '2023-08-28'),
+	('tes4', 'test4', 1, 'test4', '2023-08-28'),
+	('qrqrqrq', 'ㄱㄱㄱㄱㄱㄱ', 1, 'qwr', '2023-08-28');
 
 -- 테이블 club_cmn.payment_tb 구조 내보내기
 CREATE TABLE IF NOT EXISTS `payment_tb` (
@@ -117,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `payment_tb` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`uid`),
   KEY `FK_payment_tb_member_tb` (`nickname`),
-  CONSTRAINT `FK_payment_tb_member_tb` FOREIGN KEY (`nickname`) REFERENCES `member_tb` (`nickname`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `FK_payment_tb_member_tb` FOREIGN KEY (`nickname`) REFERENCES `member_tb` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- 테이블 데이터 club_cmn.payment_tb:~0 rows (대략적) 내보내기
@@ -131,8 +130,8 @@ CREATE TABLE IF NOT EXISTS `report_tb` (
   PRIMARY KEY (`uid`),
   KEY `FK_report_tb_member_tb` (`reporter`),
   KEY `FK_report_tb_member_tb_2` (`reporting_user`),
-  CONSTRAINT `FK_report_tb_member_tb` FOREIGN KEY (`reporter`) REFERENCES `member_tb` (`nickname`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_report_tb_member_tb_2` FOREIGN KEY (`reporting_user`) REFERENCES `member_tb` (`nickname`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `FK_report_tb_member_tb` FOREIGN KEY (`reporter`) REFERENCES `member_tb` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_report_tb_member_tb_2` FOREIGN KEY (`reporting_user`) REFERENCES `member_tb` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- 테이블 데이터 club_cmn.report_tb:~0 rows (대략적) 내보내기
