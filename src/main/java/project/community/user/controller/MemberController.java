@@ -104,4 +104,17 @@ public class MemberController {
         memberService.registerMember(registerDto);
         return "user/login";
     }
+
+    @PostMapping("test")
+    @ResponseBody
+    public String test(@RequestBody @Valid RegisterDto registerDto, BindingResult bindingResult){
+        System.out.println("test");
+        System.out.println(registerDto.getEmail());
+        if (memberService.findEmail(registerDto.getEmail())==1){
+            System.out.println("test");
+            bindingResult.rejectValue("email","emailErrors","이미 존재하는 이메일입니다.");
+        }
+        System.out.println("test2");
+        return "";
+    }
 }

@@ -153,6 +153,16 @@ table {
     padding-left: 8px;
 }
 
+#input-email{
+    width: 500px;
+    height: 36px;
+    font-size: 18px;
+    border-radius: 12px;
+    outline: none;
+    border: 1px #8d8888 solid;
+    padding-left: 8px;
+}
+
 #email-check{
     width: 80px;
     height: 28px;
@@ -211,4 +221,8 @@ table {
 #account-btn:active{
 	background-color: #f3af72;
 	box-shadow: inset 1px 1px 1px 1px #c36b1b;
+}
+
+#email-validation-message{
+display:none;
 }

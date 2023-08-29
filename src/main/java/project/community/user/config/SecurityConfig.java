@@ -16,7 +16,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/user/login","/user/account","/board/boardpaging","/board/posting").permitAll() //공개페이지
                 .antMatchers("/user/member","/board/write","/board/update").authenticated() //로그인 시 이용가
                 .and()

@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Data
 public class RegisterDto {
     @NotBlank(message = "이메일을 입력해 주세요.")
-    @Email(message = "")
+    @Email
     private String email;
     @NotBlank(message = "닉네임을 입력해 주세요.")
     private String nick;

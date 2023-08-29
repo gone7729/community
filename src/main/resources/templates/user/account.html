@@ -5,6 +5,7 @@
     <title>회원 가입</title>
     <link rel="stylesheet" href="/css/accountstyle.css"/>
     <link rel="stylesheet" href="/css/H&Fstyle.css"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <header th:replace="/layout/layout :: header"></header>
@@ -27,10 +28,10 @@
                   </div>
                   <!--/*공백 감지시*/-->
                   <span class="failed" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-                  <span id="email-validation-message"></span>
+                  <span id="email-validation-message">이미 존재하는 이메일 입니다.</span>
               </div>
               <div class="account-input-box">
-                  <input class="account" type="text" name="email" th:field="*{email}">
+                  <input id="input-email" type="text" name="email" th:field="*{email}" >
                   <button type="button" id="email-check">중복 확인</button>
               </div>
           </div>
@@ -97,8 +98,25 @@
     </main>
     <footer th:replace="/layout/layout :: footer"></footer>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script th:inline="javascript">
+        const emailInput = document.querySelector("#input-email");
+        const emailValidBtn = document.querySelector("#email-check");
+        const emailMsg = document.querySelector("#email-validation-message");
+
+
+        emailValidBtn.addEventListener("click", function(){
+        const email = emailInput.value;
+        fetch("/test", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"
+            },
+            body: JSON.stringify({email}),
+         })
+          .then(res => console.log(res))
+          .then(result => console.log())
+          .catch(error => console.log(error));
+        });
     </script>
 </body>
 </html>
