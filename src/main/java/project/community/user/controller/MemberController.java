@@ -107,14 +107,14 @@ public class MemberController {
 
     @PostMapping("test")
     @ResponseBody
-    public String test(@RequestBody @Valid RegisterDto registerDto, BindingResult bindingResult){
-        System.out.println("test");
-        System.out.println(registerDto.getEmail());
-        if (memberService.findEmail(registerDto.getEmail())==1){
-            System.out.println("test");
-            bindingResult.rejectValue("email","emailErrors","이미 존재하는 이메일입니다.");
+    public String test(@Valid @RequestBody RegisterDto registerDto, BindingResult bindingResult){
+        String result;
+
+        //json으로 가져온 email로 중복 검사
+        if(memberService.findEmail(registerDto.getEmail())==1){
+            //fetch로 보낼 메세지
+            return result="이미 존재하는 이메일입니다.";
         }
-        System.out.println("test2");
-        return "";
+            return result="사용 가능합니다.";
     }
 }

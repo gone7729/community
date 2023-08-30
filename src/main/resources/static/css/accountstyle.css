@@ -224,5 +224,8 @@ table {
 }
 
 #email-validation-message{
-display:none;
+    font-size: 14px;
+    color: red;
+    letter-spacing: -2px;
+    margin-left: 18px;
 }

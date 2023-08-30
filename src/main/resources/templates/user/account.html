@@ -28,7 +28,7 @@
                   </div>
                   <!--/*공백 감지시*/-->
                   <span class="failed" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-                  <span id="email-validation-message">이미 존재하는 이메일 입니다.</span>
+                  <span id="email-validation-message"></span>
               </div>
               <div class="account-input-box">
                   <input id="input-email" type="text" name="email" th:field="*{email}" >
@@ -103,6 +103,7 @@
         const emailInput = document.querySelector("#input-email");
         const emailValidBtn = document.querySelector("#email-check");
         const emailMsg = document.querySelector("#email-validation-message");
+        const emailMsg = document.querySelectorAll(".failed");
 
 
         emailValidBtn.addEventListener("click", function(){
@@ -113,9 +114,18 @@
             },
             body: JSON.stringify({email}),
          })
-          .then(res => console.log(res))
-          .then(result => console.log())
-          .catch(error => console.log(error));
+          .then(response => {
+            if (response.ok) {
+                return response.text(); // 서버로부터 받은 text 데이터
+            } else {
+                throw new Error("서버 응답 오류");
+            }
+        })
+        .then(data => {
+            console.log(data)
+            emailMsg.textContent = data;
+        })
+          .catch((error) => console.log(error))
         });
     </script>
 </body>

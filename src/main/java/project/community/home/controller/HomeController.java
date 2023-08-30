@@ -35,7 +35,7 @@ public class HomeController {
         return "boardpaging";
     }
 
-    @RequestMapping("/user/go-write")
+    @RequestMapping("go-write")
     public String write(){
         return "/board/write";
     }

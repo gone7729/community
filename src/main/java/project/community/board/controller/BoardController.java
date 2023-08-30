@@ -26,7 +26,7 @@ public class BoardController {
     public String insert(BoardDto boardDto){
 
         boardService.insertBoard(boardDto);
-        return "redirect:/board/boardpaging?nowPage=1";
+        return "redirect:/boardpaging?nowPage=1";
     }
 
     @RequestMapping("boardpaging")
@@ -41,7 +41,6 @@ public class BoardController {
         boardDto.setOffSet((nowPage - 1) * pageSize);
         model.addAttribute("boardPagingList", boardService.findBoardList(boardDto));
         model.addAttribute("paging", paging);
-        System.out.println(boardService.findBoardList(boardDto));
         return "/board/boardpaging";
     }
 
@@ -73,39 +72,18 @@ public class BoardController {
     }
 
     @PostMapping("postUpdate")
-    public String postUpdate(Model model, BoardDto boardDto,
-                             @RequestParam(value = "nowPage", defaultValue = "1")int nowPage,
-                             @RequestParam(value = "pageSize", defaultValue = "10")int pageSize,
-                             @RequestParam int uid){
-
-        int total = boardService.countBoard();
-        project.community.util.Paging paging = new project.community.util.Paging(total, nowPage, pageSize);
-
-        boardDto.setUid(uid);
-        boardDto.setOffSet((nowPage - 1) * pageSize);
+    public String postUpdate(BoardDto boardDto){
 
         boardService.updateBoard(boardDto);
-        model.addAttribute("boardPagingList", boardService.findBoardList(boardDto));
-        model.addAttribute("paging", paging);
-        model.addAttribute("posting", boardService.findBoard(boardDto));
-        return "/board/posting";
+        return "redirect:/posting?uid=" +boardDto.getUid();
     }
 
     @GetMapping("/delete")
-    public String delete(Model model, BoardDto boardDto,
-                         @RequestParam(value = "nowPage", defaultValue = "1")int nowPage,
-                         @RequestParam(value = "pageSize", defaultValue = "10")int pageSize,
+    public String delete(BoardDto boardDto,
                          @RequestParam ("uid") int uid){
-
-        int total = boardService.countBoard();
-        project.community.util.Paging paging = new project.community.util.Paging(total, nowPage, pageSize);
-
         boardDto.setUid(uid);
-        boardDto.setOffSet((nowPage - 1) * pageSize);
 
         boardService.deleteBoard(boardDto);
-        model.addAttribute("boardPagingList", boardService.findBoardList(boardDto));
-        model.addAttribute("paging", paging);
-        return "/board/boardpaging";
+        return "redirect:/boardpaging?nowPage=1";
     }
 }
