@@ -28,6 +28,7 @@
                   </div>
                   <!--/*공백 감지시*/-->
                   <span class="failed" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                  <!--/*중복 검사*/-->
                   <span id="email-validation-message"></span>
               </div>
               <div class="account-input-box">
@@ -58,7 +59,7 @@
                   <span class="failed" th:if="${#fields.hasErrors('pw')}" th:errors="*{pw}"></span>
               </div>
               <div class="account-input-box">
-                  <input class="account" type="password" name="pw" th:field="*{pw}">
+                  <input id="input-pw" type="password" name="pw" th:field="*{pw}">
               </div>
           </div>
           <div id="account-pw-check">
@@ -66,13 +67,15 @@
                   <div class="title-box">
                       <span class="account-input-title">비밀번호 확인</span>
                   </div>
-                  <span class="failed" th:if="${#fields.hasErrors('pwCheck')}" th:errors="*{pwCheck}"></span>
+                  <span id="pw-validation-message"></span>
               </div>
               <div class="account-input-box">
-                  <input class="account" type="password" name="pwCheck" th:field="*{pwCheck}">
-                  <button class="validation-btn">
-                      <span>확 인</span>
-                  </button>
+                  <input id="input-check" type="password" name="pwCheck" th:field="*{pwCheck}">
+                  <div class="validation-btn">
+                    <button type="button" id="pw-valid-btn">
+                          <span>확 인</span>
+                    </button>
+                  </div>
               </div>
           </div>
           <div id="account-nick">
@@ -81,12 +84,15 @@
                       <span class="account-input-title">닉네임</span>
                   </div>
                   <span class="failed" th:if="${#fields.hasErrors('nick')}" th:errors="*{nick}"></span>
+                  <span id="nick-validation-message"></span>
               </div>
               <div class="account-input-box">
-                  <input class="account" type="text" name="nick" th:field="*{nick}">
-                  <button class="validation-btn">
-                      <span>중복 확인</span>
-                  </button>
+                  <input id="nick-input" type="text" name="nick" th:field="*{nick}">
+                  <div class="validation-btn">
+                      <button type="button" id="nick-valid-btn">
+                          <span>중복 확인</span>
+                      </button>
+                  </div>
               </div>
           </div>
           <div id="account-btn-box">
@@ -103,12 +109,25 @@
         const emailInput = document.querySelector("#input-email");
         const emailValidBtn = document.querySelector("#email-check");
         const emailMsg = document.querySelector("#email-validation-message");
-        const emailMsg = document.querySelectorAll(".failed");
+        const pwCheckInput = document.querySelector("#input-check");
+        const pwInput = document.querySelector("#input-pw");
+        const pwValidBtn = document.querySelector("#pw-valid-btn");
+        const pwMsg = document.querySelector("#pw-validation-message");
+        const nickValidBtn = document.querySelector("#nick-valid-btn");
+        const nickInput = document.querySelector("#nick-input");
+        const nickMsg = document.querySelector("#nick-validation-message");
+        const validMsg = document.querySelector(".failed");
+
+
+        const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+        const pwRegex = /^(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{6,}$/;
+        const nickRegex = /^\S+$/;
 
 
         emailValidBtn.addEventListener("click", function(){
         const email = emailInput.value;
-        fetch("/test", {
+        console.log()
+        fetch("/emailTest", {
             method: "POST",
             headers: {"Content-Type": "application/json"
             },
@@ -122,10 +141,53 @@
             }
         })
         .then(data => {
-            console.log(data)
-            emailMsg.textContent = data;
+            console.log(emailRegex.test(email))
+            if(emailRegex.test(email) == true){
+                emailMsg.textContent = data;
+                } else {
+                    emailMsg.textContent = "잘 못된 형식 입니다.";
+                }
         })
-          .catch((error) => console.log(error))
+        .catch((error) => console.log(error))
+        });
+
+        pwValidBtn.addEventListener("click", function(){
+            if(pwRegex.test(pwCheckInput.value) == true){
+            if(pwInput.value != pwCheckInput.value){
+                pwMsg.textContent = "일치 하지 않습니다.";
+            } else{
+                pwMsg.textContent = "사용 가능합니다.";
+            }
+        }else {
+            pwMsg.textContent = "비밀번호는 최소 6자리 이상의 영어와 특수문자가 최소 한 개 포함되어야 합니다.";
+        }
+        })
+
+        nickValidBtn.addEventListener("click", function(){
+        const nick = nickInput.value;
+        console.log()
+        fetch("/nickTest", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"
+            },
+            body: JSON.stringify({nick}),
+         })
+          .then(response => {
+            if (response.ok) {
+                return response.text(); // 서버로부터 받은 text 데이터
+            } else {
+                throw new Error("서버 응답 오류");
+            }
+        })
+        .then(data => {
+                console.log(nick)
+                if(nickRegex.test(nick) == true){
+                    nickMsg.textContent = data;
+                } else{
+                    nickMsg.textContent = "공백이 포함될 수 없습니다.";
+                }
+        })
+        .catch((error) => console.log(error))
         });
     </script>
 </body>

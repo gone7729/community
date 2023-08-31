@@ -73,8 +73,8 @@ public class MemberController {
 
     @PostMapping("accountValidTest")
     public String registerMember(@Valid @ModelAttribute("registerDto") RegisterDto registerDto, BindingResult bindingResult){
-        System.out.println(registerDto.getPwCheck()+"비번체크");
-        System.out.println(registerDto.getPw()+"비번");
+        System.out.println(registerDto.getPwCheck());
+        System.out.println(registerDto.getPw());
 
         if(registerDto.isTerms()==false){
             bindingResult.rejectValue("terms", "termsError", "이용 약관에 동의해주세요.");
@@ -88,7 +88,6 @@ public class MemberController {
 
         if (!registerDto.getPwCheck().equals(registerDto.getPw())){
             bindingResult.rejectValue("pw", "pwCheckErrors", "비밀번호가 일치하지 않습니다.");
-            bindingResult.rejectValue("pwCheck", "pwCheckErrors", "비밀번호가 일치하지 않습니다.");
             return "user/account";
         }
 
@@ -105,16 +104,32 @@ public class MemberController {
         return "user/login";
     }
 
-    @PostMapping("test")
+    @PostMapping("emailTest")
     @ResponseBody
-    public String test(@Valid @RequestBody RegisterDto registerDto, BindingResult bindingResult){
+    public String emailTest(@Valid @RequestBody RegisterDto registerDto, BindingResult bindingResult){
+        System.out.println(registerDto.getEmail());
         String result;
 
         //json으로 가져온 email로 중복 검사
         if(memberService.findEmail(registerDto.getEmail())==1){
             //fetch로 보낼 메세지
-            return result="이미 존재하는 이메일입니다.";
+            result="이미 존재하는 이메일입니다.";
+        } else {
+            result="사용 가능합니다.";
         }
-            return result="사용 가능합니다.";
+        return result;
+    }
+
+    @PostMapping("nickTest")
+    @ResponseBody
+    public String nickTest(@Valid @RequestBody RegisterDto registerDto, BindingResult bindingResult){
+        String result;
+
+        if(memberService.findNick(registerDto.getNick())==1){
+            result="이미 존재하는 닉네임입니다.";
+        } else {
+            result="사용 가능합니다.";
+        }
+        return result;
     }
 }
