@@ -22,7 +22,7 @@ public class BoardController {
         this.boardService =boardService;
     }
 
-    @RequestMapping("do-write")
+    @PostMapping("write")
     public String insert(BoardDto boardDto){
 
         boardService.insertBoard(boardDto);

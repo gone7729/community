@@ -21,4 +21,5 @@ public interface Mapper {
 
     int findEmail(String email);
     int findNick(String nick);
+    MemberDto singIn(MemberDto memberDto);
 }

@@ -26,4 +26,7 @@ public class MemberDao {
     public int findNick(String nick){
         return mapper.findNick(nick);
     }
+    public MemberDto singIn(MemberDto memberDto){
+        return mapper.singIn(memberDto);
+    }
 }

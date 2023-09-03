@@ -45,11 +45,13 @@
             <div id="main-top-bannerBox"></div>
             <div id="main-top-loginBox">
                 <form id="login-box" th:action="login">
+                    <p th:text="${user}"></p>
                     <button id="login-btn">로그인</button>
                 </form>
                 <form id="account-box" th:action="account">
                     <button id="create-act">회원 가입</button>
                 </form>
+                <a th:href="@{/logout}">로그아웃</a>
             </div>
         </div>
         <div id="main-mid">

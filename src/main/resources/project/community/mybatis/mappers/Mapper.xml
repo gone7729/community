@@ -46,7 +46,7 @@
 
     <insert id="insertMember">
         INSERT INTO member_tb(terms, email, nickname, password)
-        VALUES(#{terms}, #{email}, #{nick}, #{pw})
+        VALUES(#{terms}, #{email}, #{nickName}, #{password})
     </insert>
 
     <select id="memberInfo" resultType="project.community.user.dto.MemberDto">
@@ -61,6 +61,11 @@
 
     <select id="findNick" resultType="int">
         SELECT count(*) from member_tb
-        WHERE nickname = #{nick};
+        WHERE nickname = #{nickName};
+    </select>
+
+    <select id="singIn" resultType="project.community.user.dto.MemberDto">
+        select * from member_tb
+        where email = #{email};
     </select>
 </mapper>

@@ -10,7 +10,8 @@ import project.community.user.dto.MemberDto;
 @Service
 public class MemberService {
     MemberDao memberDao;
-
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public MemberService(MemberDao memberDao){
@@ -30,11 +31,10 @@ public class MemberService {
     }
     public void registerMember(RegisterDto registerDto){
         MemberDto memberDto = new MemberDto();
-        BCryptPasswordEncoder bCryptPasswordEncoder = null;
 
         memberDto.setEmail(registerDto.getEmail());
-        memberDto.setPw(bCryptPasswordEncoder.encode(registerDto.getPw()));
-        memberDto.setNick(registerDto.getNick());
+        memberDto.setPassword(bCryptPasswordEncoder.encode(registerDto.getPassword()));
+        memberDto.setNickName(registerDto.getNickName());
         memberDto.setTerms(registerDto.isTerms());
 
         this.memberDao.insertMember(memberDto);

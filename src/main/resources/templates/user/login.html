@@ -9,7 +9,7 @@
 <body>
   <header th:replace="/layout/layout :: header"></header>
   <main>
-    <form id="login-box">
+    <form id="login-box" th:action="@{singIn}" method="post">
       <div class="email-login-box">
         <div id="email-login-title">
           <span>로그인</span>
