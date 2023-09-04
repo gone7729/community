@@ -122,9 +122,9 @@
         </li>
       </ul>
       <div id="write-btn">
-        <button th:formaction="@{write}">
-          <span>글쓰기</span>
-        </button>
+        <a type="button" th:href="@{write}">
+          글쓰기
+        </a>
       </div>
     </div>
     <div id="search-box">
@@ -146,6 +146,10 @@
         <input id="search-bar" type="text" name="search">
       </div>
     </div>
+  </form>
+  <form th:action="@{checkSession}">
+    <button>세션 확인</button>
+    <p th:text="${message}"></p>
   </form>
 </main>
 <footer th:replace="/layout/layout :: footer"></footer>

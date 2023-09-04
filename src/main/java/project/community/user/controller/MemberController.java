@@ -30,9 +30,8 @@ public class MemberController {
         return "member";
     }
 
-    @GetMapping("account")
+    @RequestMapping("account")
     public String accountPage(Model model) {
-        model.addAttribute("memberDto", new MemberDto());
         model.addAttribute("registerDto", new RegisterDto());
         return "/user/account";
     }

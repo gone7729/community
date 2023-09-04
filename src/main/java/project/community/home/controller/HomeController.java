@@ -1,6 +1,7 @@
 package project.community.home.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -8,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import project.community.board.dto.BoardDto;
 import project.community.home.service.HomeService;
+import project.community.user.dto.MemberDto;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
@@ -35,9 +40,13 @@ public class HomeController {
         return "boardpaging";
     }
 
-    @RequestMapping("write")
-    public String write(){
-        return "/board/write";
+    @GetMapping("write")
+    public String write(@ModelAttribute MemberDto memberDto, HttpSession session, HttpServletRequest request){
+        MemberDto user = (MemberDto) session.getAttribute("user");
+        if (user != null){
+            return "/board/write";
+        }
+        return "user/login";
     }
 
     @RequestMapping("post")
