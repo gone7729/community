@@ -59,6 +59,11 @@
         WHERE email = #{email};
     </select>
 
+    <select id="findByEmail" resultType="project.community.user.dto.MemberDto">
+        SELECT * from member_tb
+        WHERE email = #{email};
+    </select>
+
     <select id="findNick" resultType="int">
         SELECT count(*) from member_tb
         WHERE nickname = #{nickName};

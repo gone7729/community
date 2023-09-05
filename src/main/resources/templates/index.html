@@ -43,15 +43,17 @@
     <main>
         <div id="main-top">
             <div id="main-top-bannerBox"></div>
-            <div id="main-top-loginBox">
-                <form id="login-box" th:action="login">
-                    <p th:text="${user}"></p>
-                    <button id="login-btn">로그인</button>
-                </form>
-                <form id="account-box" th:action="account">
-                    <button id="create-act">회원 가입</button>
-                </form>
-                <a th:href="@{/logout}">로그아웃</a>
+            <div id="main-top-loginBox" th:unless="${member}">
+                    <a type="button" th:href="@{login}" id="login-btn">로그인</a>
+                    <a type="button" th:href="@{account}" id="create-act">회원 가입</a>
+            </div>
+            <div id="main-top-infoBox" th:if="${member}">
+                <div>
+                    <p th:text="${member.nickName} + '님 안녕하세요.'"></p>
+                </div>
+                <div>
+                    <a type="button" th:href="@{logout}">로그 아웃</a>
+                </div>
             </div>
         </div>
         <div id="main-mid">

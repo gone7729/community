@@ -2,7 +2,10 @@ package project.community.user.controller;
 
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,19 +31,17 @@ public class AuthController {
     }
 
     @PostMapping("singIn")
-    public String singIn(Model model, @ModelAttribute MemberDto memberDto,
-                         @RequestParam("password") String password, HttpSession session,
-                         HttpServletRequest request, RedirectAttributes redirectAttributes) {
+    public String singIn(Model model, MemberDto memberDto,
+                         @RequestParam("password") String password,
+                         @RequestParam("email") String email,
+                         HttpSession session, HttpServletRequest request, RedirectAttributes redirectAttributes) {
         memberDto = authService.singIn(memberDto);
         session = request.getSession();
-        System.out.println("찾아온 정보 "+memberDto);
-        System.out.println("session 생성 전 "+session);
-        System.out.println("입력한 정보가 데이터베이스에 있는가");
         if (memberDto.getEmail() != null && bCryptPasswordEncoder.matches(password, memberDto.getPassword())) {
-            System.out.println("있다 그럼 session을 생성한다");
             session.setAttribute("user", memberDto);
-            System.out.println(session.getAttribute("user"));
+            model.addAttribute("member", memberDto);
             System.out.println("세션 아이디 " + session.getId());
+            System.out.println(memberDto);
             return "redirect:/boardpaging";
         } else {
             System.out.println("실패");
@@ -50,10 +51,11 @@ public class AuthController {
         }
     }
 
-    @GetMapping("/logout")
+    @GetMapping("logout")
     public String logout(HttpSession session, RedirectAttributes redirectAttributes) {
+        System.out.println(session.getId());
         // 세션이 이미 만료되었는지 확인
-        if (session != null && session.getAttribute("user") != null) {
+        if (session.getId() != null) {
             // 세션에서 사용자 정보 삭제
             session.removeAttribute("user");
             // 세션 무효화
@@ -61,8 +63,9 @@ public class AuthController {
             // 로그 메시지
             System.out.println("로그아웃 성공");
         } else {
-            // 세션이 이미 만료되었거나 사용자 정보가 없을 경우
             System.out.println("세션이 이미 만료되었거나 사용자 정보가 없습니다.");
+            return "login";
+            // 세션이 이미 만료되었거나 사용자 정보가 없을 경우
         }
         // 리다이렉트 시 메시지 전달을 위한 RedirectAttributes 사용
         redirectAttributes.addFlashAttribute("message", "로그아웃 되었습니다.");

@@ -3,7 +3,10 @@ package project.community.mybatis.mappers;
 import project.community.board.dto.BoardDto;
 import project.community.user.dto.MemberDto;
 
+import java.lang.reflect.Member;
+import java.security.SecureRandom;
 import java.util.List;
+import java.util.Optional;
 
 @org.apache.ibatis.annotations.Mapper
 public interface Mapper {
@@ -20,6 +23,7 @@ public interface Mapper {
     MemberDto memberInfo(MemberDto memberDto);
 
     int findEmail(String email);
+    String findByEmail(String email);
     int findNick(String nick);
     MemberDto singIn(MemberDto memberDto);
 }

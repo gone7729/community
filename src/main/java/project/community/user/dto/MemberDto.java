@@ -13,4 +13,5 @@ public class MemberDto {
     private String password;
     private boolean terms;
     private LocalDate createDate;
+    private String role;
 }

@@ -41,12 +41,9 @@ public class HomeController {
     }
 
     @GetMapping("write")
-    public String write(@ModelAttribute MemberDto memberDto, HttpSession session, HttpServletRequest request){
-        MemberDto user = (MemberDto) session.getAttribute("user");
-        if (user != null){
-            return "/board/write";
-        }
-        return "user/login";
+    public String write(){
+
+        return "board/write";
     }
 
     @RequestMapping("post")
