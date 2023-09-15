@@ -264,13 +264,13 @@ table {
     height: 30px;
     border-radius: 12px;
     border: 1px #9b9b9b solid;
-    background-color: white;
-    font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     letter-spacing: -2px;
     margin-left: 130px;
+    text-decoration: none;
+    color: black;
 }
 
 #search{

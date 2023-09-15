@@ -41,8 +41,10 @@ public class HomeController {
     }
 
     @GetMapping("write")
-    public String write(){
-
+    public String write(HttpServletRequest request, HttpSession session){
+        if (session.getId() == null){
+            return "user/login";
+        }
         return "board/write";
     }
 

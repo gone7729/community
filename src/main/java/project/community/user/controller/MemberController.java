@@ -38,8 +38,6 @@ public class MemberController {
 
     @PostMapping("accountValidTest")
     public String registerMember(@Valid @ModelAttribute("registerDto") RegisterDto registerDto, BindingResult bindingResult){
-        System.out.println(registerDto.getPasswordCheck());
-        System.out.println(registerDto.getPassword());
 
         if(registerDto.isTerms()==false){
             bindingResult.rejectValue("terms", "termsError", "이용 약관에 동의해주세요.");

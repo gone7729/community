@@ -5,12 +5,10 @@ import lombok.Data;
 @Data
 public class Paging {
     private int startPage;
-    // nP/pC*pC +1, nP/pC = 1 이라면 sP -= pC
     private int endPage;
-    //sP+pC-1, tP가 eP보다 작다면 eP = tP
     private int nowPage;
     private int lastPage;
-    private int pageCount =10; //10
+    private int pageCount =10;
     private int pageSize;
     private int total; //불러온 게시글 개수
 
@@ -23,14 +21,14 @@ public class Paging {
         setStartPage(getStartPage());
         setEndPage(getEndPage());
     }
-
+    //총 게시 글 수로 계산한 마지막 페이지 계산
     public void calcLastPage(int total, int pageSize){
         setLastPage((total/pageSize));
         if(total % pageSize != 0){
             setLastPage((total/pageSize)+1);
         }
     }
-
+    //첫 페이지와 마지막 페이지 계산
     public void calcStartEndPage(int nowPage, int pageCount){
         setStartPage((nowPage/pageCount)*pageCount+1);
         if(nowPage % pageCount == 0){

@@ -39,9 +39,7 @@ public class AuthController {
         session = request.getSession();
         if (memberDto.getEmail() != null && bCryptPasswordEncoder.matches(password, memberDto.getPassword())) {
             session.setAttribute("user", memberDto);
-            model.addAttribute("member", memberDto);
-            System.out.println("세션 아이디 " + session.getId());
-            System.out.println(memberDto);
+            model.addAttribute("member", session.getAttribute("user"));
             return "redirect:/boardpaging";
         } else {
             System.out.println("실패");

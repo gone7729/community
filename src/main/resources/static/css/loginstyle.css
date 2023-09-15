@@ -200,3 +200,7 @@ table {
     color: #737070;
     letter-spacing: -1px;
 }
+
+.sns-btn > a{
+    text-decoration: none;
+}

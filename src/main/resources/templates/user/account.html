@@ -33,7 +33,6 @@
               </div>
               <div class="account-input-box">
                   <input id="input-email" type="text" name="email" th:field="*{email}" >
-                  <button type="button" id="email-check">중복 확인</button>
               </div>
           </div>
           <div style="display: none;" id="account-code">
@@ -71,11 +70,6 @@
               </div>
               <div class="account-input-box">
                   <input id="input-check" type="password" name="passwordCheck" th:field="*{passwordCheck}">
-                  <div class="validation-btn">
-                    <button type="button" id="pw-valid-btn">
-                          <span>확 인</span>
-                    </button>
-                  </div>
               </div>
           </div>
           <div id="account-nick">
@@ -88,11 +82,6 @@
               </div>
               <div class="account-input-box">
                   <input id="nick-input" type="text" name="nickName" th:field="*{nickName}">
-                  <div class="validation-btn">
-                      <button type="button" id="nick-valid-btn">
-                          <span>중복 확인</span>
-                      </button>
-                  </div>
               </div>
           </div>
           <div id="account-btn-box">
@@ -107,13 +96,10 @@
 
     <script th:inline="javascript">
         const emailInput = document.querySelector("#input-email");
-        const emailValidBtn = document.querySelector("#email-check");
         const emailMsg = document.querySelector("#email-validation-message");
         const pwCheckInput = document.querySelector("#input-check");
         const pwInput = document.querySelector("#input-pw");
-        const pwValidBtn = document.querySelector("#pw-valid-btn");
         const pwMsg = document.querySelector("#pw-validation-message");
-        const nickValidBtn = document.querySelector("#nick-valid-btn");
         const nickInput = document.querySelector("#nick-input");
         const nickMsg = document.querySelector("#nick-validation-message");
         const validMsg = document.querySelector(".failed");
@@ -124,7 +110,7 @@
         const nickRegex = /^\S+$/;
 
 
-        emailValidBtn.addEventListener("click", function(){
+        emailInput.addEventListener("blur", function(){
         const email = emailInput.value;
         console.log()
         fetch("/emailTest", {
@@ -151,7 +137,7 @@
         .catch((error) => console.log(error))
         });
 
-        pwValidBtn.addEventListener("click", function(){
+        pwCheckInput.addEventListener("blur", function(){
             if(pwRegex.test(pwCheckInput.value) == true){
             if(pwInput.value != pwCheckInput.value){
                 pwMsg.textContent = "일치 하지 않습니다.";
@@ -163,7 +149,7 @@
         }
         })
 
-        nickValidBtn.addEventListener("click", function(){
+        nickInput.addEventListener("blur", function(){
         const nick = nickInput.value;
         console.log()
         fetch("/nickTest", {

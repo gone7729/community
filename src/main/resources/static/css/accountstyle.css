@@ -193,35 +193,6 @@ table {
     padding-left: 8px;
 }
 
-#email-check{
-    width: 80px;
-    height: 28px;
-    background-color: white;
-    border-radius: 12px;
-    border: 1px #8d8888 solid;
-    letter-spacing: -2px;
-    font-size: 14px;
-}
-.validation-btn{
-    width: 80px;
-    height: 28px;
-    background-color: white;
-    border-radius: 12px;
-    border: 1px #8d8888 solid;
-    letter-spacing: -2px;
-    font-size: 14px;
-}
-
-.validation-btn:hover{
-	cursor: pointer;
-	background-color: #eeeded;
-}
-
-.validation-btn:active{
-	background-color: #dddddd;
-	box-shadow: inset 1px 1px 1px 1px #898989;
-}
-
 #account-btn-box{
     display: flex;
     justify-content: center;
