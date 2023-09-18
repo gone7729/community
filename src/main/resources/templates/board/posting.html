@@ -62,7 +62,7 @@
     </div>
   </form>
   <div id="post-cmt-box">
-    <form id="cmt-box" th:action="@{/write-cmt}">
+    <form id="cmt-box" th:action="@{/write-cmt}" onsubmit="return writeCmt()">
       <div id="cmt-top">
         <div id="cmt-top-title">
           <span>댓글</span>
@@ -73,7 +73,9 @@
       </div>
       <div id="cmt-write-box" style="height: 0px;">
         <textarea id="cmt-write"></textarea>
-        <input id="input-cmt" type="hidden" name="cmt">
+        <input id="input-cmt" type="hidden" name="content" value="">
+        <input id="cmt-writer" type="hidden" name="writer" th:value="${member.email}">
+        <input id="board-uid" type="hidden" name="board_uid" th:value="${posting.uid}">
         <button id="cmt-btn">
           <span>댓글 달기</span>
         </button>
@@ -168,35 +170,13 @@
 <script src="/js/SearchCtg.js"></script>
 <script src="/js/cmt.js"></script>
 <script th:inline="javascript">
-        const cmtBtn = document.querySelector("#cmt-cmt-btn");
-        const emailMsg = document.querySelector("#email-validation-message");
-        let text = document.querySelector("#cmt-cmt-write").innerHTML;
-        let content = document.querySelector("#input-cmt-cmt");
+        const cmtBtn = document.querySelector("#cmt-btn");
+        let text = document.querySelector("#cmt-writ").innerHTML;
+        let content = document.querySelector("#input-cmt");
 
-        cmtBtn.addEventListener("click", function(){
-        content.value = text;
-        console.log()
-        fetch("/write-cmt", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"
-            },
-            body: JSON.stringify({content}),
-         })
-          .then(response => {
-            if (response.ok) {
-                return response.text(); // 서버로부터 받은 text 데이터
-            } else {
-                throw new Error("서버 응답 오류");
-            }
-        })
-        .then(data => {
-            console.log(content.test(content))
-            if(content == null){
-                console.log(content);
-                }
-        })
-        .catch((error) => console.log(error))
-        });
+        const writeCmt = () =>{
+          content.value = text;
+        }
     </script>
 
 </body>

@@ -79,7 +79,7 @@
     
     
     <insert id="insertComment">
-        INSERT INTO comment_tb(content, writer)
-        VALUES(#{content}, #{writer})
+        INSERT INTO comment_tb(content, writer, uid)
+        VALUES(#{content}, #{writer}, #{uid})
     </insert>
 </mapper>
