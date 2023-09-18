@@ -66,45 +66,6 @@ table {
     letter-spacing: -1px;
 }
 
-#login-box{
-    display: flex;
-    width: 284px;
-    height: 120px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    border-radius: 12px;
-    border: 1px solid #E79141;
-}
-
-#login-btn{
-    display: flex;
-    height: 31px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 12px;
-    border: 1px solid #929292;
-    width: 116px;
-    background: white;
-}
-
-#create-act{
-    display: flex;
-    height: 31px;
-    width: 116px;
-    padding: 6px 29px 6px 28px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 12px;
-    border: 1px solid #929292;
-    background: white;
-}
-
-#login-box > button > span {
-    font-weight: 550;
-    letter-spacing: -1px;
-}
 
 #top-ct-ctn{
     display: flex;
@@ -152,6 +113,7 @@ table {
 #main-content{
     display: flex;
     gap: 16px;
+    justify-content: space-between;
 }
 
 #board-box{

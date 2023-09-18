@@ -5,6 +5,7 @@
   <title>게시판</title>
   <link rel="stylesheet" href="/css/boardstyle.css"/>
   <link rel="stylesheet" href="/css/H&Fstyle.css"/>
+  <link rel="stylesheet" href="/css/asidestyle.css"/>
 </head>
 <body>
 <main>
@@ -30,23 +31,7 @@
           <li th:text="${pagingList.upPoint}"></li>
         </ul>
       </div>
-      <div id="main-side">
-        <div id="side-banner-box">
-          <img id="side-banner" src="" alt="x">
-        </div>
-        <div id="main-mid-hotTopic">
-          <div id="mid-hotTopic-title">
-            <span>화제글</span>
-          </div>
-          <div id="ht-box">
-            <ul>
-              <li class="item-ctg">[게시판]</li>
-              <li class="item-title">[제목]</li>
-              <li class="item-up-point">[0]</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <div th:replace="/layout/asidelayout :: content"></div>
     </div>
     <!--페이징-->
     <form id="search" th:action="@{boardpaging}"  method="post">

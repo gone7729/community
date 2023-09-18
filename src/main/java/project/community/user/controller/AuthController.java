@@ -34,17 +34,19 @@ public class AuthController {
     public String singIn(Model model, MemberDto memberDto,
                          @RequestParam("password") String password,
                          @RequestParam("email") String email,
-                         HttpSession session, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+                         HttpSession session, HttpServletRequest request) {
+        //회원 정보 확인
         memberDto = authService.singIn(memberDto);
+        //세션 객체 생성
         session = request.getSession();
         if (memberDto.getEmail() != null && bCryptPasswordEncoder.matches(password, memberDto.getPassword())) {
+            //세션 생성
             session.setAttribute("user", memberDto);
+            session.setMaxInactiveInterval(3600);
             model.addAttribute("member", session.getAttribute("user"));
-            return "redirect:/boardpaging";
+            return "index";
         } else {
             System.out.println("실패");
-            // 로그인 실패 시 메시지를 리다이렉트 속성으로 전달
-            redirectAttributes.addFlashAttribute("loginError", "Invalid email or password.");
             return "redirect:/login";
         }
     }
@@ -62,25 +64,9 @@ public class AuthController {
             System.out.println("로그아웃 성공");
         } else {
             System.out.println("세션이 이미 만료되었거나 사용자 정보가 없습니다.");
-            return "login";
             // 세션이 이미 만료되었거나 사용자 정보가 없을 경우
         }
-        // 리다이렉트 시 메시지 전달을 위한 RedirectAttributes 사용
-        redirectAttributes.addFlashAttribute("message", "로그아웃 되었습니다.");
-        return "redirect:/login";
+        return "login";
     }
 
-    @GetMapping("checkSession")
-    public String checkSession(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession(false); // 세션이 없으면 null 반환
-        System.out.println("세션 확인"+ session.getId());
-        if (session != null) {
-            MemberDto user = (MemberDto) session.getAttribute("user");
-            model.addAttribute("message", "세션 생성됨. 사용자: " + user);
-        } else {
-            System.out.println("사용자 없");
-            model.addAttribute("message", "세션 없음");
-        }
-        return "redirect:/boardpaging";
-    }
 }

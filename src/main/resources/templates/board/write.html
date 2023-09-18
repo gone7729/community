@@ -21,7 +21,7 @@
             <p>정보통신망에서 불법촬영물등을 유통할 경우 「전기통신사업법」 제22조의 5 제1항에 따른 삭제.접속차단 등 유통방지에</br>
                 필요한 조치가 취해지며 「성폭력처벌법」 제14조 「청소년성보호법」 제11조에 따라 형사처벌을 받을수 있습니다.</p>
         </div>
-        <form id="main-content-box" th:action="@{write}" method="post">
+        <form id="main-content-box" th:action="@{write}" method="post" th:object="${member}">
             <div id="content-top">
                 <div id = "category-box">
                     <div id = "items">
@@ -35,13 +35,15 @@
                             <li value="4" class = "option-item">정보</li>
                         </ul>
                         <input type="hidden" id="category" name="category">
+                        <input type="hidden" name="writer" th:value="${member.email}">
+                        <p th:text="${member.email}"></p>
                     </div>
                 </div>
                 <div id = "title-box">
                     <input type = "text" name = "title" placeholder = "제목" id = "input-title">
                 </div>
             </div>
-            <input id="content-mid" type="hidden" name="content" +>
+            <input id="content-mid" type="hidden" name="content">
             <div id="editor-box">
                 <div id="editor">
                 </div>

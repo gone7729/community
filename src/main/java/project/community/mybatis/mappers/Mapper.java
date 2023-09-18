@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @org.apache.ibatis.annotations.Mapper
 public interface Mapper {
+
     //board
     List<BoardDto> findAllBoard();
     void insertBoard(BoardDto boardDto);
@@ -18,12 +19,15 @@ public interface Mapper {
     BoardDto findBoard(Object obj);
     void updateBoard(Object obj);
     void deleteBoard(Object obj);
+
     //user
     void insertMember(MemberDto memberDto);
     MemberDto memberInfo(MemberDto memberDto);
-
     int findEmail(String email);
     String findByEmail(String email);
     int findNick(String nick);
     MemberDto singIn(MemberDto memberDto);
+
+    //코맨트
+    void insertComment(Object obj);
 }

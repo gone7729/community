@@ -53,7 +53,7 @@ table {
     flex-direction: column;
     gap: 24px;
     position: absolute;
-    right: 0;
+    right: 6px;
     top: 156px;
 }
 

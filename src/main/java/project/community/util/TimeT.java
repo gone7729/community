@@ -35,4 +35,9 @@ public class TimeT {
 
         return betweenTimeDay / 365 + "년전";
     }
+
+    public static String date(String value){
+        LocalDateTime time = LocalDateTime.parse(value);
+        return time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
 }

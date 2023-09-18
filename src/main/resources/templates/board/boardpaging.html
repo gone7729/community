@@ -5,6 +5,7 @@
   <title>자유 게시판</title>
   <link rel="stylesheet" href="/css/boardstyle.css"/>
   <link rel="stylesheet" href="/css/H&Fstyle.css"/>
+  <link rel="stylesheet" href="/css/topstyle.css"/>
 </head>
 <body>
 <header th:replace="/layout/layout :: header"></header>
@@ -13,16 +14,7 @@
     <div id="main-top-title">
       <span>자유 게시판</span>
     </div>
-    <div id="main-top-loginBox">
-      <form id="login-box">
-        <button id="login-btn" formaction ="/login">
-          <span>로그인</span>
-        </button>
-        <button formaction="/account" id="create-act">
-          <span>회원 가입</span>
-        </button>
-      </form>
-    </div>
+    <div th:replace="/layout/toplayout :: content"></div>
   </div>
   <div id="top-ct-ctn">
     <div class="top-ct-box">

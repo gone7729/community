@@ -3,6 +3,7 @@ package project.community.home.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,11 @@ public class HomeController {
         this.homeService = homeService;
     }
 
+    @GetMapping("/")
+    public String Home(HttpSession session, Model model){
+        model.addAttribute("member", session.getAttribute("user"));
+        return "index";
+    }
     @GetMapping("login")
     public String logIn(){
         return "/user/login";
@@ -41,10 +47,11 @@ public class HomeController {
     }
 
     @GetMapping("write")
-    public String write(HttpServletRequest request, HttpSession session){
-        if (session.getId() == null){
+    public String write(Model model, HttpSession session){
+        if (session.getAttribute("user") == null){
             return "user/login";
         }
+        model.addAttribute("member", session.getAttribute("user"));
         return "board/write";
     }
 

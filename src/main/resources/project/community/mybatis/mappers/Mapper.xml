@@ -14,22 +14,24 @@
     </select>
 
     <select id="findBoardList" resultType="project.community.board.dto.BoardDto">
-        SELECT board_tb.uid, category_tb.category, board_tb.writer, board_tb.title, board_tb.content, board_tb.regdate, board_tb.view, board_tb.up_point
+        SELECT board_tb.uid, category_tb.category, member_tb.nickname AS writer, board_tb.title, board_tb.content, board_tb.regdate, board_tb.view, board_tb.up_point
         FROM board_tb
         INNER JOIN category_tb ON category_tb.uid = board_tb.category
+        INNER JOIN member_tb ON member_tb.email = board_tb.writer
         ORDER BY board_tb.uid DESC
         LIMIT 15 OFFSET #{offSet}
     </select>
 
     <insert id="insertBoard">
-        INSERT INTO board_tb(title, content, category)
-        VALUES(#{title}, #{content}, #{category})
+        INSERT INTO board_tb(title, content, category, writer)
+        VALUES(#{title}, #{content}, #{category}, #{writer})
     </insert>
 
     <select id="findBoard" resultType="project.community.board.dto.BoardDto">
-        SELECT board_tb.uid, category_tb.category, board_tb.writer, board_tb.title, board_tb.content, board_tb.regdate, board_tb.view, board_tb.up_point
+        SELECT board_tb.uid, category_tb.category, member_tb.nickname AS writer, board_tb.title, board_tb.content, board_tb.regdate, board_tb.view, board_tb.up_point
         FROM board_tb
         INNER JOIN category_tb ON category_tb.uid = board_tb.category
+        INNER JOIN member_tb ON member_tb.email = board_tb.writer
         WHERE board_tb.uid = #{uid};
     </select>
 
@@ -44,6 +46,7 @@
         WHERE uid= #{uid};
     </delete>
 
+    
     <insert id="insertMember">
         INSERT INTO member_tb(terms, email, nickname, password)
         VALUES(#{terms}, #{email}, #{nickName}, #{password})
@@ -73,4 +76,10 @@
         select * from member_tb
         where email = #{email};
     </select>
+    
+    
+    <insert id="insertComment">
+        INSERT INTO comment_tb(content, writer)
+        VALUES(#{content}, #{writer})
+    </insert>
 </mapper>
