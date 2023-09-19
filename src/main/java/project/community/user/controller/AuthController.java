@@ -42,6 +42,7 @@ public class AuthController {
         if (memberDto.getEmail() != null && bCryptPasswordEncoder.matches(password, memberDto.getPassword())) {
             //세션 생성
             session.setAttribute("user", memberDto);
+            System.out.println(session.getId());
             session.setMaxInactiveInterval(3600);
             model.addAttribute("member", session.getAttribute("user"));
             return "index";

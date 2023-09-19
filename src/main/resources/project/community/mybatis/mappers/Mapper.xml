@@ -79,7 +79,14 @@
     
     
     <insert id="insertComment">
-        INSERT INTO comment_tb(content, writer, uid)
-        VALUES(#{content}, #{writer}, #{uid})
+        INSERT INTO comment_tb(content, writer, board_uid)
+        VALUES(#{content}, #{writer}, #{board_uid})
     </insert>
+
+    <select id="findCmt" resultType="project.community.comment.dto.CommentDto">
+        SELECT comment_tb.uid, member_tb.nickname AS writer,comment_tb.board_uid, comment_tb.content, comment_tb.up_point, comment_tb.down_point
+        FROM comment_tb
+        INNER JOIN member_tb ON member_tb.email = comment_tb.writer
+        WHERE comment_tb.board_uid = #{board_uid}
+    </select>
 </mapper>

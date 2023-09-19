@@ -36,8 +36,8 @@
     </ul>
   </div>
   <div id="post-top-title-box" >
-    <span id="post-top-ctg" th:utext="${posting.category}"></span>
-    <span id="post-top-title" th:utext="${posting.title}"></span>
+    <span id="post-top-ctg" th:text="${posting.category}"></span>
+    <span id="post-top-title" th:text="${posting.title}"></span>
   </div>
   <div id="post-mid-content-box">
     <p id="post-mid-content" th:utext="${posting.content}"></p>
@@ -67,24 +67,26 @@
         <div id="cmt-top-title">
           <span>댓글</span>
         </div>
-        <button type="button" id="cmt-top-btn">
+        <button type="button" id="cmt-top-btn" th:if="${member != null}">
           <span>작성</span>
         </button>
       </div>
       <div id="cmt-write-box" style="height: 0px;">
         <textarea id="cmt-write"></textarea>
-        <input id="input-cmt" type="hidden" name="content" value="">
-        <input id="cmt-writer" type="hidden" name="writer" th:value="${member.email}">
-        <input id="board-uid" type="hidden" name="board_uid" th:value="${posting.uid}">
+        <input id="input-cmt" type="hidden" name="content">
+        <input th:if="${member != null}" id="writer-cmt" type="hidden" name="writer" th:value="${member.email}">
+        <input id="boardUid-cmt" type="hidden" name="uid" th:value="${posting.uid}">
         <button id="cmt-btn">
           <span>댓글 달기</span>
         </button>
       </div>
-      <div id="cmt-main-box">
+    </form>
+    <form>
+      <div id="cmt-main-box" th:each="cmt, stat : ${cmtList}">
         <div class="cmt-main">
           <div class="cmt-main-left">
             <div class="cmt-main-nick">
-              <span>닉네임</span>
+              <span th:text="${cmtList.writer}">닉네임</span>
             </div>
             <button class="cmt-main-update">
               <span>수정</span>
@@ -94,12 +96,12 @@
             </button>
           </div>
           <div class="cmt-main-num">
-            <span>0</span>
+            <span th:text="${cmtList.up_point}">0</span>
           </div>
         </div>
         <div class="cmt-main-content-box">
           <div class="cmt-main-content">
-            <p>내용</p>
+            <p th:utext="${cmtList.content}">내용</p>
           </div>
           <div class="cmt-main-btn-box">
             <button class="cmt-main-btn">
@@ -173,6 +175,10 @@
         const cmtBtn = document.querySelector("#cmt-btn");
         let text = document.querySelector("#cmt-writ").innerHTML;
         let content = document.querySelector("#input-cmt");
+
+        const cmtContent = document.querySelector(".cmt-main-num > p");
+        const cmtText = /*[[${cmtList.content}]]*/
+        cmtContent.innerHTML = cmtText;
 
         const writeCmt = () =>{
           content.value = text;
