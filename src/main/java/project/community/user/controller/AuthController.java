@@ -14,7 +14,6 @@ import project.community.user.dto.MemberDto;
 import project.community.user.service.AuthService;
 import project.community.user.service.MemberService;
 
-import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -39,13 +38,14 @@ public class AuthController {
         memberDto = authService.singIn(memberDto);
         //세션 객체 생성
         session = request.getSession();
+
         if (memberDto.getEmail() != null && bCryptPasswordEncoder.matches(password, memberDto.getPassword())) {
             //세션 생성
             session.setAttribute("user", memberDto);
             System.out.println(session.getId());
             session.setMaxInactiveInterval(3600);
             model.addAttribute("member", session.getAttribute("user"));
-            return "index";
+            return "redirect:/index";
         } else {
             System.out.println("실패");
             return "redirect:/login";

@@ -97,17 +97,19 @@
                         <span>자유 게시판</span>
                     </div>
                     <div class="board-more">
-                        <span>더보기 +</span>
+                        <a th:href="@{/boardpaging}">더보기 +</a>
                     </div>
                 </div>
                 <div class="board-list-box">
-                    <ul class="board-list">
-                        <li class="list-ctg">[카테고리]</li>
-                        <li class="list-title">[제목]</li>
-                        <li class="list-regdate">[날짜]</li>
-                        <li class="list-writer">[작성자]</li>
-                        <li class="list-view">[조회수]</li>
-                        <li class="list-up">[추천수]</li>
+                    <ul class="board-list" th:each="pagingList, stat : ${boardPagingList}">
+                        <li class="list-ctg" th:text="${pagingList.category}">[카테고리]</li>
+                        <li class="list-title">
+                            <a class="post-link" th:text="${pagingList.title}" th:href="@{/posting(uid = ${pagingList.uid})}"></a>
+                        </li>
+                        <li class="list-regdate" th:text="${@TimeT.getTimeT(pagingList.regdate.toString())}">[날짜]</li>
+                        <li class="list-writer" th:text="${pagingList.writer}">[작성자]</li>
+                        <li class="list-view" th:text="${pagingList.view}">[조회수]</li>
+                        <li class="list-up" th:text="${pagingList.upPoint}">[추천수]</li>
                     </ul>
                 </div>
             </div>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import project.community.board.dto.BoardDto;
+import project.community.board.service.BoardService;
 import project.community.home.service.HomeService;
 import project.community.user.dto.MemberDto;
 
@@ -19,14 +20,19 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 
     HomeService homeService;
+    BoardService boardService;
 
     @Autowired
-    public HomeController(HomeService homeService){
+    public HomeController(HomeService homeService, BoardService boardService){
         this.homeService = homeService;
+        this.boardService = boardService;
     }
 
-    @GetMapping("/")
-    public String Home(HttpSession session, Model model){
+    @GetMapping("index")
+    public String Home(HttpSession session, Model model, BoardDto boardDto){
+        boardDto.setOffSet(0);
+        System.out.println(boardDto);
+        model.addAttribute("boardPagingList", boardService.findBoardList(boardDto));
         model.addAttribute("member", session.getAttribute("user"));
         return "index";
     }
@@ -41,7 +47,7 @@ public class HomeController {
         return "/user/member";
     }
 
-    @GetMapping("/public/freeboard")
+    @GetMapping("/board/freeboard")
     public String freeBoard(){
         return "boardpaging";
     }
