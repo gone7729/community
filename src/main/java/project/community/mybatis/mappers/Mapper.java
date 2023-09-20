@@ -1,6 +1,7 @@
 package project.community.mybatis.mappers;
 
 import project.community.board.dto.BoardDto;
+import project.community.comment.dto.CommentDto;
 import project.community.user.dto.MemberDto;
 
 import java.lang.reflect.Member;
@@ -30,4 +31,6 @@ public interface Mapper {
 
     //코맨트
     void insertComment(Object obj);
+
+    List<CommentDto> findCmt(CommentDto commentDto);
 }

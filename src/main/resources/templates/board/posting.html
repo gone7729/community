@@ -42,12 +42,10 @@
   <div id="post-mid-content-box">
     <p id="post-mid-content" th:utext="${posting.content}"></p>
   </div>
-  <form id="update-box" method="post">
     <div id="update-btn" th:if="${member != null && (member.nickName == posting.writer)}">
       <a role="button" th:href="@{/update(uid = ${posting.uid})}">수정</a>
       <a id="delete-btn" th:href="@{/delete(uid = ${posting.uid})}">삭제</a>
     </div>
-  </form>
   <form id="post-btm-box">
     <button class="post-btm-btn">
       <span>주소 복사</span>
@@ -62,7 +60,7 @@
     </div>
   </form>
   <div id="post-cmt-box">
-    <form id="cmt-box" th:action="@{/write-cmt}" onsubmit="return writeCmt()">
+    <form id="cmt-box" th:action="@{write-cmt}" method="post" onsubmit="return set()">
       <div id="cmt-top">
         <div id="cmt-top-title">
           <span>댓글</span>
@@ -73,43 +71,42 @@
       </div>
       <div id="cmt-write-box" style="height: 0px;">
         <textarea id="cmt-write"></textarea>
-        <input id="input-cmt" type="hidden" name="content">
+        <input id="input-cmt" type="hidden" name="content" value="">
         <input th:if="${member != null}" id="writer-cmt" type="hidden" name="writer" th:value="${member.email}">
         <input id="boardUid-cmt" type="hidden" name="uid" th:value="${posting.uid}">
-        <button id="cmt-btn">
+        <button id="cmt-btn" >
           <span>댓글 달기</span>
         </button>
       </div>
     </form>
     <form>
-      <div id="cmt-main-box" th:each="cmt, stat : ${cmtList}">
+      <div class="cmt-main-box" th:if="cmt != null" th:each="cmtList, stat : ${cmt}">
         <div class="cmt-main">
           <div class="cmt-main-left">
             <div class="cmt-main-nick">
               <span th:text="${cmtList.writer}">닉네임</span>
             </div>
-            <button class="cmt-main-update">
-              <span>수정</span>
-            </button>
-            <button class="cmt-main-del">
-              <span>삭제</span>
-            </button>
+            <div th:if="${member != null && (member.nickName == cmtList.writer)}">
+            <button type="button" class="cmt-main-update"> 수정</button>
+            <button type="button" class="cmt-main-del">삭제</button>
+            </div>
           </div>
           <div class="cmt-main-num">
-            <span th:text="${cmtList.up_point}">0</span>
+            <button class="cmt-main-btn">
+              <img class="cmt-up-img" src="/img/minup.svg" alt="x">
+            </button>
+            <span th:text="${cmtList.up_point}"></span>
+            <button class="cmt-main-btn">
+              <img class="cmt-down-img" src="/img/mindown.svg" alt="x">
+            </button>
+            <span th:text="${cmtList.down_point}"></span>
           </div>
         </div>
         <div class="cmt-main-content-box">
           <div class="cmt-main-content">
-            <p th:utext="${cmtList.content}">내용</p>
+            <p th:utext="${cmtList.content}"></p>
           </div>
           <div class="cmt-main-btn-box">
-            <button class="cmt-main-btn">
-              <img class="cmt-up-img" src="/img/minup.svg" alt="x">
-            </button>
-            <button class="cmt-main-btn">
-              <img class="cmt-down-img" src="/img/mindown.svg" alt="x">
-            </button>
             <button type="button" class="cmt-main-btn">
               <span>답글</span>
             </button>
@@ -118,15 +115,15 @@
             </button>
           </div>
         </div>
-        <div id="cmt-cmt-write-box" style="height: 0px;">
-          <textarea id="cmt-cmt-write"></textarea>
-          <input id="input-cmt-cmt" type="hidden" name="content" value="">
-          <button type="button" id="cmt-cmt-btn">
+        <div class="cmt-cmt-write-box" style="height: 0px;">
+          <textarea class="cmt-cmt-write"></textarea>
+          <input class="input-cmt-cmt" type="hidden" name="content" value="">
+          <button type="button" class="cmt-cmt-btn">
             <span>댓글 달기</span>
           </button>
         </div>
       </div>
-      <div id="cmt-cmt-box">
+      <div class="cmt-cmt-box">
         <div class="cmt-main">
           <div class="cmt-main-left">
             <div class="cmt-main-nick">
@@ -168,22 +165,16 @@
   <div th:replace="/layout/boardlayout :: content"></div>
 </main>
 <footer th:replace="/layout/layout :: footer"></footer>
-
 <script src="/js/SearchCtg.js"></script>
 <script src="/js/cmt.js"></script>
 <script th:inline="javascript">
-        const cmtBtn = document.querySelector("#cmt-btn");
-        let text = document.querySelector("#cmt-writ").innerHTML;
         let content = document.querySelector("#input-cmt");
 
-        const cmtContent = document.querySelector(".cmt-main-num > p");
-        const cmtText = /*[[${cmtList.content}]]*/
-        cmtContent.innerHTML = cmtText;
-
-        const writeCmt = () =>{
+        const set = () =>{
+          let text = document.querySelector("#cmt-write").value;
+          console.log(text);
           content.value = text;
         }
-    </script>
-
+</script>
 </body>
 </html>

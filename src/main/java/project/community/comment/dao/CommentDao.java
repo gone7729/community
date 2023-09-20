@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 import project.community.comment.dto.CommentDto;
 import project.community.mybatis.mappers.Mapper;
 
+import java.util.List;
+
 @Repository
 public class CommentDao {
     Mapper mapper;
@@ -17,4 +19,6 @@ public class CommentDao {
     public void insertComment(CommentDto commentDto){
         this.mapper.insertComment(commentDto);
     }
+
+
 }

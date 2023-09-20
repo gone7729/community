@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import project.community.board.dto.BoardDto;
 import project.community.board.service.BoardService;
+import project.community.comment.dto.CommentDto;
+import project.community.comment.service.CommentService;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLOutput;
@@ -47,19 +49,21 @@ public class BoardController {
     }
 
     @RequestMapping("posting")
-    public String posting(Model model, BoardDto boardDto, HttpSession session,
+    public String posting(Model model, BoardDto boardDto, CommentDto commentDto, HttpSession session,
                           @RequestParam(value = "nowPage", defaultValue = "1")int nowPage,
                           @RequestParam(value = "pageSize", defaultValue = "10")int pageSize,
                           @RequestParam (value = "uid") int uid){
         int total = boardService.countBoard();
         project.community.util.Paging paging = new project.community.util.Paging(total, nowPage, pageSize);
 
+        commentDto.setBoard_uid(uid);
         boardDto.setUid(uid);
         boardDto.setOffSet((nowPage - 1) * pageSize);
 
         model.addAttribute("boardPagingList", boardService.findBoardList(boardDto));
         model.addAttribute("paging", paging);
         model.addAttribute("posting", boardService.findBoard(boardDto));
+        model.addAttribute("cmt", boardService.findCmt(commentDto));
         model.addAttribute("member", session.getAttribute("user"));
         return "/board/posting";
     }

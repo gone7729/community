@@ -152,7 +152,7 @@ main {
     background-color: white;
 }
 
-#cmt-main-box{
+.cmt-main-box{
     height: 61px;
 }
 
@@ -207,6 +207,10 @@ main {
     letter-spacing: -1px;
 }
 
+.cmt-main-content > p{
+    margin-left: 16px;
+}
+
 .cmt-main-btn-box{
     display: flex;
     gap: 8px;
@@ -249,12 +253,12 @@ main {
     border-radius: 7px;
 }
 
-#cmt-cmt-write-box{
+.cmt-cmt-write-box{
     overflow: hidden;
     transition-duration: 0.5s;
 }
 
-#cmt-cmt-write{
+.cmt-cmt-write{
     width: 758px;
     overflow-y: scroll;
     resize: none;
@@ -262,7 +266,7 @@ main {
     transition-duration: 0.3s;
 }
 
-#cmt-cmt-btn{
+.cmt-cmt-btn{
     margin-left: 703px;
     font-size: 12px;
     letter-spacing: -1px;

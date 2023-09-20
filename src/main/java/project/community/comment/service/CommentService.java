@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import project.community.comment.dao.CommentDao;
 import project.community.comment.dto.CommentDto;
 
+import java.util.List;
+
 @Service
 public class CommentService {
     CommentDao commentDao;
@@ -17,4 +19,6 @@ public class CommentService {
     public void insertComment(CommentDto commentDto){
         this.commentDao.insertComment(commentDto);
     }
+
+
 }

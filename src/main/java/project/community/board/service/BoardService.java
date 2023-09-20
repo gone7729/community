@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import project.community.board.dto.BoardDto;
 import project.community.board.dao.BoardDao;
 import project.community.board.dto.ListSetDto;
+import project.community.comment.dto.CommentDto;
 
 import java.util.List;
 
@@ -42,5 +43,8 @@ public class BoardService {
     }
     public void deleteBoard(BoardDto boardDto){
         this.boardDao.deleteBoard(boardDto);
+    }
+    public List<CommentDto> findCmt(CommentDto commentDto){
+        return boardDao.findCmt(commentDto);
     }
 }

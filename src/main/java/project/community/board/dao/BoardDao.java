@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import project.community.board.dto.BoardDto;
 import project.community.board.dto.ListSetDto;
+import project.community.comment.dto.CommentDto;
 import project.community.mybatis.mappers.Mapper;
 
 import java.util.List;
@@ -40,5 +41,8 @@ public class BoardDao {
     }
     public void deleteBoard(BoardDto boardDto){
         this.mapper.deleteBoard(boardDto);
+    }
+    public List<CommentDto> findCmt(CommentDto commentDto){
+        return mapper.findCmt(commentDto);
     }
 }
