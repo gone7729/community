@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.community.user.dto.MemberDto;
@@ -16,39 +17,44 @@ import project.community.user.service.MemberService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 public class AuthController {
     AuthService authService;
+    MemberService memberService;
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     @Autowired
-    public AuthController(AuthService authService){
+    public AuthController(AuthService authService, MemberService memberService){
         this.authService= authService;
+        this.memberService = memberService;
     }
 
     @PostMapping("singIn")
-    public String singIn(Model model, MemberDto memberDto,
+    public String singIn(Model model, @ModelAttribute("memberDto") @Valid MemberDto memberDto,
+                         BindingResult result,
                          @RequestParam("password") String password,
                          @RequestParam("email") String email,
                          HttpSession session, HttpServletRequest request) {
-        //회원 정보 확인
-        memberDto = authService.singIn(memberDto);
-        //세션 객체 생성
-        session = request.getSession();
+        if (result.hasErrors()) {
+            return "login"; // 유효성 검사 실패 시 로그인 페이지로 이동
+        }
 
-        if (memberDto.getEmail() != null && bCryptPasswordEncoder.matches(password, memberDto.getPassword())) {
-            //세션 생성
+        if (memberService.findEmail(email) == 0 || bCryptPasswordEncoder.matches(password, memberDto.getPassword()) != true) {
+            result.rejectValue("email", "loginError", "이메일 혹은 비밀번호를 틀렸습니다.");
+            result.rejectValue("password", "loginError", "이메일 혹은 비밀번호를 틀렸습니다.");
+            return "redirect:/login";
+        } else {
+            System.out.println("로그인 성공");
+            memberDto = authService.singIn(memberDto);
+            session = request.getSession();
             session.setAttribute("user", memberDto);
-            System.out.println(session.getId());
             session.setMaxInactiveInterval(3600);
             model.addAttribute("member", session.getAttribute("user"));
             return "redirect:/index";
-        } else {
-            System.out.println("실패");
-            return "redirect:/login";
         }
     }
 

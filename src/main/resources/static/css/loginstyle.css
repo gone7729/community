@@ -76,6 +76,7 @@ table {
     flex-direction: column;
     align-items: center;
     gap: 24px;
+    margin-bottom: 8px;
 }
 
 #email-box{
@@ -119,7 +120,7 @@ table {
 }
 
 #find-box{
-    margin: 6px 0px 18px 228px;
+    margin: 6px 0px 6px 228px;
     letter-spacing: -1px;
 }
 
@@ -127,14 +128,17 @@ table {
     color: #ACACAC;
     text-decoration: none;
     font-size: 14px;
+    margin-left: 16px;
 }
 
 #save-box{
     display: flex;
     justify-content: flex-end;
-    gap: 16px;
+    gap: 48px;
     letter-spacing: -1px;
-    margin-right: 18px;
+    margin-right: 23px;
+    margin-top: 16px;
+    font-size: 14px;
 }
 
 #sns-login-box{
@@ -144,14 +148,15 @@ table {
 #login-btn-box{
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 16px;
 }
 
 .login-btn{
     width: 108px;
     height: 31px;
-    margin-left: 60px;
-    margin-top: 42px;
+    margin-left: 56px;
+    margin-top: 32px;
     border-radius: 7px;
     border: 1px #afafaf solid;
     background-color: white;
@@ -203,4 +208,11 @@ table {
 
 .sns-btn > a{
     text-decoration: none;
+}
+
+#login-valid{
+font-size: 14px;
+    color: red;
+    letter-spacing: -1px;
+    text-align: center;
 }
