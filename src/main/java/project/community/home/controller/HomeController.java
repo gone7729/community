@@ -28,7 +28,7 @@ public class HomeController {
         this.boardService = boardService;
     }
 
-    @GetMapping("index")
+    @RequestMapping("index")
     public String Home(HttpSession session, Model model, BoardDto boardDto){
         boardDto.setOffSet(0);
         System.out.println(boardDto);
@@ -37,7 +37,7 @@ public class HomeController {
         return "index";
     }
     @GetMapping("login")
-    public String logIn(){
+    public String logIn(@ModelAttribute MemberDto memberDto){
         return "/user/login";
     }
 

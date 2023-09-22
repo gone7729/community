@@ -34,28 +34,28 @@ public class AuthController {
     }
 
     @PostMapping("singIn")
-    public String singIn(Model model, @ModelAttribute("memberDto") @Valid MemberDto memberDto,
-                         BindingResult result,
+    public String singIn(@Valid @ModelAttribute("memberDto") MemberDto memberDto,
+                         BindingResult bindingResult, Model model,
                          @RequestParam("password") String password,
                          @RequestParam("email") String email,
                          HttpSession session, HttpServletRequest request) {
-        if (result.hasErrors()) {
-            return "login"; // 유효성 검사 실패 시 로그인 페이지로 이동
-        }
 
-        if (memberService.findEmail(email) == 0 || bCryptPasswordEncoder.matches(password, memberDto.getPassword()) != true) {
-            result.rejectValue("email", "loginError", "이메일 혹은 비밀번호를 틀렸습니다.");
-            result.rejectValue("password", "loginError", "이메일 혹은 비밀번호를 틀렸습니다.");
-            return "redirect:/login";
-        } else {
-            System.out.println("로그인 성공");
-            memberDto = authService.singIn(memberDto);
-            session = request.getSession();
-            session.setAttribute("user", memberDto);
-            session.setMaxInactiveInterval(3600);
-            model.addAttribute("member", session.getAttribute("user"));
-            return "redirect:/index";
+        memberDto = authService.singIn(memberDto);
+
+        if (memberService.findEmail(email) == 0) {
+            bindingResult.reject("loginEmail",  "이메일 혹은 비밀번호를 틀렸습니다.");
+            return "user/login";
         }
+        if (bCryptPasswordEncoder.matches(password, memberDto.getPassword()) != true) {
+            bindingResult.reject("loginPassword",  "이메일 혹은 비밀번호를 틀렸습니다.");
+            return "user/login";
+        }
+        System.out.println("로그인 성공");
+        session = request.getSession();
+        session.setAttribute("user", memberDto);
+        session.setMaxInactiveInterval(3600);
+        model.addAttribute("member", session.getAttribute("user"));
+        return "redirect:/index";
     }
 
     @GetMapping("logout")

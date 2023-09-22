@@ -9,7 +9,7 @@
 <body>
   <header th:replace="/layout/layout :: header"></header>
   <main>
-    <form id="login-box" th:action="@{singIn}" method="post" th:object="${memberDto}">
+    <form id="login-box" th:object="${memberDto}" th:action="@{singIn}" method="post">
       <div class="email-login-box">
         <div id="email-login-title">
           <span>로그인</span>
@@ -17,13 +17,15 @@
         <div id="email-pw-box">
           <div id="email-box">
             <span>이메일</span>
-            <input id="email" type="text" name="email" th:field="*{email}">
+            <input id="email" type="text" name="email" >
           </div>
           <div id="pw-box">
             <span>비밀번호</span>
-            <input id="pw" type="password" name="password" th:field="*{password}">
+            <input id="pw" type="password" name="password">
           </div>
-          <p id="login-valid" th:if="${#fields.hasErrors('email') || #fields.hasErrors('password')}" th:errors="*{email},*{password}"></p>
+        </div>
+        <div th:if="${#fields.hasGlobalErrors()}">
+          <p class="login-valid" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
         </div>
         <div id="find-box">
         <a id="find">아이디/비밀번호 찾기</a>
