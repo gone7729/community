@@ -89,4 +89,10 @@
         INNER JOIN member_tb ON member_tb.email = comment_tb.writer
         WHERE comment_tb.board_uid = #{board_uid}
     </select>
+
+    <update id="updateMember">
+        UPDATE member_tb
+        SET nickname = #{nickName}
+        WHERE email = #{email};
+    </update>
 </mapper>

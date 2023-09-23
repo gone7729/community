@@ -28,6 +28,7 @@ public interface Mapper {
     String findByEmail(String email);
     int findNick(String nick);
     MemberDto singIn(MemberDto memberDto);
+    void updateMember(Object obj);
 
     //코맨트
     void insertComment(Object obj);

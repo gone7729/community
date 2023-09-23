@@ -42,8 +42,9 @@ public class HomeController {
     }
 
 
-    @RequestMapping("/user/member")
-    public String member(){
+    @RequestMapping("member")
+    public String member(HttpSession session, Model model){
+        model.addAttribute("member", session.getAttribute("user"));
         return "/user/member";
     }
 

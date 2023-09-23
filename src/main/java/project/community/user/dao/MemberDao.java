@@ -35,4 +35,7 @@ public class MemberDao {
     public MemberDto singIn(MemberDto memberDto){
         return mapper.singIn(memberDto);
     }
+    public void updateMember(MemberDto memberDto){
+        this.mapper.updateMember(memberDto);
+    }
 }

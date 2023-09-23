@@ -9,13 +9,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import project.community.user.dto.RegisterDto;
 import project.community.user.dto.MemberDto;
+import project.community.user.service.AuthService;
 import project.community.user.service.MemberService;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
 public class MemberController {
     MemberService memberService;
+    AuthService authService;
 
 
     @Autowired
@@ -94,5 +97,15 @@ public class MemberController {
             result="사용 가능합니다.";
         }
         return result;
+    }
+
+    @PostMapping("userUpdate")
+    public String userUpdate(Model model, MemberDto memberDto, HttpSession session){
+
+        memberService.updateMember(memberDto);
+        memberService.memberInfo(memberDto);
+        session.setAttribute("user", memberDto);
+        model.addAttribute("member", session.getAttribute("user"));
+        return "user/member";
     }
 }

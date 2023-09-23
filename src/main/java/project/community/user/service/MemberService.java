@@ -39,5 +39,8 @@ public class MemberService {
 
         this.memberDao.insertMember(memberDto);
     }
+    public void updateMember(MemberDto memberDto){
+        this.memberDao.updateMember(memberDto);
+    }
 
 }

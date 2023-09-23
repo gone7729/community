@@ -20,7 +20,6 @@
       <div id="profile-img-box">
         <img id="profile-img" src="" alt="x">
       </div>
-      <button id="profile-btn">변경 하기</button>
     </div>
   </div>
   <div id="main-nav">
@@ -32,37 +31,60 @@
       </li>
     </ul>
   </div>
-  <form id="main-ct">
+  <form id="main-ct" th:action="userUpdate" method="post" onsubmit="return update()">
     <div id="main-ct-ctn">
       <div id="main-ct-box">
         <div class="main-ct">
           <span class="ct-title">이메일</span>
           <div class="ct-box">
-            <span class="ct">email@email.com</span>
-            <input class="ct-input" type="hidden" name="email">
+            <span class="ct" th:text="${member.email}"></span>
+            <input class="email-input" type="hidden" name="email" th:value="${member.email}">
           </div>
         </div>
         <div class="main-ct">
           <span class="ct-title">닉네임</span>
           <div class="ct-box">
-            <span class="ct">닉네임</span>
-            <input class="ct-input" type="hidden" name="email">
+            <span id="ct-nick" th:text="${member.nickName}"></span>
+            <input class="nick-input" type="hidden" name="nickName" value="">
           </div>
         </div>
         <div class="main-ct">
           <span class="ct-title">가입일자</span>
           <div class="ct-box">
-            <span class="ct">2023.08.18</span>
-            <input class="ct-input" type="hidden" name="email">
+            <span class="ct" th:text="${member.createDate}"></span>
           </div>
         </div>
       </div>
       <div id="btn-box">
-        <button id="btn">수정</button>
+        <button id="update-btn">수정하기</button>
+        <button type="button" id="btn" onclick="input()">수정</button>
       </div>
     </div>
   </form>
 </main>
 <footer th:replace="/layout/layout :: footer"></footer>
+<script th:inline="javascript">
+  const btn = document.querySelector("#btn");
+  const updateBtn = document.querySelector("#update-btn");
+  const nickText = document.querySelector("#ct-nick");
+  const nickInput = document.querySelector(".nick-input");
+  const nick = /*[[${member.nickName}]]*/
+
+  const input = () =>{
+    btn.style.display = 'none';
+    updateBtn.style.display = 'block';
+    nickText.style.display = 'none';
+    nickInput.setAttribute("type", "text");
+    nickInput.value= nick;
+  }
+
+  const update = () =>{
+    btn.style.display = 'block';
+    updateBtn.style.display = 'none';
+    nickText.style.display = 'block';
+    nickInput.setAttribute("type", "hidden");
+  }
+
+</script>
 </body>
 </html>

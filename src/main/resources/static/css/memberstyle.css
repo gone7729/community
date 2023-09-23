@@ -185,10 +185,33 @@ table {
 }
 
 #btn{
+    display: block;
     width: 84px;
     height: 30px;
     border-radius: 12px;
     background-color: white;
     border: 1px #a1a0a0 solid;
     letter-spacing: -1px;
+}
+
+#update-btn{
+    display: none;
+    width: 84px;
+    height: 30px;
+    border-radius: 12px;
+    background-color: white;
+    border: 1px #a1a0a0 solid;
+    letter-spacing: -1px;
+}
+
+#ct-nick{
+    display: block;
+    margin-left: 16px;
+}
+
+.ct-input{
+    margin-left: 16px;
+    border-radius: 6px;
+    outline: none;
+    border: 1px #c7c7c7 solid;
 }
