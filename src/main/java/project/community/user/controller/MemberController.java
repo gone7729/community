@@ -103,7 +103,7 @@ public class MemberController {
     public String userUpdate(Model model, MemberDto memberDto, HttpSession session){
 
         memberService.updateMember(memberDto);
-        memberService.memberInfo(memberDto);
+        memberDto = memberService.memberInfo(memberDto);
         session.setAttribute("user", memberDto);
         model.addAttribute("member", session.getAttribute("user"));
         return "user/member";

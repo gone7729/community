@@ -48,16 +48,13 @@ public class HomeController {
         return "/user/member";
     }
 
-    @GetMapping("/board/freeboard")
+    @GetMapping("freeboard")
     public String freeBoard(){
         return "boardpaging";
     }
 
     @GetMapping("write")
     public String write(Model model, HttpSession session){
-        if (session.getAttribute("user") == null){
-            return "user/login";
-        }
         model.addAttribute("member", session.getAttribute("user"));
         return "board/write";
     }

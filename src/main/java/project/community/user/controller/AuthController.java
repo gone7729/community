@@ -36,9 +36,11 @@ public class AuthController {
     @PostMapping("singIn")
     public String singIn(@Valid @ModelAttribute("memberDto") MemberDto memberDto,
                          BindingResult bindingResult, Model model,
+                         @RequestParam(defaultValue = "/index")String redirectURL,
                          @RequestParam("password") String password,
                          @RequestParam("email") String email,
-                         HttpSession session, HttpServletRequest request) {
+                         HttpSession session, HttpServletRequest request,
+                         RedirectAttributes redirectAttributes) {
 
         memberDto = authService.singIn(memberDto);
 
@@ -55,7 +57,8 @@ public class AuthController {
         session.setAttribute("user", memberDto);
         session.setMaxInactiveInterval(3600);
         model.addAttribute("member", session.getAttribute("user"));
-        return "redirect:/index";
+        redirectAttributes.addFlashAttribute("msg","로그인 성공");
+        return "redirect:" + redirectURL;
     }
 
     @GetMapping("logout")
