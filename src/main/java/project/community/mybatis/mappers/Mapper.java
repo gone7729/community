@@ -1,13 +1,10 @@
 package project.community.mybatis.mappers;
 
-import project.community.board.dto.BoardDto;
-import project.community.comment.dto.CommentDto;
-import project.community.user.dto.MemberDto;
+import project.community.board.BoardDto;
+import project.community.comment.CommentDto;
+import project.community.user.MemberDto;
 
-import java.lang.reflect.Member;
-import java.security.SecureRandom;
 import java.util.List;
-import java.util.Optional;
 
 @org.apache.ibatis.annotations.Mapper
 public interface Mapper {

@@ -20,28 +20,17 @@
   <div id="header-nav">
     <ul id="nav-box">
       <li class="nav-item">
-        <div>
-          <a class="nav-link" th:href="@{/boardpaging}">
-            <span>자유 게시판</span>
-            <img class="nav-logo" src="/img/club.svg" alt="x">
-          </a>
-        </div>
+        <a class="nav-link" th:href="@{boardpaging}">자유 게시판</a>
       </li>
-      <li class="nav-item">
-        <div>
-          <a class="nav-link" th:href="@{/}">
-            <span>풋살 게시판</span>
-            <img class="nav-logo" src="/img/club.svg" alt="x">
-          </a>
-        </div>
-      </li>
-
+      <!--            <li class="nav-item">-->
+      <!--                    <a class="nav-link" th:href="@{/}">풋살 게시판</a>-->
+      <!--            </li>-->
     </ul>
   </div>
 </header>
 <footer th:fragment="footer">
   <div id="footer-box">
-    <img id="footer-logo" src="/img/club.svg" alt="x">
+    <img id="footer-logo" src="img/club.svg" alt="x">
     <ul id="footer-item-box">
       <li class="footer-item">
         <a class="footer-item-link">문의 하기</a>

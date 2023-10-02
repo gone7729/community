@@ -1,11 +1,8 @@
-package project.community.board.service;
+package project.community.board;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import project.community.board.dto.BoardDto;
-import project.community.board.dao.BoardDao;
-import project.community.board.dto.ListSetDto;
-import project.community.comment.dto.CommentDto;
+import project.community.comment.CommentDto;
 
 import java.util.List;
 

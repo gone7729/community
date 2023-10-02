@@ -1,19 +1,12 @@
-package project.community.user.controller;
+package project.community.user;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import project.community.user.dto.MemberDto;
-import project.community.user.service.AuthService;
-import project.community.user.service.MemberService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -39,8 +32,7 @@ public class AuthController {
                          @RequestParam(defaultValue = "/index")String redirectURL,
                          @RequestParam("password") String password,
                          @RequestParam("email") String email,
-                         HttpSession session, HttpServletRequest request,
-                         RedirectAttributes redirectAttributes) {
+                         HttpSession session, HttpServletRequest request) {
 
         memberDto = authService.singIn(memberDto);
 
@@ -57,7 +49,6 @@ public class AuthController {
         session.setAttribute("user", memberDto);
         session.setMaxInactiveInterval(3600);
         model.addAttribute("member", session.getAttribute("user"));
-        redirectAttributes.addFlashAttribute("msg","로그인 성공");
         return "redirect:" + redirectURL;
     }
 

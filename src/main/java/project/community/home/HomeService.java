@@ -1,4 +1,4 @@
-package project.community.home.service;
+package project.community.home;
 
 import org.springframework.stereotype.Service;
 

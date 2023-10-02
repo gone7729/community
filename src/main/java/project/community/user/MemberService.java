@@ -1,11 +1,11 @@
-package project.community.user.service;
+package project.community.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import project.community.user.dao.MemberDao;
-import project.community.user.dto.RegisterDto;
-import project.community.user.dto.MemberDto;
+import project.community.user.MemberDao;
+import project.community.user.RegisterDto;
+import project.community.user.MemberDto;
 
 @Service
 public class MemberService {

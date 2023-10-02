@@ -1,12 +1,9 @@
-package project.community.comment.controller;
+package project.community.comment;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import project.community.comment.dto.CommentDto;
-import project.community.comment.service.CommentService;
-import project.community.user.dto.MemberDto;
+import project.community.user.MemberDto;
 
 @Controller
 public class CommentController {

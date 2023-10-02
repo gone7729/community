@@ -1,11 +1,9 @@
-package project.community.comment.service;
+package project.community.comment;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import project.community.comment.dao.CommentDao;
-import project.community.comment.dto.CommentDto;
-
-import java.util.List;
+import project.community.comment.CommentDao;
+import project.community.comment.CommentDto;
 
 @Service
 public class CommentService {

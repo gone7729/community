@@ -1,4 +1,4 @@
-package project.community.user.config;
+package project.community.config;
 
 
 import org.springframework.context.annotation.Bean;

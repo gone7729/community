@@ -1,4 +1,4 @@
-package project.community.user.dto;
+package project.community.user;
 
 import lombok.Data;
 import org.springframework.context.annotation.Bean;

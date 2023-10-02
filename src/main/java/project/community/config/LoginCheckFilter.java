@@ -1,17 +1,20 @@
-package project.community.user.Filter;
+package project.community.config;
 
 import org.springframework.util.PatternMatchUtils;
 
 import javax.servlet.*;
+import javax.servlet.FilterConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LoginCheckFilter implements Filter {
-    private static final String[] whitelist = {"/", "/index", "/singIn", "/login", "/logout", "/js/*", "/css/*", "/img/*", "/boardpaging", "/posting"};
+    private static final String[] whitelist = {"/index", "/singIn", "/login", "/logout", "/js/*", "/css/*", "/img/*", "/boardpaging", "/posting"};
+
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {}
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
 
     private boolean isLoginCheckPath(String requestURI) {
         return PatternMatchUtils.simpleMatch(whitelist, requestURI);
@@ -24,10 +27,10 @@ public class LoginCheckFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         String requestURI = httpRequest.getRequestURI();
 
-        if(isLoginCheckPath(requestURI)){
+        if(!isLoginCheckPath(requestURI)){//true면 로그인 해야 사용 가능
             HttpSession session = httpRequest.getSession(false);
 
-            if(session == null || session.getAttribute("member") == null) {
+            if(session == null) {
                 httpResponse.sendRedirect("/login");
                 return;
             }

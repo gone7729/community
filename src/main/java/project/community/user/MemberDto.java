@@ -1,4 +1,4 @@
-package project.community.user.dto;
+package project.community.user;
 
 import lombok.Data;
 

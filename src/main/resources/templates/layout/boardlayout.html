@@ -38,7 +38,7 @@
       <div id="page">
         <ul id="page-box">
           <li class="page-btn-box">
-            <a id="pp-btn" th:href="@{/boardpaging(nowPage=${paging.startPage})}" >
+            <a id="pp-btn" th:href="@{/boardpaging(nowPage=${paging.startPage})}" th:unless="${paging.nowPage - 1 < 1}">
               <img src="/img/start.svg" alt="첫페이지">
             </a>
           </li>
@@ -48,8 +48,9 @@
             </a>
           </li>
           <li clss="page-num-box" th:each="num : ${#numbers.sequence(paging.startPage, paging.endPage)}">
-            <a class="page-num" th:href="@{/boardpaging(nowPage=${num})}">
-              <span  th:text="${num}"></span>
+            <a class="page-link" th:href="@{/boardpaging(nowPage=${num})}">
+              <span class="page-now" th:unless="${num == paging.nowPage}" th:text="${num}"></span>
+              <span class="page-num" th:text="${num}"></span>
             </a>
           </li>
           <li class="page-btn-box">
@@ -64,9 +65,9 @@
           </li>
         </ul>
         <div id="write-btn">
-          <button th:formaction="@{go-write}">
-            <span>글쓰기</span>
-          </button>
+          <a type="button" th:href="@{write}">
+            글쓰기
+          </a>
         </div>
       </div>
       <div id="search-box">
@@ -91,7 +92,6 @@
     </form>
   </div>
 </main>
-
 <script src="/js/SearchCtg.js"></script>
 
 </body>

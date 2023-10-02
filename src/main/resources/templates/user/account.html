@@ -18,42 +18,32 @@
           <div id="tou-check">
               <input type="checkbox" id="check" name="terms">
               <span>이용 약관을 읽었으며 동의합니다.</span>
-              <!--/*이용 약관 체크*/-->
               <span class="failed" th:if="${#fields.hasErrors('terms')}" th:errors="*{terms}"></span>
           </div>
           <div id="account-email">
               <div id="account-email-title">
-                  <div class="title-box">
-                      <span class="account-input-title">이메일</span>
-                  </div>
-                  <!--/*공백 감지시*/-->
+                  <span class="account-input-title">이메일</span>
                   <span class="failed" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-                  <!--/*중복 검사*/-->
                   <span id="email-validation-message"></span>
               </div>
               <div class="account-input-box">
-                  <input id="input-email" type="text" name="email" th:field="*{email}" >
+                  <input id="input-email" type="text" name="email" th:field="*{email}">
+                  <button type="button">코드 전송</button>
               </div>
           </div>
           <div style="display: none;" id="account-code">
               <div id="account-code-title">
-                  <div class="title-box">
-                      <span class="account-input-title">이메일 코드</span>
-                  </div>
+                  <span class="account-input-title">이메일 코드</span>
                   <span class="failed">유효성 검사 실패시 문장 출력</span>
               </div>
               <div class="account-input-box">
                   <input class="account" type="text" name="code">
-                  <button class="validation-btn">
-                      <span>확 인</span>
-                  </button>
+                  <button class="validation-btn">확 인</button>
               </div>
           </div>
           <div id="account-pw">
               <div id="account-pw-title">
-                  <div class="title-box">
-                      <span class="account-input-title">비밀번호</span>
-                  </div>
+                  <span class="account-input-title">비밀번호</span>
                   <span>/6자리 이상, 특수문자 포함</span>
                   <span class="failed" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
               </div>
@@ -63,9 +53,7 @@
           </div>
           <div id="account-pw-check">
               <div id="account-pw-check-title">
-                  <div class="title-box">
-                      <span class="account-input-title">비밀번호 확인</span>
-                  </div>
+                  <span class="account-input-title">비밀번호 확인</span>
                   <span id="pw-validation-message"></span>
               </div>
               <div class="account-input-box">
@@ -74,9 +62,7 @@
           </div>
           <div id="account-nick">
               <div id="account-nick-title">
-                  <div class="title-box">
-                      <span class="account-input-title">닉네임</span>
-                  </div>
+                  <span class="account-input-title">닉네임</span>
                   <span class="failed" th:if="${#fields.hasErrors('nickName')}" th:errors="*{nickName}"></span>
                   <span id="nick-validation-message"></span>
               </div>

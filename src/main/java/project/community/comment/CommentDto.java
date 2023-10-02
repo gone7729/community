@@ -1,4 +1,4 @@
-package project.community.comment.dto;
+package project.community.comment;
 
 import lombok.Data;
 

@@ -92,13 +92,7 @@
             </div>
           </div>
           <div class="cmt-main-num">
-            <button class="cmt-main-btn">
-              <img class="cmt-up-img" src="/img/minup.svg" alt="x">
-            </button>
             <span th:text="${cmtList.up_point}"></span>
-            <button class="cmt-main-btn">
-              <img class="cmt-down-img" src="/img/mindown.svg" alt="x">
-            </button>
             <span th:text="${cmtList.down_point}"></span>
           </div>
         </div>
@@ -108,9 +102,15 @@
           </div>
           <div class="cmt-main-btn-box">
             <button type="button" class="cmt-main-btn">
+              <img class="cmt-up-img" src="/img/minup.svg" alt="x">
+            </button>
+            <button type="button" class="cmt-main-btn">
+              <img class="cmt-down-img" src="/img/mindown.svg" alt="x">
+            </button>
+            <button type="button" class="cmt-main-btn">
               <span>답글</span>
             </button>
-            <button class="cmt-main-btn">
+            <button type="button" class="cmt-main-btn">
               <span>신고</span>
             </button>
           </div>
@@ -123,50 +123,50 @@
           </button>
         </div>
       </div>
-      <div class="cmt-cmt-box">
-        <div class="cmt-main">
-          <div class="cmt-main-left">
-            <div class="cmt-main-nick">
-              <span>닉네임</span>
-            </div>
-            <button class="cmt-main-update">
-              <span>수정</span>
-            </button>
-            <button class="cmt-main-del">
-              <span>삭제</span>
-            </button>
-          </div>
-          <div class="cmt-main-num">
-            <span>0</span>
-          </div>
-        </div>
-        <div class="cmt-main-content-box">
-          <div class="cmt-main-content">
-            <p>내용</p>
-          </div>
-          <div class="cmt-main-btn-box">
-            <button class="cmt-main-btn">
-              <img class="cmt-up-img" src="/img/minup.svg" alt="x">
-            </button>
-            <button class="cmt-main-btn">
-              <img class="cmt-down-img" src="/img/mindown.svg" alt="x">
-            </button>
-            <button class="cmt-main-btn">
-              <span>답글</span>
-            </button>
-            <button class="cmt-main-btn">
-              <span>신고</span>
-            </button>
-          </div>
-        </div>
-      </div>
+<!--      <div class="cmt-cmt-box">-->
+<!--        <div class="cmt-main">-->
+<!--          <div class="cmt-main-left">-->
+<!--            <div class="cmt-main-nick">-->
+<!--              <span>닉네임</span>-->
+<!--            </div>-->
+<!--            <button class="cmt-main-update">-->
+<!--              <span>수정</span>-->
+<!--            </button>-->
+<!--            <button class="cmt-main-del">-->
+<!--              <span>삭제</span>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--          <div class="cmt-main-num">-->
+<!--            <span>0</span>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="cmt-main-content-box">-->
+<!--          <div class="cmt-main-content">-->
+<!--            <p>내용</p>-->
+<!--          </div>-->
+<!--          <div class="cmt-main-btn-box">-->
+<!--            <button class="cmt-main-btn">-->
+<!--              <img class="cmt-up-img" src="/img/minup.svg" alt="x">-->
+<!--            </button>-->
+<!--            <button class="cmt-main-btn">-->
+<!--              <img class="cmt-down-img" src="/img/mindown.svg" alt="x">-->
+<!--            </button>-->
+<!--            <button class="cmt-main-btn">-->
+<!--              <span>답글</span>-->
+<!--            </button>-->
+<!--            <button class="cmt-main-btn">-->
+<!--              <span>신고</span>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
     </form>
   </div>
   <div th:replace="/layout/boardlayout :: content"></div>
 </main>
 <footer th:replace="/layout/layout :: footer"></footer>
-<script src="/js/SearchCtg.js"></script>
 <script src="/js/cmt.js"></script>
+<script src="/js/SearchCtg.js"></script>
 <script th:inline="javascript">
         let content = document.querySelector("#input-cmt");
 

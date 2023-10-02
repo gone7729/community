@@ -95,16 +95,16 @@ table {
     margin-top: 8px;
     padding-bottom: 16px;
     display: flex;
-    gap: 16px;
+    gap: 8px;
     flex-direction: column;
-    border-bottom: 1px #f3bd86 solid;
+    border-bottom: 1px #ff9c3f solid;
+    border-bottom: 1px #ff9c3f solid;
 }
 
 #account-email-title{
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
-    margin-bottom: 6px;
 }
 
 #account-code-title{
@@ -154,8 +154,8 @@ table {
 }
 
 #input-email{
-    width: 500px;
-    height: 36px;
+    width: 640px;
+    height: 32px;
     font-size: 18px;
     border-radius: 12px;
     outline: none;
@@ -164,8 +164,8 @@ table {
 }
 
 #input-pw{
-    width: 500px;
-    height: 36px;
+    width: 640px;
+    height: 32px;
     font-size: 18px;
     border-radius: 12px;
     outline: none;
@@ -174,8 +174,8 @@ table {
 }
 
 #input-check{
-    width: 500px;
-    height: 36px;
+    width: 640px;
+    height: 32px;
     font-size: 18px;
     border-radius: 12px;
     outline: none;
@@ -184,8 +184,8 @@ table {
 }
 
 #nick-input{
-    width: 500px;
-    height: 36px;
+    width: 640px;
+    height: 32px;
     font-size: 18px;
     border-radius: 12px;
     outline: none;
@@ -208,10 +208,6 @@ table {
     border-radius: 30px;
     border: 1px #E79141 solid;
     background-color: white;
-}
-
-.title-box{
-    width:110px;
 }
 
 #account-btn:hover{
@@ -245,3 +241,22 @@ table {
     margin-left: 18px;
 }
 
+.account-input-box > button{
+    width: 80px;
+    height: 32px;
+    border: 1px #8d8888 solid;
+    border-radius: 7px;
+    background-color: white;
+    letter-spacing: -1px;
+    color: #ffa569;
+}
+
+.account-input-box > button:hover{
+    cursor: pointer;
+}
+
+.account-input-box > button:active{
+	border: 1px #ff9c3f solid;
+	color: black;
+	transition-duration: 0.3s;
+}

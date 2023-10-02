@@ -60,7 +60,7 @@ table {
     align-items: center;
     width: 200px;
     height: 51px;
-    border-bottom: 1px #f3bd86 solid;
+    border-bottom: 1px #ff9c3f solid;
     justify-content: center;
     font-size: 24px;
     letter-spacing: -1px;
@@ -71,7 +71,7 @@ table {
     height: 129px;
     margin: 0 auto;
     padding: 12px 18px;
-    border-top: 1px #E79141 solid;
+    border-top: 1px #ff9c3f solid;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
@@ -164,7 +164,7 @@ border-radius: 7px;
     width: 962px;
     height: 27px;
     border-radius: 12px;
-    border: 2px #E79141 solid;
+    border: 2px #ff9c3f solid;
     outline: none;
     padding-left: 16px;
     letter-spacing: -2px;
@@ -184,7 +184,7 @@ border-radius: 7px;
     width: 1084px;
     height: 600px;
     letter-spacing: -1px;
-    border: 2px #E79141 solid;
+    border: 2px #ff9c3f solid;
     border-radius: 12px;
     font-size: 16px;
 }
@@ -197,8 +197,8 @@ border-radius: 7px;
     height: 600px;
     flex-wrap: wrap;
     border: none;
-    border-right: 2px #E79141 solid;
-    border-left: 1px #B6B6B6 solid;
+    border-right: 2px #ff9c3f solid;
+    border-left: 1px #ff9c3f solid;
     border-radius: 12px;
     gap: 16px;
 }
@@ -208,13 +208,20 @@ border-radius: 7px;
 }
 
 .btm-btn{
-    width: 120px;
-    height: 42px;
+    width: 104px;
+    height: 40px;
     background-color: white;
     border-radius: 12px;
     border: 1px #8A8A8A solid;
     font-size: 18px;
     letter-spacing: -1px;
     font-weight: 550;
+    color: #ffa569;
+
+.btm-btn:hover{
+    cursor: pointer;
+    border: 1px #ff9c3f solid;
+    color: black;
+    transition-duration: 0.3s;
 }
 

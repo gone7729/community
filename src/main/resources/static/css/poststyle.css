@@ -56,16 +56,17 @@ main {
 }
 
 #post-top-item-box{
-    width: 884px;
-    height: 51px;
+    width: 864px;
+    height: 40px;
     display: grid;
     grid-template-columns: 6fr 2fr 1fr 1fr;
     align-items: center;
-    border-top: 1px #EDAD70 solid;
-    border-bottom: 2px #EDAD70 solid;
+    border-top: 1px #ff9c3f solid;
+    border-bottom: 2px #ff9c3f solid;
     font-weight: 400;
     letter-spacing: -1px;
     font-size: 18px;
+    padding: 8px;
 }
 
 .post-top-item{
@@ -73,12 +74,12 @@ main {
 }
 
 #post-top-title-box{
-    margin-left: 20px;
     display: flex;
-    gap: 16px;
+    gap: 8px;
     height: 30px;
     align-items: center;
-    margin-top: 16px;
+    padding: 16px;
+    width: 856px;
 }
 
 #post-top-ctg{
@@ -94,7 +95,7 @@ main {
 }
 
 #post-mid-content-box{
-    width: 768px;
+    width: 760px;
     height: 675px;
     margin-left: 84px;
     margin-top: 16px;
@@ -153,20 +154,19 @@ main {
 }
 
 .cmt-main-box{
-    height: 61px;
+    height: 48px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .cmt-main{
     display: flex;
     justify-content: space-between;
-    margin-bottom: 6px;
 }
 
-.cmt-main-left{
-    display: flex;
-    gap: 6px;
-    margin-top: 6px;
-}
+
 
 .cmt-main-nick{
     margin: 0px 13px 0px 16px;
@@ -193,7 +193,16 @@ main {
 }
 
 .cmt-main-num{
-    margin: 6px 6px 0px 0px;
+    display: flex;
+    gap: 16px;
+}
+
+.cmt-main-num > :first-child{
+    color: blue;
+}
+
+.cmt-main-num > :last-child{
+    color: red;
 }
 
 .cmt-main-content-box{
@@ -285,25 +294,40 @@ main {
 }
 
 #update-btn{
-    margin-bottom: 16px;
     background-color: white;
     display: flex;
     gap: 16px;
+    justify-content: flex-end;
+    width: 864px;
 }
 
 #update-btn > a{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 52px;
+    width: 48px;
     height: 24px;
     text-decoration: none;
     color: black;
-    border: 1px #b2b2b2 solid;
+    border: 1px #ff9c3f solid;
     border-radius: 7px;
 }
 
-#update-btn >:active{
-	border-color: #fbecdd;
-	background-color: #fbecdd;
+#update-btn > a:active{
+	cursor:pointer;
+	border: 1px #ff9c3f solid;
+    color: black;
+    transition-duration: 0.3s;
+}
+
+#post-top-item-box > :nth-child(3){
+    justify-content: space-evenly;
+}
+
+#post-top-item-box > :nth-child(4){
+    justify-content: space-evenly;
+}
+
+.cmt-main-btn >:hover{
+    cursor: pointer;
 }

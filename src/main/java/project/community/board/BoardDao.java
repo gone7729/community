@@ -1,10 +1,8 @@
-package project.community.board.dao;
+package project.community.board;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import project.community.board.dto.BoardDto;
-import project.community.board.dto.ListSetDto;
-import project.community.comment.dto.CommentDto;
+import project.community.comment.CommentDto;
 import project.community.mybatis.mappers.Mapper;
 
 import java.util.List;

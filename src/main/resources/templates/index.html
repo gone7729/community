@@ -7,39 +7,7 @@
     <link rel="stylesheet" href="/css/H&Fstyle.css"/>
 </head>
 <body>
-    <header>
-        <div id="header-top">
-            <a th:href="@{index}" id="header-logo-link">
-                <img id="header-logo" src="/img/club.svg" alt="x">
-            </a>
-            <!--검색창-->
-            <form id="header-search" th:action="@{/}" method="post">
-                <img id="header-search-icon" src="/img/search.svg" alt="x">
-                <input id="header-search-bar" name="total-search" type="text">
-            </form>
-        </div>
-        <div id="header-nav">
-            <ul id="nav-box">
-                <li class="nav-item">
-                    <div>
-                        <a class="nav-link" th:href="@{boardpaging}">
-                            <span>자유 게시판</span>
-                            <img class="nav-logo" src="/img/club.svg" alt="x">
-                        </a>
-                    </div>
-                </li>
-<!--                <li class="nav-item">-->
-<!--                    <div>-->
-<!--                        <a class="nav-link" th:href="@{/}">-->
-<!--                            <span>풋살 게시판</span>-->
-<!--                            <img class="nav-logo" src="/img/club.svg" alt="x">-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                </li>-->
-
-            </ul>
-        </div>
-    </header>
+<header th:replace="/layout/layout :: header"></header>
     <main>
         <div id="main-top">
             <div id="main-top-bannerBox"></div>
@@ -48,9 +16,9 @@
                     <a type="button" th:href="@{account}" id="create-act">회원 가입</a>
             </div>
             <div id="main-top-infoBox" th:if="${member}">
-                <a th:href="@{member}">마이페이지</a>
                 <div>
-                    <p th:text="${member.nickName} + '님 안녕하세요.'"></p>
+                    <a th:href="@{member}" th:text="${member.nickName}"></a>
+                    <span>님 안녕하세요.</span>
                 </div>
                 <div>
                     <a type="button" th:href="@{logout}" id="logout-btn">로그 아웃</a>
@@ -60,9 +28,7 @@
         <div id="main-mid">
             <div id="main-mid-news">
                 <div id="news-top">
-                    <div id="news-title">
-                        <span>스포츠 뉴스</span>
-                    </div>
+                    <div id="news-title">스포츠 뉴스</div>
                     <form id="news-ctg">
                         <button class="news-ctg-btn">종목</button>
                         <button class="news-ctg-btn">종목</button>
@@ -79,9 +45,7 @@
                 </div>
             </div>
             <div id="main-mid-hotTopic">
-                <div id="mid-hotTopic-title">
-                    <span>화제글</span>
-                </div>
+                <div id="mid-hotTopic-title">화제글</div>
                 <div id="ht-box">
                     <ul>
                         <li class="item-ctg">[게시판]</li>
@@ -94,9 +58,7 @@
         <div id="main-btm">
             <div class="main-btm-boardBox">
                 <div class="boardBox-top">
-                    <div class="boardBox-title">
-                        <span>자유 게시판</span>
-                    </div>
+                    <div class="boardBox-title">자유 게시판</div>
                     <div class="board-more">
                         <a th:href="@{boardpaging}">더보기 +</a>
                     </div>
@@ -114,43 +76,26 @@
                     </ul>
                 </div>
             </div>
-            <div class="main-btm-boardBox">
-                <div class="boardBox-top">
-                    <div class="boardBox-title">
-                        <span>풋살 게시판</span>
-                    </div>
-                    <div class="board-more">
-                        <span>더보기 +</span>
-                    </div>
-                </div>
-                <div class="board-list-box">
-                    <ul class="board-list">
-                        <li class="list-ctg">[카테고리]</li>
-                        <li class="list-title">[제목]</li>
-                        <li class="list-regdate">[날짜]</li>
-                        <li class="list-writer">[작성자]</li>
-                        <li class="list-view">[조회수]</li>
-                        <li class="list-up">[추천수]</li>
-                    </ul>
-                </div>
-            </div>
+<!--            <div class="main-btm-boardBox">-->
+<!--                <div class="boardBox-top">-->
+<!--                    <div class="boardBox-title">풋살 게시판</div>-->
+<!--                    <div class="board-more">-->
+<!--                        <a>더보기 +</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="board-list-box">-->
+<!--                    <ul class="board-list">-->
+<!--                        <li class="list-ctg">[카테고리]</li>-->
+<!--                        <li class="list-title">[제목]</li>-->
+<!--                        <li class="list-regdate">[날짜]</li>-->
+<!--                        <li class="list-writer">[작성자]</li>-->
+<!--                        <li class="list-view">[조회수]</li>-->
+<!--                        <li class="list-up">[추천수]</li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </main>
-    <footer>
-        <div id="footer-box">
-            <img id="footer-logo" src="img/club.svg" alt="x">
-            <ul id="footer-item-box">
-                <li class="footer-item">
-                    <a class="footer-item-link">문의 하기</a>
-                </li>
-                <li class="footer-item">
-                    <a class="footer-item-link">이용 약관</a>
-                </li>
-                <li class="footer-item">
-                    <a class="footer-item-link">개인정보처리방침</a>
-                </li>
-            </ul>
-        </div>
-    </footer>
+<footer th:replace="/layout/layout :: footer"></footer>
 </body>
 </html>

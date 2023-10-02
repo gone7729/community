@@ -1,4 +1,4 @@
-package project.community.board.dto;
+package project.community.board;
 
 import lombok.Data;
 

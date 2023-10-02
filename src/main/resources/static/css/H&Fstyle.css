@@ -53,7 +53,6 @@ table {
     height: 160px;
     align-items: center;
     gap: 16px;
-    border-bottom: 1px #f3bd86 solid;
 }
 
 #header-search{
@@ -74,13 +73,14 @@ table {
     font-size: 16px;
     color: black;
     border-radius: 30px;
-    border: 2px #ffa264 solid;
+    border: 2px #ff9c3f solid;
     padding-left: 45px;
     outline: none;
 }
 
 #header-nav{
-    border-bottom: 3px #e79141 solid;
+    border-bottom: 3px #ff9c3f solid;
+    border-top: 1px #ff9c3f solid;
 }
 
 #nav-box{
@@ -88,29 +88,22 @@ table {
     justify-content: flex-start;
     align-items: center;
     height: 48px;
-    margin-left:100px;
     width: 1184px;
     margin: 0 auto;
 }
 
-.nav-item > div {
-    text-align: center;
-    width: 184px;
-    height: 26px;
-    border-radius: 7px;
-    border-right: 2px #e79141 solid;
+.nav-item {
+    width: 104px;
+    border-right: 1px #ff9c3f solid;
+    border-radius: 3px;
 }
 
 .nav-link{
     text-decoration: none;
-}
-
-.nav-item > div > a > span{
-
+    color: #ffa569;
     letter-spacing: -1px;
     font-size: 18px;
     font-weight: bold;
-    color: #e79243;
 }
 
 .nav-logo{
@@ -122,7 +115,7 @@ main{
     width: 1184px;
     margin: 0 auto;
     padding: 0px 8px;
-    max-height: calc(250vh);
+    min-height: calc(100vh);
 }
 
 footer{
@@ -131,7 +124,7 @@ footer{
 
 #footer-box{
     height: 60px;
-    border-top: 3px #e79141 solid;
+    border-top: 3px #ff9c3f solid;
     display: flex;
     justify-content: center;
     gap: 82px;

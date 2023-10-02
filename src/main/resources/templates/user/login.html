@@ -11,38 +11,36 @@
   <main>
     <form id="login-box" th:object="${memberDto}" th:action="@{singIn}" method="post">
       <div class="email-login-box">
-        <div id="email-login-title">
-          <span>로그인</span>
+        <div id="email-login-title">로그인</div>
+        <div class="input-box">
+          <span>이메일</span>
+          <input id="email" type="text" name="email" >
         </div>
-        <div id="email-pw-box">
-          <div id="email-box">
-            <span>이메일</span>
-            <input id="email" type="text" name="email" >
-          </div>
-          <div id="pw-box">
-            <span>비밀번호</span>
-            <input id="pw" type="password" name="password">
-          </div>
+        <div class="input-box">
+          <span>비밀번호</span>
+          <input id="pw" type="password" name="password">
         </div>
         <div th:if="${#fields.hasGlobalErrors()}">
           <p class="login-valid" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
         </div>
-        <div id="find-box">
-        <a id="find">아이디/비밀번호 찾기</a>
-        </div>
-        <div id="save-box">
-          <div id="save-email-box">
-            <input id="save-email" type="checkbox" name="save-email">
-            <span>이메일 저장하기</span>
+        <div class="login-btm">
+          <div id="find-box">
+            <a id="find">아이디/비밀번호 찾기</a>
           </div>
-          <div id="save-login-box">
-            <input id="save-login" type="checkbox" name="save-login">
-            <span>로그인 유지하기</span>
+          <div id="save-box">
+            <div id="save-email-box">
+              <input id="save-email" type="checkbox" name="save-email">
+              <span>이메일 저장하기</span>
+            </div>
+            <div id="save-login-box">
+              <input id="save-login" type="checkbox" name="save-login">
+              <span>로그인 유지하기</span>
+            </div>
           </div>
-        </div>
-        <div id="login-btn-box">
-          <button class="login-btn">로그인</button>
-          <button formaction="/account" class="login-btn">회원 가입</button>
+          <div id="login-btn-box">
+            <button class="login-btn">로그인</button>
+            <button formaction="/account" class="login-btn">회원 가입</button>
+          </div>
         </div>
       </div>
       <div class="email-login-box">
@@ -64,7 +62,6 @@
             <img class="sns-btn-img" src="/img/GoogleLogo.svg">
             <span class="sns-btn-text">구글 로그인</span>
           </button>
-          <img id="sns-login-img" src="/img/club.svg" alt="x">
         </div>
       </div>
     </form>

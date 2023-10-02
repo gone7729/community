@@ -1,18 +1,13 @@
-package project.community.board.controller;
+package project.community.board;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import project.community.board.dto.BoardDto;
-import project.community.board.service.BoardService;
-import project.community.comment.dto.CommentDto;
-import project.community.comment.service.CommentService;
+import project.community.comment.CommentDto;
 
 import javax.servlet.http.HttpSession;
-import java.sql.SQLOutput;
-
 
 
 @Controller

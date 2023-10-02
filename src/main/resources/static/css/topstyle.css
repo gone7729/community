@@ -90,11 +90,11 @@ table {
     justify-content: center;
     align-items: center;
     border-radius: 12px;
-    border: 1px solid #929292;
+    border: 1px solid #b7b0b0;
     width: 116px;
     background: white;
     text-decoration: none;
-        color: black;
+    color: #ffa569;
 }
 
 #create-act{
@@ -103,11 +103,11 @@ table {
     justify-content: center;
     align-items: center;
     border-radius: 12px;
-    border: 1px solid #929292;
+    border: 1px solid #b7b0b0;
     width: 116px;
     background: white;
     text-decoration: none;
-        color: black;
+    color: #ffa569;
 }
 
 #logout-btn{

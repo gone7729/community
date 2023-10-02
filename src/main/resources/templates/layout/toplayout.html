@@ -15,7 +15,8 @@
       </div>
       <div id="main-top-infoBox" th:if="${member}">
         <div>
-          <p th:text="${member.nickName} + '님 안녕하세요.'"></p>
+          <a th:href="@{member}" th:text="${member.nickName}"></a>
+          <span>님 안녕하세요.</span>
         </div>
         <div>
           <a type="button" th:href="@{logout}" id="logout-btn">로그 아웃</a>

@@ -1,19 +1,15 @@
-package project.community.home.controller;
+package project.community.home;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import project.community.board.dto.BoardDto;
-import project.community.board.service.BoardService;
-import project.community.home.service.HomeService;
-import project.community.user.dto.MemberDto;
+import project.community.board.BoardDto;
+import project.community.board.BoardService;
+import project.community.user.MemberDto;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
