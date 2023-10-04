@@ -5,12 +5,35 @@
     <title>We Are club!!</title>
     <link rel="stylesheet" href="/css/style.css"/>
     <link rel="stylesheet" href="/css/H&Fstyle.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 </head>
 <body>
-<header th:replace="/layout/layout :: header"></header>
+<header th:replace="~{layout/layout :: header}"></header>
     <main>
         <div id="main-top">
-            <div id="main-top-bannerBox"></div>
+            <div id="main-top-bannerBox">
+                <!-- Slider main container -->
+                <div class="swiper">
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide">
+                            <img id="image-1" src="/img/club.svg" alt="image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img id="image-2" src="/img/club.svg" alt="image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img id="image-3" src="/img/club.svg" alt="image">
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <!-- If we need navigation buttons -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
             <div id="main-top-loginBox" th:unless="${member}">
                     <a type="button" th:href="@{login}" id="login-btn">로그인</a>
                     <a type="button" th:href="@{account}" id="create-act">회원 가입</a>
@@ -37,9 +60,11 @@
                     </form>
                 </div>
                 <div id="mid-news-box">
-                    <ul>
+                    <ul th:each="newsList, stat : ${news}">
                         <li class="news-item-title">
-                            <a class="item-link">뉴스 기사 링크</a>
+                            <a class="item-link" th:href="${newsList.url}" th:title="${newsList.title}">
+                                <span th:text="${newsList.title.substring(0, 28) + '. . .'}"></span>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -96,6 +121,28 @@
 <!--            </div>-->
         </div>
     </main>
-<footer th:replace="/layout/layout :: footer"></footer>
+<footer th:replace="~{layout/layout :: footer}"></footer>
+<script th:inline="javascript">
+    const swiper = new Swiper('.swiper', {
+
+        autoplay: {     //자동슬라이드 (false-비활성화)
+          delay: 5000, // 시간 설정
+          disableOnInteraction: false, // false-스와이프 후 자동 재생
+        },
+
+        pagination: {
+           //페이지 기능
+           el: '.swiper-pagination',
+           //클릭 가능여부
+           clickable: true,
+         },
+
+        // Navigation arrows
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }
+});
+</script>
 </body>
 </html>

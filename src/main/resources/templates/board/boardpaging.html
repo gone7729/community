@@ -8,17 +8,17 @@
   <link rel="stylesheet" href="/css/topstyle.css"/>
 </head>
 <body>
-<header th:replace="/layout/layout :: header"></header>
+<header th:replace="~{layout/layout :: header}"></header>
 <main>
   <div id="main-top">
     <div id="main-top-title">
       <span>자유 게시판</span>
     </div>
-    <div th:replace="/layout/toplayout :: content"></div>
+    <div th:replace="~{layout/toplayout :: content}"></div>
   </div>
-  <div th:replace="/layout/boardlayout :: content"></div>
+  <div th:replace="~{layout/boardlayout :: content}"></div>
 </main>
-<footer th:replace="/layout/layout :: footer"></footer>
+<footer th:replace="~{layout/layout :: footer}"></footer>
 <script src="/js/SearchCtg.js"></script>
 
 </body>

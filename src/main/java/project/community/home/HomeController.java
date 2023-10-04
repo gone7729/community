@@ -11,6 +11,7 @@ import project.community.board.BoardService;
 import project.community.user.MemberDto;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -24,24 +25,28 @@ public class HomeController {
         this.boardService = boardService;
     }
 
-    @RequestMapping("index")
+
+    @GetMapping("/")
     public String Home(HttpSession session, Model model, BoardDto boardDto){
         boardDto.setOffSet(0);
         System.out.println(boardDto);
+        List<NewsDto> newsList = homeService.getNews();
+        model.addAttribute("news", newsList);
         model.addAttribute("boardPagingList", boardService.findBoardList(boardDto));
         model.addAttribute("member", session.getAttribute("user"));
+        System.out.println(homeService.getNews());
         return "index";
     }
+
     @GetMapping("login")
     public String logIn(@ModelAttribute MemberDto memberDto){
-        return "/user/login";
+        return "user/login";
     }
-
 
     @RequestMapping("member")
     public String member(HttpSession session, Model model){
         model.addAttribute("member", session.getAttribute("user"));
-        return "/user/member";
+        return "user/member";
     }
 
     @GetMapping("freeboard")

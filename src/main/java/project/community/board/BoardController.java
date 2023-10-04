@@ -40,7 +40,7 @@ public class BoardController {
         model.addAttribute("boardPagingList", boardService.findBoardList(boardDto));
         model.addAttribute("paging", paging);
         model.addAttribute("member", session.getAttribute("user"));
-        return "/board/boardpaging";
+        return "board/boardpaging";
     }
 
     @RequestMapping("posting")
@@ -60,7 +60,7 @@ public class BoardController {
         model.addAttribute("posting", boardService.findBoard(boardDto));
         model.addAttribute("cmt", boardService.findCmt(commentDto));
         model.addAttribute("member", session.getAttribute("user"));
-        return "/board/posting";
+        return "board/posting";
     }
 
     @RequestMapping("update")
@@ -70,7 +70,7 @@ public class BoardController {
         boardDto.setUid(uid);
 
         model.addAttribute("posting", boardService.findBoard(boardDto));
-        return "/board/update";
+        return "board/update";
     }
 
     @PostMapping("postUpdate")

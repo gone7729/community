@@ -31,7 +31,7 @@
           <li th:text="${pagingList.upPoint}"></li>
         </ul>
       </div>
-      <div th:replace="/layout/asidelayout :: content"></div>
+      <div th:replace="~{layout/asidelayout :: content}"></div>
     </div>
     <!--페이징-->
     <form id="search" th:action="@{boardpaging}"  method="post">

@@ -22,19 +22,20 @@ public class MemberController {
 
 
 
-    @RequestMapping("/user/info")
+    @RequestMapping("info")
     public String goInfo(){
-        return "member";
+        return "user/member";
     }
 
     @RequestMapping("account")
     public String accountPage(Model model) {
         model.addAttribute("registerDto", new RegisterDto());
-        return "/user/account";
+        return "user/account";
     }
 
     @PostMapping("accountValidTest")
-    public String registerMember(@Valid @ModelAttribute("registerDto") RegisterDto registerDto, BindingResult bindingResult){
+    public String registerMember(@Valid @ModelAttribute("registerDto") RegisterDto registerDto, BindingResult bindingResult,
+                                 Model model, MemberDto memberDto){
 
         if(registerDto.isTerms()==false){
             bindingResult.rejectValue("terms", "termsError", "이용 약관에 동의해주세요.");
@@ -61,6 +62,7 @@ public class MemberController {
         }
 
         memberService.registerMember(registerDto);
+        model.addAttribute("memberDto", memberDto);
         return "user/login";
     }
 
