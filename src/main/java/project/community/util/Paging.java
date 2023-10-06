@@ -34,7 +34,6 @@ public class Paging {
         if(nowPage % pageCount == 0){
             setStartPage(startPage -= pageCount);
         }
-
         setEndPage(startPage + pageCount -1);
         if (endPage > lastPage){
             setEndPage(getLastPage());

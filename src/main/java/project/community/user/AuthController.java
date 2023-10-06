@@ -29,7 +29,7 @@ public class AuthController {
     @PostMapping("singIn")
     public String singIn(@Valid @ModelAttribute("memberDto") MemberDto memberDto,
                          BindingResult bindingResult, Model model,
-                         @RequestParam(defaultValue = "/index")String redirectURL,
+                         @RequestParam(defaultValue = "/")String redirectURL,
                          @RequestParam("password") String password,
                          @RequestParam("email") String email,
                          HttpSession session, HttpServletRequest request) {

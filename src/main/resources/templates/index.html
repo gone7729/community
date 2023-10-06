@@ -63,7 +63,7 @@
                     <ul th:each="newsList, stat : ${news}">
                         <li class="news-item-title">
                             <a class="item-link" th:href="${newsList.url}" th:title="${newsList.title}">
-                                <span th:text="${newsList.title.substring(0, 28) + '. . .'}"></span>
+                                <span th:text="${newsList.title}"></span>
                             </a>
                         </li>
                     </ul>

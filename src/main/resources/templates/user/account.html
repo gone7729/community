@@ -90,11 +90,9 @@
         const nickMsg = document.querySelector("#nick-validation-message");
         const validMsg = document.querySelector(".failed");
 
-
         const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
         const pwRegex = /^(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{6,}$/;
         const nickRegex = /^\S+$/;
-
 
         emailInput.addEventListener("blur", function(){
         const email = emailInput.value;

@@ -11,7 +11,6 @@ import java.io.IOException;
 
 public class LoginCheckFilter implements Filter {
     private static final String[] whitelist = {"/index", "/singIn", "/login", "/logout", "/js/*", "/css/*", "/img/*", "/boardpaging", "/posting"};
-
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
@@ -22,6 +21,7 @@ public class LoginCheckFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
+        System.out.println("HHHHHHHHHHHHHHHHHHHHHHHH");
 
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
@@ -35,13 +35,8 @@ public class LoginCheckFilter implements Filter {
                 return;
             }
         }
-
         chain.doFilter(request, response);
-
     }
-
     @Override
     public void destroy() {}
-
-
 }

@@ -36,31 +36,25 @@ public class MemberController {
     @PostMapping("accountValidTest")
     public String registerMember(@Valid @ModelAttribute("registerDto") RegisterDto registerDto, BindingResult bindingResult,
                                  Model model, MemberDto memberDto){
-
         if(registerDto.isTerms()==false){
             bindingResult.rejectValue("terms", "termsError", "이용 약관에 동의해주세요.");
             return "user/account";
         }
-
         if (memberService.findEmail(registerDto.getEmail())==1){
             bindingResult.rejectValue("email","emailErrors","이미 존재하는 이메일입니다.");
             return "user/account";
         }
-
         if (!registerDto.getPasswordCheck().equals(registerDto.getPassword())){
             bindingResult.rejectValue("pw", "pwCheckErrors", "비밀번호가 일치하지 않습니다.");
             return "user/account";
         }
-
         if (memberService.findNick(registerDto.getNickName())==1){
             bindingResult.rejectValue("nick", "nickErrors", "이미 존재하는 닉네임입니다.");
             return "user/account";
         }
-
         if (bindingResult.hasErrors()){
             return "user/account";
         }
-
         memberService.registerMember(registerDto);
         model.addAttribute("memberDto", memberDto);
         return "user/login";

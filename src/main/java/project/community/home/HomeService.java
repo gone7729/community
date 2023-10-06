@@ -14,7 +14,6 @@ import java.util.List;
 @Service
 public class HomeService {
     private static String News_URL = "https://sports.news.naver.com/index";
-
     public List<NewsDto> getNews() {
         List<NewsDto> newsList = new ArrayList<>();
         Document document = null;
@@ -23,7 +22,6 @@ public class HomeService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         Elements contents = document.select(".today_list li");
 
         for (Element content : contents) {
