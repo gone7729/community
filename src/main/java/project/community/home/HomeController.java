@@ -10,6 +10,7 @@ import project.community.board.BoardDto;
 import project.community.board.BoardService;
 import project.community.user.MemberDto;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -27,7 +28,8 @@ public class HomeController {
 
 
     @GetMapping("/")
-    public String Home(HttpSession session, Model model, BoardDto boardDto){
+    public String Home(HttpSession session, HttpServletRequest request,
+                       Model model, BoardDto boardDto){
         boardDto.setOffSet(0);
         System.out.println(boardDto);
         List<NewsDto> newsList = homeService.getNews();
@@ -44,7 +46,8 @@ public class HomeController {
     }
 
     @RequestMapping("member")
-    public String member(HttpSession session, Model model){
+    public String member(HttpSession session, HttpServletRequest request, Model model){
+        session = request.getSession(false);
         model.addAttribute("member", session.getAttribute("user"));
         return "user/member";
     }
@@ -55,7 +58,7 @@ public class HomeController {
     }
 
     @GetMapping("write")
-    public String write(Model model, HttpSession session){
+    public String write(Model model, HttpSession session, HttpServletRequest request){
         model.addAttribute("member", session.getAttribute("user"));
         return "board/write";
     }

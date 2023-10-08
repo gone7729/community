@@ -6,8 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import project.community.comment.CommentDto;
+import project.community.user.MemberDto;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 
 
 @Controller
@@ -80,8 +83,8 @@ public class BoardController {
         return "redirect:/posting?uid=" +boardDto.getUid();
     }
 
-    @GetMapping("/delete")
-    public String delete(BoardDto boardDto,
+    @GetMapping("delete")
+    public String delete(BoardDto boardDto, Principal principal,
                          @RequestParam ("uid") int uid){
         boardDto.setUid(uid);
 

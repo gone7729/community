@@ -44,7 +44,7 @@
   </div>
     <div id="update-btn" th:if="${member != null && (member.nickName == posting.writer)}">
       <a role="button" th:href="@{/update(uid = ${posting.uid})}">수정</a>
-      <a id="delete-btn" th:href="@{/delete(uid = ${posting.uid})}">삭제</a>
+      <a title="삭제" id="delete-btn" th:href="@{/delete(uid = ${posting.uid}, writer = ${posting.writer})}">삭제</a>
     </div>
   <form id="post-btm-box">
     <button class="post-btm-btn">

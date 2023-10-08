@@ -14,17 +14,9 @@ public class MemberController {
     MemberService memberService;
     AuthService authService;
 
-
     @Autowired
     public MemberController(MemberService memberService){
         this.memberService = memberService;
-    }
-
-
-
-    @RequestMapping("info")
-    public String goInfo(){
-        return "user/member";
     }
 
     @RequestMapping("account")
@@ -33,7 +25,7 @@ public class MemberController {
         return "user/account";
     }
 
-    @PostMapping("accountValidTest")
+    @PostMapping("accountValid")
     public String registerMember(@Valid @ModelAttribute("registerDto") RegisterDto registerDto, BindingResult bindingResult,
                                  Model model, MemberDto memberDto){
         if(registerDto.isTerms()==false){
