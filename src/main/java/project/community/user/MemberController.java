@@ -8,15 +8,18 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.UUID;
 
 @Controller
 public class MemberController {
     MemberService memberService;
     AuthService authService;
+    MailManager mailManager;
 
     @Autowired
-    public MemberController(MemberService memberService){
+    public MemberController(MemberService memberService, MailManager mailManager){
         this.memberService = memberService;
+        this.mailManager = mailManager;
     }
 
     @RequestMapping("account")
@@ -52,7 +55,7 @@ public class MemberController {
         return "user/login";
     }
 
-    @PostMapping("emailTest")
+    @PostMapping("/emailTest")
     @ResponseBody
     public String emailTest(@Valid @RequestBody RegisterDto registerDto, BindingResult bindingResult){
         System.out.println(registerDto.getEmail());
@@ -89,5 +92,26 @@ public class MemberController {
         session.setAttribute("user", memberDto);
         model.addAttribute("member", session.getAttribute("user"));
         return "user/member";
+    }
+
+    //email인증
+    @PostMapping("sendmail") //
+    @ResponseBody  //AJAX후 값을 리턴하기위해 작성
+    public String SendMail(String email) throws Exception {
+        UUID uuid = UUID.randomUUID(); // 랜덤한 UUID 생성
+        String key = uuid.toString().substring(0, 7); // UUID 문자열 중 7자리만 사용하여 인증번호 생성
+        String sub ="인증번호 입력을 위한 메일 전송";
+        String con = "인증 번호 : "+key;
+        mailManager.send(email,sub,con);
+        return key;
+    }
+    @PostMapping("checkmail")
+    @ResponseBody
+    public boolean CheckMail(String key, String insertKey,String email) throws Exception {
+
+        if(key.equals(insertKey)) {
+            return true;
+        }
+        return false;
     }
 }

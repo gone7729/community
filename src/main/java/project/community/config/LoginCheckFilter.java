@@ -35,8 +35,9 @@ public class LoginCheckFilter implements Filter {
 
             HttpSession session = httpRequest.getSession(false);
             System.out.println("session에 유저 정보가 있는지 확인: " + session.getAttribute("user"));
+            System.out.println(session);
 
-            if(session.getAttribute("user") == null) {
+            if(session.getAttribute("user") == null || session == null) {
                 System.out.println("세션이 null이면 로그인페이지로 + 필터걸린 uri 기억");
                 session.setAttribute("previousUrl", requestURI);
                 System.out.println(session.getAttribute("previousUrl"));

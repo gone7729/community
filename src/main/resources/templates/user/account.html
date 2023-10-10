@@ -28,17 +28,17 @@
               </div>
               <div class="account-input-box">
                   <input id="input-email" type="text" name="email" th:field="*{email}">
-                  <button type="button">코드 전송</button>
+                  <button id="mail-send" type="button">코드 전송</button>
               </div>
           </div>
           <div style="display: none;" id="account-code">
               <div id="account-code-title">
                   <span class="account-input-title">이메일 코드</span>
-                  <span class="failed">유효성 검사 실패시 문장 출력</span>
+                  <span class="failed" id="mail-code-valid"></span>
               </div>
               <div class="account-input-box">
-                  <input class="account" type="text" name="code">
-                  <button class="validation-btn">확 인</button>
+                  <input class="account" type="text" name="insertKey">
+                  <button type="button" id="send-code-check" class="validation-btn">확 인</button>
               </div>
           </div>
           <div id="account-pw">
@@ -83,12 +83,20 @@
     <script th:inline="javascript">
         const emailInput = document.querySelector("#input-email");
         const emailMsg = document.querySelector("#email-validation-message");
+
         const pwCheckInput = document.querySelector("#input-check");
         const pwInput = document.querySelector("#input-pw");
         const pwMsg = document.querySelector("#pw-validation-message");
+
         const nickInput = document.querySelector("#nick-input");
         const nickMsg = document.querySelector("#nick-validation-message");
+
         const validMsg = document.querySelector(".failed");
+
+        const mailSendBtn = document.querySelector("#mail-send");
+        const codeInput = document.querySelector("#account-code");
+        const sendCheckBtn = document.querySelector("#send-code-check");
+        const mailCodeValid = document.querySelector("#mail-code-valid");
 
         const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
         const pwRegex = /^(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{6,}$/;
@@ -99,6 +107,7 @@
         console.log()
         fetch("/emailTest", {
             method: "POST",
+            mode: 'dcors',
             headers: {"Content-Type": "application/json"
             },
             body: JSON.stringify({email}),
@@ -159,6 +168,8 @@
         })
         .catch((error) => console.log(error))
         });
+
+
     </script>
 </body>
 </html>
