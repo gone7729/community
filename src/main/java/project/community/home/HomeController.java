@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import project.community.board.BoardDto;
 import project.community.board.BoardService;
-import project.community.user.MemberDto;
+import project.community.user.web.MemberDto;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

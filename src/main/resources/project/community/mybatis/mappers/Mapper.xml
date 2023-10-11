@@ -52,7 +52,7 @@
         VALUES(#{terms}, #{email}, #{nickName}, #{password})
     </insert>
 
-    <select id="memberInfo" resultType="project.community.user.MemberDto">
+    <select id="memberInfo" resultType="project.community.user.web.MemberDto">
         SELECT * FROM member_tb
         WHERE email = #{email};
     </select>
@@ -62,7 +62,7 @@
         WHERE email = #{email};
     </select>
 
-    <select id="findByEmail" resultType="project.community.user.MemberDto">
+    <select id="findByEmail" resultType="project.community.user.web.MemberDto">
         SELECT * from member_tb
         WHERE email = #{email};
     </select>
@@ -72,7 +72,7 @@
         WHERE nickname = #{nickName};
     </select>
 
-    <select id="singIn" resultType="project.community.user.MemberDto">
+    <select id="singIn" resultType="project.community.user.web.MemberDto">
         select * from member_tb
         where email = #{email};
     </select>

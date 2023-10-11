@@ -1,9 +1,9 @@
-package project.community.user;
+package project.community.user.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import project.community.mybatis.mappers.Mapper;
-import project.community.user.MemberDto;
+import project.community.user.web.MemberDto;
 
 @Repository
 public class MemberDao {
@@ -13,8 +13,8 @@ public class MemberDao {
     public MemberDao(Mapper mapper){
         this.mapper = mapper;
     }
-    public void insertMember(MemberDto memberDto){
-        this.mapper.insertMember(memberDto);
+    public void insertMember(Member member){
+        this.mapper.insertMember(member);
     }
     public MemberDto memberInfo(MemberDto memberDto){
         return mapper.memberInfo(memberDto);

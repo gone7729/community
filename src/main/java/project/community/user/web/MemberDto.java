@@ -1,4 +1,4 @@
-package project.community.user;
+package project.community.user.web;
 
 import lombok.Data;
 

@@ -14,7 +14,7 @@
           <span>회원 가입</span>
       </div>
         <div id="TermsofUse"></div>
-      <form id="account-box" th:object="${registerDto}" th:action="@{accountValid}" method="post">
+      <form id="account-box" th:object="${registerDto}" th:action="@{newaccount}" method="post">
           <div id="tou-check">
               <input type="checkbox" id="check" name="terms">
               <span>이용 약관을 읽었으며 동의합니다.</span>
@@ -105,10 +105,10 @@
         emailInput.addEventListener("blur", function(){
         const email = emailInput.value;
         console.log()
-        fetch("/emailTest", {
+        fetch("/emailtest", {
             method: "POST",
-            mode: 'dcors',
-            headers: {"Content-Type": "application/json"
+            headers: {
+                "Content-Type": "application/json",
             },
             body: JSON.stringify({email}),
          })
@@ -121,6 +121,7 @@
         })
         .then(data => {
             console.log(emailRegex.test(email))
+            console.log(data)
             if(emailRegex.test(email) == true){
                 emailMsg.textContent = data;
                 } else {
@@ -145,7 +146,7 @@
         nickInput.addEventListener("blur", function(){
         const nick = nickInput.value;
         console.log()
-        fetch("/nickTest", {
+        fetch("/nicktest", {
             method: "POST",
             headers: {"Content-Type": "application/json"
             },
@@ -169,6 +170,29 @@
         .catch((error) => console.log(error))
         });
 
+        mailSendBtn.addEventListener("click", function(){
+        const email = emailInput.value;
+        codeInput.style.display = 'block';
+        console.log()
+        fetch("/sendmail", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"
+            },
+            body: JSON.stringify({email}),
+         })
+          .then(response => {
+            if (response.ok) {
+                console.log(response.text());
+                return response.text(); // 서버로부터 받은 text 데이터
+            } else {
+                throw new Error("서버 응답 오류");
+            }
+        })
+        .then(data => {
+            console.log()
+        })
+        .catch((error) => console.log(error))
+        });
 
     </script>
 </body>

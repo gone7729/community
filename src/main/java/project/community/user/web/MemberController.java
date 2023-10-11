@@ -1,10 +1,13 @@
-package project.community.user;
+package project.community.user.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import project.community.user.*;
+import project.community.user.domain.AuthService;
+import project.community.user.domain.MemberService;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -13,7 +16,6 @@ import java.util.UUID;
 @Controller
 public class MemberController {
     MemberService memberService;
-    AuthService authService;
     MailManager mailManager;
 
     @Autowired
@@ -28,7 +30,7 @@ public class MemberController {
         return "user/account";
     }
 
-    @PostMapping("accountValid")
+    @PostMapping("newaccount")
     public String registerMember(@Valid @ModelAttribute("registerDto") RegisterDto registerDto, BindingResult bindingResult,
                                  Model model, MemberDto memberDto){
         if(registerDto.isTerms()==false){
@@ -55,7 +57,7 @@ public class MemberController {
         return "user/login";
     }
 
-    @PostMapping("/emailTest")
+    @PostMapping("emailtest")
     @ResponseBody
     public String emailTest(@Valid @RequestBody RegisterDto registerDto, BindingResult bindingResult){
         System.out.println(registerDto.getEmail());
@@ -71,7 +73,7 @@ public class MemberController {
         return result;
     }
 
-    @PostMapping("nickTest")
+    @PostMapping("nicktest")
     @ResponseBody
     public String nickTest(@Valid @RequestBody RegisterDto registerDto, BindingResult bindingResult){
         String result;
@@ -84,7 +86,7 @@ public class MemberController {
         return result;
     }
 
-    @PostMapping("userUpdate")
+    @PostMapping("userupdate")
     public String userUpdate(Model model, MemberDto memberDto, HttpSession session){
 
         memberService.updateMember(memberDto);

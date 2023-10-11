@@ -1,11 +1,10 @@
-package project.community.user;
+package project.community.user.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import project.community.user.MemberDao;
-import project.community.user.RegisterDto;
-import project.community.user.MemberDto;
+import project.community.user.web.MemberDto;
+import project.community.user.web.RegisterDto;
 
 @Service
 public class MemberService {
@@ -17,8 +16,8 @@ public class MemberService {
     public MemberService(MemberDao memberDao){
         this.memberDao = memberDao;
     }
-    public void insertMember(MemberDto memberDto){
-        this.memberDao.insertMember(memberDto);
+    public void insertMember(Member member){
+        this.memberDao.insertMember(member);
     }
     public MemberDto memberInfo(MemberDto memberDto){
         return memberDao.memberInfo(memberDto);
@@ -30,14 +29,14 @@ public class MemberService {
         return memberDao.findNick(nick);
     }
     public void registerMember(RegisterDto registerDto){
-        MemberDto memberDto = new MemberDto();
+        Member member = new Member();
 
-        memberDto.setEmail(registerDto.getEmail());
-        memberDto.setPassword(bCryptPasswordEncoder.encode(registerDto.getPassword()));
-        memberDto.setNickName(registerDto.getNickName());
-        memberDto.setTerms(registerDto.isTerms());
+        member.setEmail(registerDto.getEmail());
+        member.setPassword(bCryptPasswordEncoder.encode(registerDto.getPassword()));
+        member.setNickName(registerDto.getNickName());
+        member.setTerms(registerDto.isTerms());
 
-        this.memberDao.insertMember(memberDto);
+        this.memberDao.insertMember(member);
     }
     public void updateMember(MemberDto memberDto){
         this.memberDao.updateMember(memberDto);

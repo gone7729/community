@@ -1,9 +1,8 @@
-package project.community.user;
+package project.community.user.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import project.community.user.MemberDao;
-import project.community.user.MemberDto;
+import project.community.user.web.MemberDto;
 
 @Service
 public class AuthService {

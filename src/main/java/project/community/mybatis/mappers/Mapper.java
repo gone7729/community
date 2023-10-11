@@ -2,7 +2,7 @@ package project.community.mybatis.mappers;
 
 import project.community.board.BoardDto;
 import project.community.comment.CommentDto;
-import project.community.user.MemberDto;
+import project.community.user.web.MemberDto;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public interface Mapper {
     void deleteBoard(Object obj);
 
     //user
-    void insertMember(MemberDto memberDto);
+    void insertMember(Object obj);
     MemberDto memberInfo(MemberDto memberDto);
     int findEmail(String email);
     String findByEmail(String email);

@@ -1,4 +1,4 @@
-package project.community.user;
+package project.community.user.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -6,7 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import project.community.user.domain.AuthService;
+import project.community.user.domain.MemberService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,7 +27,7 @@ public class AuthController {
         this.memberService = memberService;
     }
 
-    @PostMapping("singIn")
+    @PostMapping("login")
     public String singIn(@Valid @ModelAttribute("memberDto") MemberDto memberDto,
                          BindingResult bindingResult, Model model,
                          @RequestParam("password") String password,
@@ -45,12 +46,18 @@ public class AuthController {
             bindingResult.reject("loginPassword",  "이메일 혹은 비밀번호를 틀렸습니다.");
             return "user/login";
         }
+
         session = request.getSession();
         System.out.println("로그인 성공" + session);
         session.setAttribute("user", memberDto);
         session.setMaxInactiveInterval(3600);
         model.addAttribute("member", session.getAttribute("user"));
-        return "redirect:/";
+
+        if (previousUrl == null){
+            System.out.println("이전 페이지가 없으므로 메인페이지로");
+            return "redirect:/";
+        }
+        return "redirect:" + previousUrl;
     }
 
     @GetMapping("logout")
