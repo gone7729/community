@@ -31,6 +31,9 @@ public class BoardService {
     public List<BoardDto> findBoardList(BoardDto boardDto){
         return boardDao.findBoardList(boardDto);
     }
+    public List<BoardDto> findHomeBoardList(BoardDto boardDto){
+        return boardDao.findBoardList(boardDto);
+    }
 
     public BoardDto findBoard(BoardDto boardDto){
         return boardDao.findBoard(boardDto);

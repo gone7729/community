@@ -3,6 +3,7 @@ package project.community.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -30,6 +31,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
                         "/write", "/member", "/update", "/postUpdate", "/delete"
                 );
         registry.addInterceptor(new AsyncInterceptor())
+                .order(3)
                 .excludePathPatterns("/emailtest");
+    }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

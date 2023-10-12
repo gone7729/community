@@ -1,6 +1,7 @@
 package project.community.user.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +12,7 @@ import project.community.user.domain.MemberService;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
 @Controller
@@ -97,16 +99,27 @@ public class MemberController {
     }
 
     //email인증
-    @PostMapping("sendmail") //
+    @PostMapping("sendmail")
     @ResponseBody  //AJAX후 값을 리턴하기위해 작성
-    public String SendMail(String email) throws Exception {
+    public String SendMail(@RequestBody SendAddress sendAddress, RegisterDto registerDto) throws Exception {
+        String email = sendAddress.getEmail();
+        registerDto.setEmail(email);
+        if (memberService.findEmail(registerDto.getEmail())==1){
+            return "";
+        }
+
+        System.out.println("이메일 전송 시작 전송할 이메일은 : " + email);
         UUID uuid = UUID.randomUUID(); // 랜덤한 UUID 생성
         String key = uuid.toString().substring(0, 7); // UUID 문자열 중 7자리만 사용하여 인증번호 생성
         String sub ="인증번호 입력을 위한 메일 전송";
         String con = "인증 번호 : "+key;
         mailManager.send(email,sub,con);
+        sendAddress.setKey(key);
+        System.out.println("key: " + sendAddress.getKey());
+        System.out.println("발송 시간: " + sendAddress.getRegdate());
         return key;
     }
+
     @PostMapping("checkmail")
     @ResponseBody
     public boolean CheckMail(String key, String insertKey,String email) throws Exception {

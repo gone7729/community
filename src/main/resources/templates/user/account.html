@@ -37,7 +37,7 @@
                   <span class="failed" id="mail-code-valid"></span>
               </div>
               <div class="account-input-box">
-                  <input class="account" type="text" name="insertKey">
+                  <input id="input-key" class="input" type="text" name="insertKey">
                   <button type="button" id="send-code-check" class="validation-btn">확 인</button>
               </div>
           </div>
@@ -80,7 +80,7 @@
     <footer th:replace="~{layout/layout :: footer}"></footer>
 
 
-    <script th:inline="javascript">
+    <script th:inline="javascript" nonce="my_nonce">
         const emailInput = document.querySelector("#input-email");
         const emailMsg = document.querySelector("#email-validation-message");
 
@@ -98,6 +98,9 @@
         const sendCheckBtn = document.querySelector("#send-code-check");
         const mailCodeValid = document.querySelector("#mail-code-valid");
 
+        const inputKey = document.querySelector("#input-key");
+        const keyMsg = document.querySelector("#mail-code-valid");
+
         const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
         const pwRegex = /^(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{6,}$/;
         const nickRegex = /^\S+$/;
@@ -107,6 +110,8 @@
         console.log()
         fetch("/emailtest", {
             method: "POST",
+            mode: "cors",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -170,15 +175,24 @@
         .catch((error) => console.log(error))
         });
 
+
         mailSendBtn.addEventListener("click", function(){
+        if(emailMsg.textContent == "사용 가능합니다."){
         const email = emailInput.value;
         codeInput.style.display = 'block';
+        const currentDate = new Date();
+        const currentTime = currentDate.toISOString();
         console.log()
         fetch("/sendmail", {
             method: "POST",
+            mode: "cors",
+            credentials: "include",
             headers: {"Content-Type": "application/json"
             },
-            body: JSON.stringify({email}),
+            body: JSON.stringify({
+            email: email,
+            regdate : currentDate
+            }),
          })
           .then(response => {
             if (response.ok) {
@@ -192,7 +206,11 @@
             console.log()
         })
         .catch((error) => console.log(error))
+        } else{
+            alert("이메일이 중복이거나 형식이 올바르지 않습니다.");
+        }
         });
+
 
     </script>
 </body>

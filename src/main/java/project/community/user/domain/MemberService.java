@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import project.community.user.web.MemberDto;
 import project.community.user.web.RegisterDto;
+import project.community.user.web.SendAddress;
 
 @Service
 public class MemberService {

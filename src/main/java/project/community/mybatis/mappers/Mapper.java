@@ -14,6 +14,7 @@ public interface Mapper {
     void insertBoard(BoardDto boardDto);
     int countBoard();
     List<BoardDto> findBoardList(Object obj);
+    List<BoardDto> findHomeBoardList(Object obj);
     BoardDto findBoard(Object obj);
     void updateBoard(Object obj);
     void deleteBoard(Object obj);
