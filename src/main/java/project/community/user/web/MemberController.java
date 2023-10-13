@@ -102,8 +102,10 @@ public class MemberController {
     @PostMapping("sendmail")
     @ResponseBody  //AJAX후 값을 리턴하기위해 작성
     public String SendMail(@RequestBody SendAddress sendAddress, RegisterDto registerDto) throws Exception {
+
         String email = sendAddress.getEmail();
         registerDto.setEmail(email);
+
         if (memberService.findEmail(registerDto.getEmail())==1){
             return "";
         }
@@ -115,14 +117,16 @@ public class MemberController {
         String con = "인증 번호 : "+key;
         mailManager.send(email,sub,con);
         sendAddress.setKey(key);
+
+
         System.out.println("key: " + sendAddress.getKey());
         System.out.println("발송 시간: " + sendAddress.getRegdate());
         return key;
     }
 
-    @PostMapping("checkmail")
+    @PostMapping("checkkey")
     @ResponseBody
-    public boolean CheckMail(String key, String insertKey,String email) throws Exception {
+    public boolean CheckKey(String key, String insertKey,String email) throws Exception {
 
         if(key.equals(insertKey)) {
             return true;

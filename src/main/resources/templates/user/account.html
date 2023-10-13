@@ -93,10 +93,11 @@
 
         const validMsg = document.querySelector(".failed");
 
-        const mailSendBtn = document.querySelector("#mail-send");
+        const mailSendBtn = document.querySelector("#mail-send");input-key
         const codeInput = document.querySelector("#account-code");
         const sendCheckBtn = document.querySelector("#send-code-check");
         const mailCodeValid = document.querySelector("#mail-code-valid");
+        const inputKey = document.querySelector("#input-key");
 
         const inputKey = document.querySelector("#input-key");
         const keyMsg = document.querySelector("#mail-code-valid");
@@ -181,7 +182,7 @@
         const email = emailInput.value;
         codeInput.style.display = 'block';
         const currentDate = new Date();
-        const currentTime = currentDate.toISOString();
+        const milliseconds = currentDate.getMilliseconds();
         console.log()
         fetch("/sendmail", {
             method: "POST",
@@ -191,7 +192,7 @@
             },
             body: JSON.stringify({
             email: email,
-            regdate : currentDate
+            regdate : milliseconds
             }),
          })
           .then(response => {
@@ -209,6 +210,33 @@
         } else{
             alert("이메일이 중복이거나 형식이 올바르지 않습니다.");
         }
+        });
+
+        sendCheckBtn.addEventListener("click", function(){
+        const value = inputKey.value;
+        console.log()
+        fetch("/checkkey", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"
+            },
+            body: JSON.stringify({nick}),
+         })
+          .then(response => {
+            if (response.ok) {
+                return response.text(); // 서버로부터 받은 text 데이터
+            } else {
+                throw new Error("서버 응답 오류");
+            }
+        })
+        .then(data => {
+                console.log(nick)
+                if(nickRegex.test(nick) == true){
+                    nickMsg.textContent = data;
+                } else{
+                    nickMsg.textContent = "공백이 포함될 수 없습니다.";
+                }
+        })
+        .catch((error) => console.log(error))
         });
 
 

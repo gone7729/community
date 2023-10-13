@@ -32,7 +32,7 @@ public class BoardService {
         return boardDao.findBoardList(boardDto);
     }
     public List<BoardDto> findHomeBoardList(BoardDto boardDto){
-        return boardDao.findBoardList(boardDto);
+        return boardDao.findHomeBoardList(boardDto);
     }
 
     public BoardDto findBoard(BoardDto boardDto){

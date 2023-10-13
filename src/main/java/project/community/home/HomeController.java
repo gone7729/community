@@ -34,7 +34,7 @@ public class HomeController {
         System.out.println(boardDto);
         List<NewsDto> newsList = homeService.getNews();
         model.addAttribute("news", newsList);
-        model.addAttribute("boardPagingList", boardService.findBoardList(boardDto));
+        model.addAttribute("boardPagingList", boardService.findHomeBoardList(boardDto));
         model.addAttribute("member", session.getAttribute("user"));
         System.out.println(homeService.getNews());
         return "index";

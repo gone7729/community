@@ -32,7 +32,7 @@ public class BoardDao {
         return mapper.findBoardList(boardDto);
     }
     public List<BoardDto> findHomeBoardList(BoardDto boardDto) {
-        return mapper.findBoardList(boardDto);
+        return mapper.findHomeBoardList(boardDto);
     }
     public BoardDto findBoard(BoardDto boardDto){
         return mapper.findBoard(boardDto);

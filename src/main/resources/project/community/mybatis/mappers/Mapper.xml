@@ -104,4 +104,5 @@
         SET nickname = #{nickName}
         WHERE email = #{email};
     </update>
+
 </mapper>
