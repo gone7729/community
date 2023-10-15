@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class SendAddress {
     private String email;
-    private int regdate;
-    private String key;
+    private int codetime;
+    private String code;
 }

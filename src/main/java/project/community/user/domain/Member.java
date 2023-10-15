@@ -14,4 +14,6 @@ public class Member {
     private boolean terms;
     private LocalDate createDate;
 
+
+
 }

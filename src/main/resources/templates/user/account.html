@@ -93,13 +93,13 @@
 
         const validMsg = document.querySelector(".failed");
 
-        const mailSendBtn = document.querySelector("#mail-send");input-key
+        const mailSendBtn = document.querySelector("#mail-send");
         const codeInput = document.querySelector("#account-code");
         const sendCheckBtn = document.querySelector("#send-code-check");
         const mailCodeValid = document.querySelector("#mail-code-valid");
         const inputKey = document.querySelector("#input-key");
 
-        const inputKey = document.querySelector("#input-key");
+
         const keyMsg = document.querySelector("#mail-code-valid");
 
         const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -182,7 +182,7 @@
         const email = emailInput.value;
         codeInput.style.display = 'block';
         const currentDate = new Date();
-        const milliseconds = currentDate.getMilliseconds();
+        const milliseconds = (currentDate.getMinutes() * 60 + currentDate.getSeconds()) * 1000;
         console.log()
         fetch("/sendmail", {
             method: "POST",
@@ -192,7 +192,7 @@
             },
             body: JSON.stringify({
             email: email,
-            regdate : milliseconds
+            codetime : milliseconds
             }),
          })
           .then(response => {
@@ -215,11 +215,11 @@
         sendCheckBtn.addEventListener("click", function(){
         const value = inputKey.value;
         console.log()
-        fetch("/checkkey", {
+        fetch("/codecheck", {
             method: "POST",
             headers: {"Content-Type": "application/json"
             },
-            body: JSON.stringify({nick}),
+            body: JSON.stringify({value}),
          })
           .then(response => {
             if (response.ok) {
@@ -229,11 +229,11 @@
             }
         })
         .then(data => {
-                console.log(nick)
-                if(nickRegex.test(nick) == true){
-                    nickMsg.textContent = data;
+                console.log(value)
+                if(data == true){
+                    keyMsg.textContent = data;
                 } else{
-                    nickMsg.textContent = "공백이 포함될 수 없습니다.";
+                    keyMsg.textContent = "공백이 포함될 수 없습니다.";
                 }
         })
         .catch((error) => console.log(error))

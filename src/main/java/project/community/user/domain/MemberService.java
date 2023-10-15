@@ -42,6 +42,10 @@ public class MemberService {
     public void updateMember(MemberDto memberDto){
         this.memberDao.updateMember(memberDto);
     }
-
+    public void insertCode(SendAddress sendAddress){
+        Code code = new Code();
+        code.setCode(sendAddress.getCode());
+        code.setCodetime(sendAddress.getCodetime());
+        this.memberDao.insertCode(code);}
 
 }

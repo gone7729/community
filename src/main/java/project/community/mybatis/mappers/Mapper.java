@@ -28,6 +28,8 @@ public interface Mapper {
     MemberDto singIn(MemberDto memberDto);
     void updateMember(Object obj);
 
+    void insertCode(Object obj);
+
     //코맨트
     void insertComment(Object obj);
 

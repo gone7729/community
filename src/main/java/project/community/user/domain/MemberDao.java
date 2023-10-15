@@ -35,4 +35,7 @@ public class MemberDao {
     public void updateMember(MemberDto memberDto){
         this.mapper.updateMember(memberDto);
     }
+    public void insertCode(Code code){
+        this.mapper.insertCode(code);
+    }
 }

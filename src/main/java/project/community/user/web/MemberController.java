@@ -112,23 +112,24 @@ public class MemberController {
 
         System.out.println("이메일 전송 시작 전송할 이메일은 : " + email);
         UUID uuid = UUID.randomUUID(); // 랜덤한 UUID 생성
-        String key = uuid.toString().substring(0, 7); // UUID 문자열 중 7자리만 사용하여 인증번호 생성
+        String code = uuid.toString().substring(0, 7); // UUID 문자열 중 7자리만 사용하여 인증번호 생성
         String sub ="인증번호 입력을 위한 메일 전송";
-        String con = "인증 번호 : "+key;
+        String con = "인증 번호 : "+code;
         mailManager.send(email,sub,con);
-        sendAddress.setKey(key);
+        sendAddress.setCode(code);
+        System.out.println("code: " + sendAddress.getCode());
+        System.out.println("발송 시간: " + sendAddress.getCodetime());
 
+        memberService.insertCode(sendAddress);
 
-        System.out.println("key: " + sendAddress.getKey());
-        System.out.println("발송 시간: " + sendAddress.getRegdate());
-        return key;
+        return code;
     }
 
-    @PostMapping("checkkey")
+    @PostMapping("codecheck")
     @ResponseBody
-    public boolean CheckKey(String key, String insertKey,String email) throws Exception {
+    public boolean codeCheck(String code, String insertCode,String email) throws Exception {
 
-        if(key.equals(insertKey)) {
+        if(code.equals(insertCode)) {
             return true;
         }
         return false;
