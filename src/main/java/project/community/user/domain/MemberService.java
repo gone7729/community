@@ -35,9 +35,9 @@ public class MemberService {
         member.setEmail(registerDto.getEmail());
         member.setPassword(bCryptPasswordEncoder.encode(registerDto.getPassword()));
         member.setNickName(registerDto.getNickName());
-        member.setTerms(registerDto.isTerms());
 
         this.memberDao.insertMember(member);
+        this.memberDao.deleteCode(registerDto.getCode());
     }
     public void updateMember(MemberDto memberDto){
         this.memberDao.updateMember(memberDto);
@@ -46,6 +46,10 @@ public class MemberService {
         Code code = new Code();
         code.setCode(sendAddress.getCode());
         code.setCodetime(sendAddress.getCodetime());
-        this.memberDao.insertCode(code);}
-
+        this.memberDao.insertCode(code);
+    }
+    public Code checkCode(String code){
+        return memberDao.checkCode(code);
+    }
+    public int findCode(String code){return memberDao.findCode(code);}
 }

@@ -2,6 +2,7 @@ const itemBtn = document.querySelector("#item-btn");
 const optionItems = document.querySelectorAll(".option-item");
 const itemBox = document.querySelector("#item-box");
 const any = document.querySelector(".ql-editor");
+const formCategory = document.querySelector("#category");
 
 
 
@@ -27,23 +28,18 @@ any.addEventListener("click", ()=>{
 })
 
 
-
-
-let liv = "";
-
 optionItems.forEach((item) => {
-        item.addEventListener("click", () => {
-            liv = item.value;
+              item.addEventListener("click", (e) => {
+                itemBtn.firstElementChild.textContent = item.textContent;
+                itemBox.style.height = "0px";
+                formCategory.value = e.target.value;
+              });
             });
-        });
-liv;
 
 function set(){
     let content = document.querySelector("#content-mid");
     let text = document.querySelector(".ql-editor").innerHTML;
-    let category = document.querySelector("#category");
 
-    category.value = liv;
     content.value = text;
 }
 

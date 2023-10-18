@@ -57,8 +57,8 @@
 
     
     <insert id="insertMember">
-        INSERT INTO member_tb(terms, email, nickname, password)
-        VALUES(#{terms}, #{email}, #{nickName}, #{password})
+        INSERT INTO member_tb(email, nickname, password)
+        VALUES(#{email}, #{nickName}, #{password})
     </insert>
 
     <select id="memberInfo" resultType="project.community.user.web.MemberDto">
@@ -110,5 +110,24 @@
         VALUES(#{code}, #{codetime})
     </insert>
 
+    <select id="checkCode" resultType="project.community.user.domain.Code">
+        SELECT * FROM code_tb
+        WHERE code = #{code};
+    </select>
 
+    <select id="findCode" resultType="int">
+        SELECT count(*) FROM code_tb
+        WHERE code = #{code};
+    </select>
+
+    <delete id="deleteCode">
+        DELETE FROM code_tb
+        WHERE code= #{code};
+    </delete>
+
+    <update id="viewUp">
+        UPDATE board_tb
+        SET view = view + 1
+        WHERE board_id = #{uid};
+    </update>
 </mapper>

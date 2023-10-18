@@ -99,8 +99,11 @@ table {
     flex-direction: column;
     border-bottom: 1px #ff9c3f solid;
     border-bottom: 1px #ff9c3f solid;
-}
 
+}
+#account-code{
+transition-duration: 0.3s;
+}
 #account-email-title{
     display: flex;
     justify-content: flex-start;
@@ -152,8 +155,7 @@ table {
     border: 1px #8d8888 solid;
     padding-left: 8px;
 }
-
-#input-email{
+.input{
     width: 640px;
     height: 32px;
     font-size: 18px;
@@ -163,35 +165,6 @@ table {
     padding-left: 8px;
 }
 
-#input-pw{
-    width: 640px;
-    height: 32px;
-    font-size: 18px;
-    border-radius: 12px;
-    outline: none;
-    border: 1px #8d8888 solid;
-    padding-left: 8px;
-}
-
-#input-check{
-    width: 640px;
-    height: 32px;
-    font-size: 18px;
-    border-radius: 12px;
-    outline: none;
-    border: 1px #8d8888 solid;
-    padding-left: 8px;
-}
-
-#nick-input{
-    width: 640px;
-    height: 32px;
-    font-size: 18px;
-    border-radius: 12px;
-    outline: none;
-    border: 1px #8d8888 solid;
-    padding-left: 8px;
-}
 
 #account-btn-box{
     display: flex;

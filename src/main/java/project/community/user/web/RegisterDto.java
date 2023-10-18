@@ -17,6 +17,8 @@ public class RegisterDto {
     private String password;
     @NotBlank(message = "비밀번호를 입력해 주세요.")
     private String passwordCheck;
+    @NotBlank
+    private String code;
     private boolean terms;
     private LocalDate createDate;
 }

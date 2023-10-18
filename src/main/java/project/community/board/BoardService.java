@@ -47,4 +47,5 @@ public class BoardService {
     public List<CommentDto> findCmt(CommentDto commentDto){
         return boardDao.findCmt(commentDto);
     }
+    public void viewUp(int uid){this.boardDao.viewUp(uid);}
 }

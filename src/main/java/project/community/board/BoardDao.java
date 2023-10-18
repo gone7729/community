@@ -46,4 +46,5 @@ public class BoardDao {
     public List<CommentDto> findCmt(CommentDto commentDto){
         return mapper.findCmt(commentDto);
     }
+    public void viewUp(int uid){this.mapper.viewUp(uid);}
 }

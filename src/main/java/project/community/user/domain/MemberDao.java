@@ -38,4 +38,9 @@ public class MemberDao {
     public void insertCode(Code code){
         this.mapper.insertCode(code);
     }
+    public Code checkCode(String code){return mapper.checkCode(code);}
+    public int findCode(String code){return mapper.findCode(code);}
+    public void deleteCode(String code){
+        this.mapper.deleteCode(code);
+    }
 }

@@ -27,7 +27,7 @@
                   <span id="email-validation-message"></span>
               </div>
               <div class="account-input-box">
-                  <input id="input-email" type="text" name="email" th:field="*{email}">
+                  <input id="input-email" class="input" type="text" name="email" th:field="*{email}">
                   <button id="mail-send" type="button">코드 전송</button>
               </div>
           </div>
@@ -37,7 +37,7 @@
                   <span class="failed" id="mail-code-valid"></span>
               </div>
               <div class="account-input-box">
-                  <input id="input-key" class="input" type="text" name="insertKey">
+                  <input id="input-key" class="input" type="text" name="code" th:field="*{code}">
                   <button type="button" id="send-code-check" class="validation-btn">확 인</button>
               </div>
           </div>
@@ -48,7 +48,7 @@
                   <span class="failed" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
               </div>
               <div class="account-input-box">
-                  <input id="input-pw" type="password" name="password" th:field="*{password}">
+                  <input id="input-pw" class="input" type="password" name="password" th:field="*{password}">
               </div>
           </div>
           <div id="account-pw-check">
@@ -57,7 +57,7 @@
                   <span id="pw-validation-message"></span>
               </div>
               <div class="account-input-box">
-                  <input id="input-check" type="password" name="passwordCheck" th:field="*{passwordCheck}">
+                  <input id="input-check" class="input" type="password" name="passwordCheck" th:field="*{passwordCheck}">
               </div>
           </div>
           <div id="account-nick">
@@ -67,7 +67,7 @@
                   <span id="nick-validation-message"></span>
               </div>
               <div class="account-input-box">
-                  <input id="nick-input" type="text" name="nickName" th:field="*{nickName}">
+                  <input id="nick-input" class="input" type="text" name="nickName" th:field="*{nickName}">
               </div>
           </div>
           <div id="account-btn-box">
@@ -95,10 +95,9 @@
 
         const mailSendBtn = document.querySelector("#mail-send");
         const codeInput = document.querySelector("#account-code");
-        const sendCheckBtn = document.querySelector("#send-code-check");
+        const codeCheckBtn = document.querySelector("#send-code-check");
         const mailCodeValid = document.querySelector("#mail-code-valid");
         const inputKey = document.querySelector("#input-key");
-
 
         const keyMsg = document.querySelector("#mail-code-valid");
 
@@ -180,7 +179,7 @@
         mailSendBtn.addEventListener("click", function(){
         if(emailMsg.textContent == "사용 가능합니다."){
         const email = emailInput.value;
-        codeInput.style.display = 'block';
+        codeInput.style.display = 'flex';
         const currentDate = new Date();
         const milliseconds = (currentDate.getMinutes() * 60 + currentDate.getSeconds()) * 1000;
         console.log()
@@ -197,29 +196,34 @@
          })
           .then(response => {
             if (response.ok) {
-                console.log(response.text());
                 return response.text(); // 서버로부터 받은 text 데이터
             } else {
                 throw new Error("서버 응답 오류");
             }
         })
         .then(data => {
-            console.log()
+            alert(data);
         })
-        .catch((error) => console.log(error))
-        } else{
-            alert("이메일이 중복이거나 형식이 올바르지 않습니다.");
+        .catch((error) => console.log(error));
         }
         });
 
-        sendCheckBtn.addEventListener("click", function(){
+        codeCheckBtn.addEventListener("click", function(){
         const value = inputKey.value;
+        const currentDate = new Date();
+        const milliseconds = (currentDate.getMinutes() * 60 + currentDate.getSeconds()) * 1000;
+        console.log(milliseconds);
         console.log()
         fetch("/codecheck", {
             method: "POST",
+            mode: "cors",
+            credentials: "include",
             headers: {"Content-Type": "application/json"
             },
-            body: JSON.stringify({value}),
+            body: JSON.stringify({
+            code : value,
+            insertTime : milliseconds
+            }),
          })
           .then(response => {
             if (response.ok) {
@@ -229,16 +233,11 @@
             }
         })
         .then(data => {
-                console.log(value)
-                if(data == true){
-                    keyMsg.textContent = data;
-                } else{
-                    keyMsg.textContent = "공백이 포함될 수 없습니다.";
-                }
+                console.log(data);
+                keyMsg.textContent = data;
         })
         .catch((error) => console.log(error))
         });
-
 
     </script>
 </body>

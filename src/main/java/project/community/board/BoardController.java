@@ -2,11 +2,14 @@ package project.community.board;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.session.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import project.community.comment.CommentDto;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
@@ -56,6 +59,7 @@ public class BoardController {
         boardDto.setUid(uid);
         boardDto.setOffSet((nowPage - 1) * pageSize);
 
+        boardService.viewUp(uid);
         model.addAttribute("boardPagingList", boardService.findBoardList(boardDto));
         model.addAttribute("paging", paging);
         model.addAttribute("posting", boardService.findBoard(boardDto));

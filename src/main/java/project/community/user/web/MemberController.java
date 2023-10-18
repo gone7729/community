@@ -1,18 +1,18 @@
 package project.community.user.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import project.community.user.*;
-import project.community.user.domain.AuthService;
+import project.community.user.domain.Code;
+import project.community.user.domain.MemberDao;
 import project.community.user.domain.MemberService;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -21,7 +21,7 @@ public class MemberController {
     MailManager mailManager;
 
     @Autowired
-    public MemberController(MemberService memberService, MailManager mailManager){
+    public MemberController(MemberService memberService, MailManager mailManager) {
         this.memberService = memberService;
         this.mailManager = mailManager;
     }
@@ -34,26 +34,34 @@ public class MemberController {
 
     @PostMapping("newaccount")
     public String registerMember(@Valid @ModelAttribute("registerDto") RegisterDto registerDto, BindingResult bindingResult,
-                                 Model model, MemberDto memberDto){
-        if(registerDto.isTerms()==false){
+                                 Model model, MemberDto memberDto) {
+
+        System.out.println("회원가입 전 입력 정보들이 잘 입력되었나 확인");
+        if (registerDto.isTerms() == false) {
             bindingResult.rejectValue("terms", "termsError", "이용 약관에 동의해주세요.");
             return "user/account";
         }
-        if (memberService.findEmail(registerDto.getEmail())==1){
-            bindingResult.rejectValue("email","emailErrors","이미 존재하는 이메일입니다.");
+        System.out.println("email");
+        if (memberService.findEmail(registerDto.getEmail()) == 1) {
+            bindingResult.rejectValue("email", "emailErrors", "이미 존재하는 이메일입니다.");
             return "user/account";
         }
-        if (!registerDto.getPasswordCheck().equals(registerDto.getPassword())){
+        System.out.println("pw");
+        if (!registerDto.getPasswordCheck().equals(registerDto.getPassword())) {
             bindingResult.rejectValue("pw", "pwCheckErrors", "비밀번호가 일치하지 않습니다.");
             return "user/account";
         }
-        if (memberService.findNick(registerDto.getNickName())==1){
+        System.out.println("nick");
+        if (memberService.findNick(registerDto.getNickName()) == 1) {
             bindingResult.rejectValue("nick", "nickErrors", "이미 존재하는 닉네임입니다.");
             return "user/account";
         }
-        if (bindingResult.hasErrors()){
+        System.out.println("전체");
+        if (bindingResult.hasErrors()) {
+            System.out.println("전체 문제 발생");
             return "user/account";
         }
+        System.out.println("모든 데이터가 올바르게 입력되었으므로 회원가입 실");
         memberService.registerMember(registerDto);
         model.addAttribute("memberDto", memberDto);
         return "user/login";
@@ -61,35 +69,35 @@ public class MemberController {
 
     @PostMapping("emailtest")
     @ResponseBody
-    public String emailTest(@Valid @RequestBody RegisterDto registerDto, BindingResult bindingResult){
+    public String emailTest(@Valid @RequestBody RegisterDto registerDto, BindingResult bindingResult) {
         System.out.println(registerDto.getEmail());
         String result;
 
         //json으로 가져온 email로 중복 검사
-        if(memberService.findEmail(registerDto.getEmail())==1){
+        if (memberService.findEmail(registerDto.getEmail()) == 1) {
             //fetch로 보낼 메세지
-            result="이미 존재하는 이메일입니다.";
+            result = "이미 존재하는 이메일입니다.";
         } else {
-            result="사용 가능합니다.";
+            result = "사용 가능합니다.";
         }
         return result;
     }
 
     @PostMapping("nicktest")
     @ResponseBody
-    public String nickTest(@Valid @RequestBody RegisterDto registerDto, BindingResult bindingResult){
+    public String nickTest(@Valid @RequestBody RegisterDto registerDto, BindingResult bindingResult) {
         String result;
 
-        if(memberService.findNick(registerDto.getNickName())==1){
-            result="이미 존재하는 닉네임입니다.";
+        if (memberService.findNick(registerDto.getNickName()) == 1) {
+            result = "이미 존재하는 닉네임입니다.";
         } else {
-            result="사용 가능합니다.";
+            result = "사용 가능합니다.";
         }
         return result;
     }
 
     @PostMapping("userupdate")
-    public String userUpdate(Model model, MemberDto memberDto, HttpSession session){
+    public String userUpdate(Model model, MemberDto memberDto, HttpSession session) {
 
         memberService.updateMember(memberDto);
         memberDto = memberService.memberInfo(memberDto);
@@ -106,32 +114,44 @@ public class MemberController {
         String email = sendAddress.getEmail();
         registerDto.setEmail(email);
 
-        if (memberService.findEmail(registerDto.getEmail())==1){
-            return "";
+        if (memberService.findEmail(registerDto.getEmail()) == 1) {
+            return "이메일이 중복이거나 형식이 올바르지 않습니다.";
         }
 
         System.out.println("이메일 전송 시작 전송할 이메일은 : " + email);
         UUID uuid = UUID.randomUUID(); // 랜덤한 UUID 생성
         String code = uuid.toString().substring(0, 7); // UUID 문자열 중 7자리만 사용하여 인증번호 생성
-        String sub ="인증번호 입력을 위한 메일 전송";
-        String con = "인증 번호 : "+code;
-        mailManager.send(email,sub,con);
+        String sub = "인증번호 입력을 위한 메일 전송";
+        String con = "인증 번호 : " + code;
+        mailManager.send(email, sub, con);
         sendAddress.setCode(code);
         System.out.println("code: " + sendAddress.getCode());
         System.out.println("발송 시간: " + sendAddress.getCodetime());
 
         memberService.insertCode(sendAddress);
 
-        return code;
+        return "코드가 전송되었습니다.";
     }
 
     @PostMapping("codecheck")
     @ResponseBody
-    public boolean codeCheck(String code, String insertCode,String email) throws Exception {
+    public String codeCheck(@RequestBody Map<Object, Object> put, Code codeDto) {
+        String code = (String) put.get("code");
+        int insertTime = (int) put.get("insertTime");
+        System.out.println("입력한 코드 : " + code);
+        System.out.println("입력한 시간 : " + insertTime);
 
-        if(code.equals(insertCode)) {
-            return true;
+        if (memberService.findCode(code) == 1) {
+            codeDto = memberService.checkCode(code);
+            System.out.println(codeDto.getCodetime());
+            long interval = codeDto.getCodetime() + 180000;
+            System.out.println("코드 발송 시간 + 3분 : " + interval);
+
+            if(interval < insertTime){
+                return "입력시간이 초과되었습니다.";
+            }
+            return "인증 되었습니다.";
         }
-        return false;
+        return "코드가 올바르지 않습니다.";
     }
 }

@@ -2,6 +2,7 @@ package project.community.mybatis.mappers;
 
 import project.community.board.BoardDto;
 import project.community.comment.CommentDto;
+import project.community.user.domain.Code;
 import project.community.user.web.MemberDto;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public interface Mapper {
     BoardDto findBoard(Object obj);
     void updateBoard(Object obj);
     void deleteBoard(Object obj);
+    void viewUp(Object obj);
 
     //user
     void insertMember(Object obj);
@@ -29,6 +31,9 @@ public interface Mapper {
     void updateMember(Object obj);
 
     void insertCode(Object obj);
+    Code checkCode(String code);
+    int findCode(String code);
+    void deleteCode(String code);
 
     //코맨트
     void insertComment(Object obj);

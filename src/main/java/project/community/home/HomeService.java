@@ -1,5 +1,6 @@
 package project.community.home;
 
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -14,11 +15,14 @@ import java.util.List;
 @Service
 public class HomeService {
     private static String News_URL = "https://sports.news.naver.com/index";
+    private static int timeoutMillis = 60000; // 30초
     public List<NewsDto> getNews() {
         List<NewsDto> newsList = new ArrayList<>();
         Document document = null;
+
         try {
-            document = Jsoup.connect(News_URL).get();
+            Connection connection = Jsoup.connect(News_URL).timeout(timeoutMillis);
+            document = connection.get();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
