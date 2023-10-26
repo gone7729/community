@@ -12,9 +12,9 @@ public class Interceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestURI = request.getRequestURI();
         HttpSession session = request.getSession(false);
-        System.out.println(requestURI);
+//        System.out.println(requestURI);
         if(session == null ||session.getAttribute("user") == null) {
-            System.out.println("세션이 null이면 로그인페이지로");
+//            System.out.println("세션이 null이면 로그인페이지로");
             session.setAttribute("previousUrl", requestURI);
             response.sendRedirect("/login");
             return false;

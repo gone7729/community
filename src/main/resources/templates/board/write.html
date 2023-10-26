@@ -34,7 +34,7 @@
                             <li value="3" class = "option-item">모집</li>
                             <li value="4" class = "option-item">정보</li>
                         </ul>
-                        <input  id="category" name="category" value="">
+                        <input type="hidden"  id="category" name="category" value="">
                         <input type="hidden" name="writer" th:value="${member.email}">
                     </div>
                 </div>
@@ -60,9 +60,7 @@
     <footer th:replace="~{layout/layout :: footer}"></footer>
 
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <script src="/js/write.js"></script>
-    <!-- Initialize Quill editor -->
-    <script>
+    <script th:inline="javascript" nonce="my_nonce">
             var toolbarOptions = [
               ['bold', 'italic'],        // toggled buttons
               ['underline', 'strike'],        // toggled buttons
@@ -89,8 +87,42 @@
             });
 
              var italic = Quill.import('formats/italic');
-              italic.tagName = 'i';
-              Quill.register(italic, true);
+             italic.tagName = 'i';
+             Quill.register(italic, true);
+              //-----------------------------------------------------------
+             const editor = document.querySelector(".ql-editor");
+             let content = document.querySelector("#content-mid");
+             const itemBtn = document.querySelector("#item-btn");
+             const optionItems = document.querySelectorAll(".option-item");
+             const itemBox = document.querySelector("#item-box");
+             const formCategory = document.querySelector("#category");
+
+             itemBtn.addEventListener("click", ()=> {
+                if(itemBox.style.height == "0px"){
+                    itemBox.style. height = itemBox.scrollHeight + "px";
+                }else{
+                    itemBox.style. height = "0px";
+                }
+            });
+
+            optionItems.forEach((item) => {
+              item.addEventListener("click", (e) => {
+                itemBtn.firstElementChild.textContent = item.textContent;
+                itemBox.style.height = "0px";
+                formCategory.value = e.target.value;
+              });
+            });
+
+            editor.addEventListener("click", ()=>{
+                if(itemBox.style.height != "0px"){
+                    itemBox.style. height = "0px";
+                }
+            })
+
+            const update = () =>{
+                let text = document.querySelector(".ql-editor").innerHTML;
+                content.value = text;
+             }
     </script>
 
 </body>

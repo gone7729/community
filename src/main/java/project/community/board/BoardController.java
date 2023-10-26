@@ -48,7 +48,8 @@ public class BoardController {
     }
 
     @RequestMapping("posting")
-    public String posting(Model model, BoardDto boardDto, CommentDto commentDto, HttpSession session,
+    public String posting(Model model, BoardDto boardDto, CommentDto commentDto,
+                          HttpSession session, HttpServletRequest httpRequest,
                           @RequestParam(value = "nowPage", defaultValue = "1")int nowPage,
                           @RequestParam(value = "pageSize", defaultValue = "10")int pageSize,
                           @RequestParam (value = "uid") int uid){
@@ -59,7 +60,19 @@ public class BoardController {
         boardDto.setUid(uid);
         boardDto.setOffSet((nowPage - 1) * pageSize);
 
-        boardService.viewUp(uid);
+        session = httpRequest.getSession(false);
+
+        long accessTime = (long) session.getAttribute("accessTime");
+        long overTime = System.currentTimeMillis();
+        System.out.println(accessTime == 0);
+
+        if (accessTime == 0|| (overTime - accessTime) >= 300000){
+            boardService.viewUp(uid);
+            session.setAttribute("accessTime", System.currentTimeMillis());
+        }
+        System.out.println(accessTime);
+        System.out.println((overTime - accessTime) >= 300000);
+
         model.addAttribute("boardPagingList", boardService.findBoardList(boardDto));
         model.addAttribute("paging", paging);
         model.addAttribute("posting", boardService.findBoard(boardDto));

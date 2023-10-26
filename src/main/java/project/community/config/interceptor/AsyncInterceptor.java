@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 public class AsyncInterceptor implements AsyncHandlerInterceptor {
     @Override
     public void afterConcurrentHandlingStarted(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println(request.getRequestURI());
+//        System.out.println(request.getRequestURI());
     }
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestURI = request.getRequestURI();
-        System.out.println("비동기통신 uri : " + requestURI);
+//        System.out.println("비동기통신 uri : " + requestURI);
         return true;
     }
 
