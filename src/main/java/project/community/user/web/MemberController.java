@@ -12,6 +12,8 @@ import project.community.user.domain.MemberService;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.Map;
 import java.util.UUID;
 
@@ -36,7 +38,6 @@ public class MemberController {
     public String registerMember(@Valid @ModelAttribute("registerDto") RegisterDto registerDto, BindingResult bindingResult,
                                  Model model, MemberDto memberDto) {
 
-        System.out.println("회원가입 전 입력 정보들이 잘 입력되었나 확인");
         if (registerDto.isTerms() == false) {
             bindingResult.rejectValue("terms", "termsError", "이용 약관에 동의해주세요.");
             return "user/account";
@@ -58,10 +59,14 @@ public class MemberController {
         }
         System.out.println("전체");
         if (bindingResult.hasErrors()) {
-            System.out.println("전체 문제 발생");
             return "user/account";
         }
-        System.out.println("모든 데이터가 올바르게 입력되었으므로 회원가입 실");
+
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[16];
+        random.nextBytes(salt);
+        registerDto.setSalt(Base64.getEncoder().encodeToString(salt));
+
         memberService.registerMember(registerDto);
         model.addAttribute("memberDto", memberDto);
         return "user/login";
@@ -69,7 +74,7 @@ public class MemberController {
 
     @PostMapping("emailtest")
     @ResponseBody
-    public String emailTest(@Valid @RequestBody RegisterDto registerDto, BindingResult bindingResult) {
+    public String emailTest(@RequestBody RegisterDto registerDto, BindingResult bindingResult) {
         System.out.println(registerDto.getEmail());
         String result;
 
@@ -85,7 +90,7 @@ public class MemberController {
 
     @PostMapping("nicktest")
     @ResponseBody
-    public String nickTest(@Valid @RequestBody RegisterDto registerDto, BindingResult bindingResult) {
+    public String nickTest(@RequestBody RegisterDto registerDto, BindingResult bindingResult) {
         String result;
 
         if (memberService.findNick(registerDto.getNickName()) == 1) {
@@ -118,15 +123,12 @@ public class MemberController {
             return "이메일이 중복이거나 형식이 올바르지 않습니다.";
         }
 
-        System.out.println("이메일 전송 시작 전송할 이메일은 : " + email);
         UUID uuid = UUID.randomUUID(); // 랜덤한 UUID 생성
         String code = uuid.toString().substring(0, 7); // UUID 문자열 중 7자리만 사용하여 인증번호 생성
         String sub = "인증번호 입력을 위한 메일 전송";
         String con = "인증 번호 : " + code;
         mailManager.send(email, sub, con);
         sendAddress.setCode(code);
-        System.out.println("code: " + sendAddress.getCode());
-        System.out.println("발송 시간: " + sendAddress.getCodetime());
 
         memberService.insertCode(sendAddress);
 
@@ -138,14 +140,10 @@ public class MemberController {
     public String codeCheck(@RequestBody Map<Object, Object> put, Code codeDto) {
         String code = (String) put.get("code");
         int insertTime = (int) put.get("insertTime");
-        System.out.println("입력한 코드 : " + code);
-        System.out.println("입력한 시간 : " + insertTime);
 
         if (memberService.findCode(code) == 1) {
             codeDto = memberService.checkCode(code);
-            System.out.println(codeDto.getCodetime());
             long interval = codeDto.getCodetime() + 180000;
-            System.out.println("코드 발송 시간 + 3분 : " + interval);
 
             if(interval < insertTime){
                 return "입력시간이 초과되었습니다.";

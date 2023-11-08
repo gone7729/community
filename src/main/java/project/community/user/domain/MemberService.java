@@ -33,8 +33,10 @@ public class MemberService {
         Member member = new Member();
 
         member.setEmail(registerDto.getEmail());
-        member.setPassword(bCryptPasswordEncoder.encode(registerDto.getPassword()));
+        member.setPassword(bCryptPasswordEncoder.encode(registerDto.getPassword()+registerDto.getSalt()));
+        System.out.println(bCryptPasswordEncoder.encode(registerDto.getPassword()+registerDto.getSalt()));
         member.setNickName(registerDto.getNickName());
+        member.setSalt(registerDto.getSalt());
 
         this.memberDao.insertMember(member);
         this.memberDao.deleteCode(registerDto.getCode());

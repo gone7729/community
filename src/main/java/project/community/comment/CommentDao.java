@@ -16,6 +16,6 @@ public class CommentDao {
     public void insertComment(CommentDto commentDto){
         this.mapper.insertComment(commentDto);
     }
-
-
+    public void updateCmt(CommentDto commentDto){this.mapper.updateCmt(commentDto);}
+    public void deleteCmt(CommentDto commentDto){this.mapper.deleteCmt(commentDto);}
 }

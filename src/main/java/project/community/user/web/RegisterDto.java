@@ -21,4 +21,5 @@ public class RegisterDto {
     private String code;
     private boolean terms;
     private LocalDate createDate;
+    private String salt;
 }

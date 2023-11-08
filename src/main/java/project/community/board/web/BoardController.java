@@ -1,17 +1,19 @@
-package project.community.board;
+package project.community.board.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.session.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import project.community.board.domain.BoardService;
 import project.community.comment.CommentDto;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Map;
 
 
 @Controller
@@ -25,22 +27,27 @@ public class BoardController {
     }
 
     @PostMapping("write")
-    public String insert(BoardDto boardDto){
+    public String insert(@Valid InsertBoard insertBoard, BindingResult bindingResult,
+                         Model model, HttpSession session){
+        model.addAttribute("member", session.getAttribute("user"));
 
-        boardService.insertBoard(boardDto);
+        if (bindingResult.hasErrors()) {
+            System.out.println("공란 발생");
+            return "redirect:/write";
+        }
+        boardService.insertBoard(insertBoard);
         return "redirect:/boardpaging?nowPage=1";
     }
 
     @RequestMapping("boardpaging")
-    public String boardList(Model model, HttpSession session,
+    public String boardList(Model model, HttpSession session, BoardDto boardDto,
                             @RequestParam(value = "nowPage", defaultValue = "1")int nowPage,
                             @RequestParam(value = "pageSize", defaultValue = "10")int pageSize){
 
         int total = boardService.countBoard();
         project.community.util.Paging paging = new project.community.util.Paging(total, nowPage, pageSize);
-        BoardDto boardDto = new BoardDto();
-
         boardDto.setOffSet((nowPage - 1) * pageSize);
+
         model.addAttribute("boardPagingList", boardService.findBoardList(boardDto));
         model.addAttribute("paging", paging);
         model.addAttribute("member", session.getAttribute("user"));
@@ -62,40 +69,45 @@ public class BoardController {
 
         session = httpRequest.getSession(false);
 
-        long accessTime = (long) session.getAttribute("accessTime");
+        Long accessTime = (Long) session.getAttribute("accessTime");
         long overTime = System.currentTimeMillis();
-        System.out.println(accessTime == 0);
 
-        if (accessTime == 0|| (overTime - accessTime) >= 300000){
+        if (accessTime == null|| (overTime - accessTime) >= 300000){
             boardService.viewUp(uid);
             session.setAttribute("accessTime", System.currentTimeMillis());
         }
-        System.out.println(accessTime);
-        System.out.println((overTime - accessTime) >= 300000);
 
         model.addAttribute("boardPagingList", boardService.findBoardList(boardDto));
         model.addAttribute("paging", paging);
         model.addAttribute("posting", boardService.findBoard(boardDto));
         model.addAttribute("cmt", boardService.findCmt(commentDto));
         model.addAttribute("member", session.getAttribute("user"));
+        System.out.println(boardService.findCmt(commentDto));
         return "board/posting";
     }
 
     @RequestMapping("update")
-    public String update(Model model, BoardDto boardDto,
+    public String update(@ModelAttribute("updateBoard") UpdateBoard updateBoard, Model model,
+                         BoardDto boardDto, HttpSession session,
                           @RequestParam (value = "uid") int uid){
 
         boardDto.setUid(uid);
 
+        model.addAttribute("member", session.getAttribute("user"));
         model.addAttribute("posting", boardService.findBoard(boardDto));
         return "board/update";
     }
 
     @PostMapping("postUpdate")
-    public String postUpdate(BoardDto boardDto){
-
-        boardService.updateBoard(boardDto);
-        return "redirect:/posting?uid=" +boardDto.getUid();
+    public String postUpdate(@Valid UpdateBoard updateBoard, BindingResult bindingResult, Model model, HttpSession session){
+        model.addAttribute("member", session.getAttribute("user"));
+        System.out.println(updateBoard);
+        if (bindingResult.hasErrors()) {
+            System.out.println("공란 발생");
+            return "redirect:/update?uid=" + updateBoard.getUid();
+        }
+        boardService.updateBoard(updateBoard);
+        return "redirect:/posting?uid=" +updateBoard.getUid();
     }
 
     @GetMapping("delete")

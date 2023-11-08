@@ -1,7 +1,10 @@
-package project.community.board;
+package project.community.board.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import project.community.board.web.BoardDto;
+import project.community.board.web.InsertBoard;
+import project.community.board.web.UpdateBoard;
 import project.community.comment.CommentDto;
 
 import java.util.List;
@@ -20,8 +23,15 @@ public class BoardService {
         return boardDao.findAllBoard();
     }
 
-    public void insertBoard(BoardDto boardDto){
-        boardDao.insertBoard(boardDto);
+    public void insertBoard(InsertBoard insertBoard){
+        Board board = new Board();
+
+        board.setCategoryNo(insertBoard.getCategoryNo());
+        board.setTitle(insertBoard.getTitle());
+        board.setContent(insertBoard.getContent());
+        board.setWriter(insertBoard.getWriter());
+
+        boardDao.insertBoard(board);
     }
 
     public int countBoard(){
@@ -36,10 +46,19 @@ public class BoardService {
     }
 
     public BoardDto findBoard(BoardDto boardDto){
-        return boardDao.findBoard(boardDto);
+        Board board = new Board();
+
+        board.setUid(boardDto.getUid());
+        return boardDao.findBoard(board);
     }
-    public void updateBoard(BoardDto boardDto){
-        this.boardDao.updateBoard(boardDto);
+    public void updateBoard(UpdateBoard updateBoard){
+        Board board = new Board();
+
+        board.setCategoryNo(updateBoard.getCategoryNo());
+        board.setWriter(updateBoard.getWriter());
+        board.setTitle(updateBoard.getTitle());
+        board.setContent(updateBoard.getContent());
+        this.boardDao.updateBoard(board);
     }
     public void deleteBoard(BoardDto boardDto){
         this.boardDao.deleteBoard(boardDto);

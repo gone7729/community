@@ -35,36 +35,33 @@ public class AuthController {
                          HttpSession session, HttpServletRequest request) {
 
         memberDto = authService.singIn(memberDto);
-        String previousUrl = (String) session.getAttribute("previousUrl");
-        System.out.println(previousUrl);
+        String prevPage = (String) request.getSession().getAttribute("prevPage");
+        System.out.println(prevPage);
 
         if (memberService.findEmail(email) == 0) {
             bindingResult.reject("loginEmail",  "이메일 혹은 비밀번호를 틀렸습니다.");
             return "user/login";
         }
-        if (bCryptPasswordEncoder.matches(password, memberDto.getPassword()) != true) {
+        if (bCryptPasswordEncoder.matches(password+memberDto.getSalt(), memberDto.getPassword()) != true) {
             bindingResult.reject("loginPassword",  "이메일 혹은 비밀번호를 틀렸습니다.");
             return "user/login";
         }
 
         session = request.getSession();
-        System.out.println("로그인 성공" + session);
         session.setAttribute("user", memberDto);
         session.setMaxInactiveInterval(3600);
         model.addAttribute("member", session.getAttribute("user"));
 
-        if (previousUrl == null){
-            System.out.println("이전 페이지가 없으므로 메인페이지로");
+        if (prevPage == null){
             return "redirect:/";
         }
-        return "redirect:" + previousUrl;
+        return "redirect:" + prevPage;
     }
 
     @GetMapping("logout")
     public String logout(HttpSession session, HttpServletRequest request,
                          @ModelAttribute MemberDto memberDto) {
 
-        System.out.println(session.getAttribute("user"));
         // 세션이 이미 만료되었는지 확인
         if (session != null) {
             // 세션에서 사용자 정보 삭제
@@ -73,10 +70,8 @@ public class AuthController {
             session.invalidate();
             // 로그 메시지
         } else {
-            System.out.println("세션이 이미 만료되었거나 사용자 정보가 없습니다.");
             // 세션이 이미 만료되었거나 사용자 정보가 없을 경우
         }
-        System.out.println("로그아웃 성공: "+session);
         return "redirect:/login";
     }
 

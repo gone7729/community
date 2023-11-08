@@ -217,11 +217,19 @@ border-radius: 7px;
     letter-spacing: -1px;
     font-weight: 550;
     color: #ffa569;
+}
 
 .btm-btn:hover{
     cursor: pointer;
     border: 1px #ff9c3f solid;
     color: black;
     transition-duration: 0.3s;
+}
+
+.write-valid{
+font-size: 14px;
+    color: red;
+    letter-spacing: -1px;
+    text-align: right;
 }
 

@@ -1,17 +1,15 @@
-package project.community.board;
+package project.community.board.domain;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.time.LocalDate;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Data
-public class BoardDto {
+public class Board {
     private int uid;
-    private String category;
     private int categoryNo;
+    private String category;
     private String writer;
     private String title;
     private String content;
@@ -20,6 +18,4 @@ public class BoardDto {
     private int upPoint;
     private int downPoint;
     private int reporting;
-    private int offSet;
-
 }

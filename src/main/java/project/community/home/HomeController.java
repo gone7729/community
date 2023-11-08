@@ -6,8 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import project.community.board.BoardDto;
-import project.community.board.BoardService;
+import project.community.board.web.BoardDto;
+import project.community.board.domain.BoardService;
+import project.community.board.web.InsertBoard;
 import project.community.user.web.MemberDto;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +42,9 @@ public class HomeController {
     }
 
     @GetMapping("login")
-    public String logIn(@ModelAttribute MemberDto memberDto){
+    public String logIn(@ModelAttribute MemberDto memberDto, HttpSession session, HttpServletRequest request){
+        String referrer = request.getHeader("Referer");
+        request.getSession().setAttribute("prevPage", referrer);
         return "user/login";
     }
 
@@ -58,7 +61,7 @@ public class HomeController {
     }
 
     @GetMapping("write")
-    public String write(Model model, HttpSession session, HttpServletRequest request){
+    public String write(@ModelAttribute("insertBoard") InsertBoard insertBoard, Model model, HttpSession session, HttpServletRequest request){
         model.addAttribute("member", session.getAttribute("user"));
         return "board/write";
     }

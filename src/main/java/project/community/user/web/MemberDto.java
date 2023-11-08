@@ -16,6 +16,7 @@ public class MemberDto {
     private String nickName;
     @NotBlank(message = "이메일 혹은 비밀번호를 틀렸습니다")
     private String password;
+    private String salt;
     private boolean terms;
     private LocalDate createDate;
     private String role;

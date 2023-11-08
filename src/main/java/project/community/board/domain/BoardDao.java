@@ -1,7 +1,9 @@
-package project.community.board;
+package project.community.board.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import project.community.board.web.BoardDto;
+import project.community.board.web.InsertBoard;
 import project.community.comment.CommentDto;
 import project.community.mybatis.mappers.Mapper;
 
@@ -20,8 +22,8 @@ public class BoardDao {
         return mapper.findAllBoard();
     }
 
-    public void insertBoard(BoardDto boardDto){
-        this.mapper.insertBoard(boardDto);
+    public void insertBoard(Board Board){
+        this.mapper.insertBoard(Board);
     }
 
     public int countBoard(){
@@ -34,11 +36,11 @@ public class BoardDao {
     public List<BoardDto> findHomeBoardList(BoardDto boardDto) {
         return mapper.findHomeBoardList(boardDto);
     }
-    public BoardDto findBoard(BoardDto boardDto){
-        return mapper.findBoard(boardDto);
+    public BoardDto findBoard(Board board){
+        return mapper.findBoard(board);
     }
-    public void updateBoard(BoardDto boardDto){
-        this.mapper.updateBoard(boardDto);
+    public void updateBoard(Board board){
+        this.mapper.updateBoard(board);
     }
     public void deleteBoard(BoardDto boardDto){
         this.mapper.deleteBoard(boardDto);

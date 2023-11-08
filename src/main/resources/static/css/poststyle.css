@@ -192,6 +192,24 @@ main {
     border: 1px #828282 solid;
 }
 
+.update-confirm{
+    width: 38px;
+    height: 20px;
+    font-size: 12px;
+    letter-spacing: -1px;
+    background-color: white;
+    border: 1px #828282 solid;
+}
+
+.update-cancel{
+    width: 38px;
+    height: 20px;
+    font-size: 12px;
+    letter-spacing: -1px;
+    background-color: white;
+    border: 1px #828282 solid;
+}
+
 .cmt-main-num{
     display: flex;
     gap: 16px;
@@ -330,4 +348,20 @@ main {
 
 .cmt-main-btn >:hover{
     cursor: pointer;
+}
+
+.cmt-main-left{
+    display: flex;
+}
+
+#btn-box{
+    display: flex;
+    gap: 8px;
+}
+
+.cmt-content-update{
+    resize: none;
+    outline: none;
+    width: 560px;
+    height: 24px;
 }

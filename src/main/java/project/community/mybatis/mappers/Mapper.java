@@ -1,6 +1,6 @@
 package project.community.mybatis.mappers;
 
-import project.community.board.BoardDto;
+import project.community.board.web.BoardDto;
 import project.community.comment.CommentDto;
 import project.community.user.domain.Code;
 import project.community.user.web.MemberDto;
@@ -12,7 +12,7 @@ public interface Mapper {
 
     //board
     List<BoardDto> findAllBoard();
-    void insertBoard(BoardDto boardDto);
+    void insertBoard(Object obj);
     int countBoard();
     List<BoardDto> findBoardList(Object obj);
     List<BoardDto> findHomeBoardList(Object obj);
@@ -37,6 +37,7 @@ public interface Mapper {
 
     //코맨트
     void insertComment(Object obj);
-
+    void updateCmt(Object obj);
+    void deleteCmt(Object obj);
     List<CommentDto> findCmt(CommentDto commentDto);
 }
