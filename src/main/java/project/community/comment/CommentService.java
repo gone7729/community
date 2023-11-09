@@ -24,6 +24,15 @@ public class CommentService {
     public void deleteCmt(CommentDto commentDto){
         this.commentDao.deleteCmt(commentDto);
     }
+    public void insertReply(ReplyDto replyDto){
+        this.commentDao.insertReply(replyDto);
+    }
+    public void updateReply(ReplyDto replyDto){
+        this.commentDao.updateReply(replyDto);
+    }
+    public void deleteReply(ReplyDto replyDto){
+        this.commentDao.deleteReply(replyDto);
+    }
 
 
 }

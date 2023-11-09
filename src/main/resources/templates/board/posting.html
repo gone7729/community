@@ -31,7 +31,7 @@
         <span th:text="${posting.view}"></span>
       </li>
       <li class="post-top-item">
-        <span th:text="${posting.upPoint}"></span>
+        <span th:text="${posting.up_point}"></span>
       </li>
     </ul>
   </div>
@@ -51,7 +51,7 @@
       <span>주소 복사</span>
     </button>
     <div id="up-down-btn">
-      <button class="post-btm-btn">
+      <button type="button" id="post-up-btn">
         <img class="btm-btn-img" src="/img/up.svg" alt="x">
       </button>
       <button class="post-btm-btn">
@@ -62,7 +62,6 @@
   <div id="post-cmt-box">
     <form id="cmt-box" th:object="${commentDto}" th:action="@{write-cmt}" method="post" onsubmit="return set()">
       <div id="cmt-top">
-
         <div id="cmt-top-title">
           <span>댓글</span>
           <p class="failed" th:if="${#fields.hasErrors('content')}" th:errors="*{commentDto.content}"></p>
@@ -74,7 +73,7 @@
       <div id="cmt-write-box" style="height: 0px;">
         <textarea id="cmt-write"></textarea>
         <input id="input-cmt" type="hidden" name="content" value="" th:field="*{content}">
-        <input th:if="${member != null}" id="writer-cmt" type="hidden" name="writer" th:value="${member.email}">
+        <input th:if="${member != null}" class="writer-cmt" type="hidden" name="writer" th:value="${member.email}">
         <input class="boardUid-cmt" type="hidden" name="uid" th:value="${posting.uid}">
         <button type="button" id="cmt-btn" >
           <span>댓글 달기</span>
@@ -115,59 +114,58 @@
             <button type="button" class="cmt-main-btn">
               <img class="cmt-down-img" src="/img/mindown.svg" alt="x">
             </button>
-            <button type="button" class="cmt-main-btn">
-              <span>답글</span>
-            </button>
-            <button type="button" class="cmt-main-btn">
-              <span>신고</span>
-            </button>
+            <button type="button" class="reply-btn">답글</button>
+            <button type="button" class="cmt-report-btn">신고</button>
           </div>
         </div>
-        <div class="cmt-cmt-write-box" style="height: 0px;">
-          <textarea class="cmt-cmt-write"></textarea>
-          <input class="input-cmt-cmt" type="hidden" name="content" value="">
-          <button type="button" class="cmt-cmt-btn">
-            <span>댓글 달기</span>
-          </button>
+        <form class="reply-form" th:action="@{write-reply}" method="post">
+          <div class="reply-write-box" style="height: 0px;">
+            <textarea class="reply-write"></textarea>
+            <input class="input-reply" type="hidden" name="content" value="">
+            <input th:if="${member != null}" class="writer-cmt" type="hidden" name="writer" th:value="${member.email}">
+            <input class="uid-cmt" type="hidden" name="cmt_uid" th:value="${cmtList.uid}">
+            <input class="boardUid-cmt" type="hidden" name="board_uid" th:value="${posting.uid}">
+            <button type="button" class="replyInsert-btn">답글 달기</button>
+          </div>
+        </form>
+        <div th:if="${reply != null}" class="reply-box" th:each="replyList, stat : ${reply}">
+          <div class="reply-trigger" th:if="${replyList.cmt_uid == cmtList.uid}">
+            <div class="reply-main">
+              <div class="cmt-main-left">
+                <div class="cmt-main-nick" th:text="${replyList.writer}"></div>
+                <div id="reply-btn-box" th:if="${member != null && (member.nickName == replyList.writer)}">
+                  <button style="display: block;" type="button" class="reply-main-update"> 수정</button>
+                  <button style="display: block;" type="button" class="reply-main-del">삭제</button>
+                  <button style="display: none;" type="button" class="reply-update-confirm"> 작성</button>
+                  <button style="display: none;" type="button" class="reply-update-cancel">취소</button>
+                </div>
+              </div>
+              <div class="cmt-main-num">
+                <span th:text="${replyList.up_point}"></span>
+                <span th:text="${replyList.down_point}"></span>
+              </div>
+            </div>
+            <div class="cmt-main-content-box">
+              <form class="reply-main-content" th:action="@{update-reply}" method="post">
+                <input class="cmtUid" type="hidden" name="board_uid" th:value="${posting.uid}">
+                <input class="replyUid" type="hidden" name="uid" th:value="${replyList.uid}">
+                <input class="reply-update-input" type="hidden" name="content">
+                <textarea class="reply-content-update" style="display: none;"></textarea>
+                <p class="reply-content" style="display: block;" th:utext="${replyList.content}"></p>
+              </form>
+              <div class="cmt-main-btn-box">
+                <button class="cmt-main-btn">
+                  <img class="cmt-up-img" src="/img/minup.svg" alt="x">
+                </button>
+                <button class="cmt-main-btn">
+                  <img class="cmt-down-img" src="/img/mindown.svg" alt="x">
+                </button>
+                <button type="button" class="cmt-report-btn">신고</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-<!--      <div class="cmt-cmt-box">-->
-<!--        <div class="cmt-main">-->
-<!--          <div class="cmt-main-left">-->
-<!--            <div class="cmt-main-nick">-->
-<!--              <span>닉네임</span>-->
-<!--            </div>-->
-<!--            <button class="cmt-main-update">-->
-<!--              <span>수정</span>-->
-<!--            </button>-->
-<!--            <button class="cmt-main-del">-->
-<!--              <span>삭제</span>-->
-<!--            </button>-->
-<!--          </div>-->
-<!--          <div class="cmt-main-num">-->
-<!--            <span>0</span>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="cmt-main-content-box">-->
-<!--          <div class="cmt-main-content">-->
-<!--            <p>내용</p>-->
-<!--          </div>-->
-<!--          <div class="cmt-main-btn-box">-->
-<!--            <button class="cmt-main-btn">-->
-<!--              <img class="cmt-up-img" src="/img/minup.svg" alt="x">-->
-<!--            </button>-->
-<!--            <button class="cmt-main-btn">-->
-<!--              <img class="cmt-down-img" src="/img/mindown.svg" alt="x">-->
-<!--            </button>-->
-<!--            <button class="cmt-main-btn">-->
-<!--              <span>답글</span>-->
-<!--            </button>-->
-<!--            <button class="cmt-main-btn">-->
-<!--              <span>신고</span>-->
-<!--            </button>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
   </div>
   <div th:replace="~{layout/boardlayout :: content}"></div>
 </main>
@@ -189,26 +187,104 @@
         const updateInputs = document.querySelectorAll(".cmt-update-input");
         const updateForms = document.querySelectorAll(".cmt-main-content");
 
+        var postData = /*[[${posting}]]*/;
         var cmtData = /*[[${cmt}]]*/ [];
+        var replyData = /*[[${reply}]]*/ [];
 
         const cmtBtn = document.querySelector("#cmt-top-btn");
         const cmt = document.querySelector("#cmt-write-box");
 
-        const cmtCmtBtn = document.querySelector(".cmt-main-btn-box >:nth-child(3)");
-        const cmtCmt = document.querySelector("#cmt-cmt-write-box");
+        const replyBtns = document.querySelectorAll(".reply-btn");
+        const replyBoxs = document.querySelectorAll(".reply-write-box");
+
+        const replyInsertBtns = document.querySelectorAll(".replyInsert-btn");
+        const replyInputs = document.querySelectorAll(".input-reply");
+        const replyWrites = document.querySelectorAll(".reply-write");
+        const replyForms = document.querySelectorAll(".reply-form");
+
+        const replyUpdateBtns = document.querySelectorAll(".reply-main-update");
+        const replyDeleteBtns = document.querySelectorAll(".reply-main-del");
+        const replyConfirmBtns = document.querySelectorAll(".reply-update-confirm");
+        const replyCancelBtns = document.querySelectorAll(".reply-update-cancel");
+        const replyContents = document.querySelectorAll(".reply-content");
+        const replyUpdates = document.querySelectorAll(".reply-content-update");
+        const replyUpdateInputs = document.querySelectorAll(".reply-update-input");
+        const replyUpdateForms = document.querySelectorAll(".reply-main-content");
+
+        const postUpBtn = document.querySelector("#post-up-btn");
+
+        cmtBtn.addEventListener("click", function(){
+          fetch("/cmt-session-check", {
+            method: "POST",
+            mode: "cors",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            }
+          })
+        .then(response => {
+            if (response.ok) {
+                return response.text(); // 서버로부터 받은 text 데이터
+            } else {
+                throw new Error("서버 응답 오류");
+            }
+        })
+        .then(data => {
+            if(data == "true"){
+             if(cmt.style.height == "0px"){
+                    cmt.style.height = cmt.scrollHeight + "px";
+                  }else{
+                    cmt.style.height = "0px";
+                  }
+              } else{
+                  if(confirm("로그인 시 이용가능합니다. 로그인 페이지로 이동하시겠습니까?")){
+                  window.location.href = "login";
+                  return false;
+                }
+              return true;
+            }
+        })
+        .catch((error) => console.log(error))
+        });
 
         cmtInsert.addEventListener("click", function(){
         const text = cmtWrite.value;
-          if(text == ""){
-            alert("내용을 입력해주세요.");
-            return false;
-          }
-          if (confirm("작성한 내용을 제출하시겠습니까?")) {
+        fetch("/cmt-session-check", {
+            method: "POST",
+            mode: "cors",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            }
+          })
+        .then(response => {
+            if (response.ok) {
+                return response.text(); // 서버로부터 받은 text 데이터
+            } else {
+                throw new Error("서버 응답 오류");
+            }
+        })
+        .then(data => {
+            if(data == "true"){
+             if(text == ""){
+              alert("내용을 입력해주세요.");
+              return false;
+            }else if (confirm("작성한 내용을 제출하시겠습니까?")) {
                     content.value = text;
                     insertForm.submit();
+                    return true;
                 } else {
                     return false;
                 }
+              } else{
+                  if(confirm("로그인 시 이용가능합니다. 로그인 페이지로 이동하시겠습니까?")){
+                  window.location.href = "login";
+                  return false;
+                }
+              return true;
+            }
+        })
+        .catch((error) => console.log(error))
         })
 
         updateBtns.forEach(function(updateBtn, index) {
@@ -308,7 +384,134 @@
           })
         })
 
-        cmtBtn.addEventListener("click", function(){
+        replyInsertBtns.forEach((replyInsertBtn, index)=>{
+          replyInsertBtn.addEventListener("click", ()=>{
+            const currentReplyInput = replyInputs[index];
+            const currentReplyWrite = replyWrites[index].value;
+            const currentReplyForm = replyForms[index];
+            if(currentReplyWrite == ""){
+              alert("내용을 입력해주세요.")
+              return false;
+            }else if(confirm("작성한 내용을 제출하시겠습니까?")){
+              currentReplyInput.value = currentReplyWrite;
+              currentReplyForm.submit();
+              return true;
+            }else{
+              return false;
+            }
+          })
+        })
+
+
+
+        replyUpdateBtns.forEach(function(replyUpdateBtn, index) {
+        replyUpdateBtn.addEventListener("click", function(){
+
+          const currentReplyContent = replyContents[index];
+          const currentReplyUpdate = replyUpdates[index];
+          const replyDeleteBtn = replyDeleteBtns[index];
+          const replyConfirmBtn = replyConfirmBtns[index];
+          const replyCancelBtn = replyCancelBtns[index];
+
+          replyUpdateBtn.style.display = "none";
+          replyDeleteBtn.style.display = "none";
+          replyConfirmBtn.style.display = "block";
+          replyCancelBtn.style.display = "block";
+
+          currentReplyContent.style.display = "none";
+          currentReplyUpdate.value = currentReplyContent.textContent;
+          currentReplyUpdate.style.display = "block";
+          })
+        })
+
+
+
+        replyConfirmBtns.forEach(function(replyConfirmBtn, index){
+          replyConfirmBtn.addEventListener("click", function(){
+            const text = replyUpdates[index].value;
+            const replyUpdateInput = replyUpdateInputs[index];
+            const replyUpdateForm = replyUpdateForms[index];
+
+            if(text == ""){
+              alert("내용을 입력해주세요.");
+              return false;
+            }
+            if (confirm("작성한 내용을 제출하시겠습니까?")) {
+                    replyUpdateInput.value = text;
+                    replyUpdateForm.submit();
+
+                    replyUpdateBtn.style.display = "block";
+                    replyDeleteBtn.style.display = "block";
+                    replyConfirmBtn.style.display = "none";
+                    replyCancelBtn.style.display = "none";
+
+                    currentReplyContent.style.display = "block";
+                    currentReplyUpdate.style.display = "none";
+                } else {
+                    return false;
+                }
+          })
+        })
+
+
+
+        replyCancelBtns.forEach(function(replyCancelBtn, index){
+          replyCancelBtn.addEventListener("click", function(){
+          const currentReplyContent = replyContents[index];
+          const currentReplyUpdate = replyUpdates[index];
+          const replyDeleteBtn = replyDeleteBtns[index];
+          const replyConfirmBtn = replyConfirmBtns[index];
+          const replyUpdateBtn = replyUpdateBtns[index];
+
+
+                    replyUpdateBtns.style.display = "block";
+                    replyDeleteBtn.style.display = "block";
+                    replyConfirmBtn.style.display = "none";
+                    replyCancelBtn.style.display = "none";
+
+                    currentReplyContent.style.display = "block";
+                    currentReplyUpdate.style.display = "none";
+          })
+        })
+
+
+
+        replyDeleteBtns.forEach(function(replyDeleteBtn, index){
+          replyDeleteBtn.addEventListener("click", function(){
+          if(confirm("삭제하시겠습니까?")){
+            var uid = replyData[index].uid;
+            fetch("/delete-reply", {
+            method: "POST",
+            mode: "cors",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({uid : uid}),
+            })
+          .then(response => {
+            if (response.ok) {
+                return response.text(); // 서버로부터 받은 text 데이터
+            } else {
+                throw new Error("서버 응답 오류");
+            }
+          })
+          .then(data => {
+            alert(data);
+            window.location.href = "posting?uid="+cmtData[index].board_uid;
+          })
+          .catch((error) => console.log(error))
+            } else{
+              return false;
+            }
+          })
+        })
+
+
+
+        replyBtns.forEach(function(replyBtn, index){
+        replyBtn.addEventListener("click", function(){
+        var replyBox = replyBoxs[index];
           fetch("/cmt-session-check", {
             method: "POST",
             mode: "cors",
@@ -326,10 +529,10 @@
         })
         .then(data => {
             if(data == "true"){
-             if(cmt.style.height == "0px"){
-                    cmt.style.height = cmt.scrollHeight + "px";
+             if(replyBox.style.height == "0px"){
+                    replyBox.style.height = replyBox.scrollHeight + "px";
                   }else{
-                    cmt.style.height = "0px";
+                    replyBox.style.height = "0px";
                   }
               } else{
                   if(confirm("로그인 시 이용가능합니다. 로그인 페이지로 이동하시겠습니까?")){
@@ -340,41 +543,39 @@
             }
         })
         .catch((error) => console.log(error))
+        })
+        })
+
+        postUpBtn.addEventListener("click", () => {
+          fetch("/point-up?uid=" + postData.uid, {
+            method: "POST",
+            mode: "cors",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            }
+          })
+            .then((response) => {
+              if (response.ok) {
+                return response.text();
+              } else {
+                throw new Error("서버 응답 오류");
+              }
+            })
+            .then((data) => {
+              if (data == "false") {
+                if (confirm("로그인 시 이용가능합니다. 로그인 페이지로 이동하시겠습니까?")) {
+                  window.location.href = "login";
+                }
+              } else {
+                alert("추천되었습니다.");
+                window.location.href = "posting?uid=" + postData.uid;
+              }
+            })
+            .catch((error) => console.log(error));
         });
 
-        cmtCmtBtn.addEventListener("click", function(){
-          fetch("/cmt-session-check", {
-            method: "POST",
-            mode: "cors",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            }
-          })
-        .then(response => {
-            if (response.ok) {
-                return response.text(); // 서버로부터 받은 text 데이터
-            } else {
-                throw new Error("서버 응답 오류");
-            }
-        })
-        .then(data => {
-            if(data == "true"){
-             if(cmt.style.height == "0px"){
-                    cmtCmt.style.height = cmt.scrollHeight + "px";
-                  }else{
-                    cmtCmt.style.height = "0px";
-                  }
-              } else{
-                  if(confirm("로그인 시 이용가능합니다. 로그인 페이지로 이동하시겠습니까?")){
-                  window.location.href = "login";
-                  return false;
-                }
-              return true;
-            }
-        })
-        .catch((error) => console.log(error))
-        });
+
 
         const set = () =>{
         const text = cmtWrite.innerHTML;

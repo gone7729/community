@@ -2,6 +2,7 @@ package project.community.mybatis.mappers;
 
 import project.community.board.web.BoardDto;
 import project.community.comment.CommentDto;
+import project.community.comment.ReplyDto;
 import project.community.user.domain.Code;
 import project.community.user.web.MemberDto;
 
@@ -20,6 +21,7 @@ public interface Mapper {
     void updateBoard(Object obj);
     void deleteBoard(Object obj);
     void viewUp(Object obj);
+    void pointUp(Object obj);
 
     //user
     void insertMember(Object obj);
@@ -40,4 +42,8 @@ public interface Mapper {
     void updateCmt(Object obj);
     void deleteCmt(Object obj);
     List<CommentDto> findCmt(CommentDto commentDto);
+    List<ReplyDto> findReply(ReplyDto replyDto);
+    void insertReply(Object obj);
+    void updateReply(Object obj);
+    void deleteReply(Object obj);
 }

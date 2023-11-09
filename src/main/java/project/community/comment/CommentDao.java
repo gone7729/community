@@ -18,4 +18,7 @@ public class CommentDao {
     }
     public void updateCmt(CommentDto commentDto){this.mapper.updateCmt(commentDto);}
     public void deleteCmt(CommentDto commentDto){this.mapper.deleteCmt(commentDto);}
+    public void insertReply(ReplyDto replyDto){this.mapper.insertReply(replyDto);}
+    public void updateReply(ReplyDto replyDto){this.mapper.updateReply(replyDto);}
+    public void deleteReply(ReplyDto replyDto){this.mapper.deleteReply(replyDto);}
 }

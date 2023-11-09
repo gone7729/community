@@ -154,7 +154,6 @@ main {
 }
 
 .cmt-main-box{
-    height: 48px;
     padding: 8px;
     display: flex;
     flex-direction: column;
@@ -183,7 +182,25 @@ main {
     border: 1px #828282 solid;
 }
 
+.reply-main-update{
+    width: 38px;
+    height: 20px;
+    font-size: 12px;
+    letter-spacing: -1px;
+    background-color: white;
+    border: 1px #828282 solid;
+}
+
 .cmt-main-del{
+    width: 38px;
+    height: 20px;
+    font-size: 12px;
+    letter-spacing: -1px;
+    background-color: white;
+    border: 1px #828282 solid;
+}
+
+.reply-main-del{
     width: 38px;
     height: 20px;
     font-size: 12px;
@@ -201,7 +218,25 @@ main {
     border: 1px #828282 solid;
 }
 
+.reply-update-confirm{
+    width: 38px;
+    height: 20px;
+    font-size: 12px;
+    letter-spacing: -1px;
+    background-color: white;
+    border: 1px #828282 solid;
+}
+
 .update-cancel{
+    width: 38px;
+    height: 20px;
+    font-size: 12px;
+    letter-spacing: -1px;
+    background-color: white;
+    border: 1px #828282 solid;
+}
+
+.reply-update-cancel{
     width: 38px;
     height: 20px;
     font-size: 12px;
@@ -238,6 +273,15 @@ main {
     margin-left: 16px;
 }
 
+.reply-main-content{
+    font-size: 14px;
+    letter-spacing: -1px;
+}
+
+.cmt-main-content > p{
+    margin-left: 16px;
+}
+
 .cmt-main-btn-box{
     display: flex;
     gap: 8px;
@@ -254,8 +298,44 @@ main {
     letter-spacing: -1px;
 }
 
-#cmt-cmt-box{
-    display: none;
+.reply-btn{
+    width: 38px;
+    height: 20px;
+    border-radius: 7px;
+    border: 1px #8C8C8C solid;
+    background-color: white;
+    font-size: 12px;
+    letter-spacing: -1px;
+}
+
+.replyInsert-btn{
+    width: 38px;
+    height: 20px;
+    border-radius: 7px;
+    border: 1px #8C8C8C solid;
+    background-color: white;
+    font-size: 12px;
+    letter-spacing: -1px;
+}
+
+.cmt-report-btn{
+    width: 38px;
+    height: 20px;
+    border-radius: 7px;
+    border: 1px #8C8C8C solid;
+    background-color: white;
+    font-size: 12px;
+    letter-spacing: -1px;
+}
+
+.reply-box{
+margin-left: 16px;
+}
+
+.reply-trigger{
+display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 #cmt-write-box{
@@ -280,12 +360,12 @@ main {
     border-radius: 7px;
 }
 
-.cmt-cmt-write-box{
+.reply-write-box{
     overflow: hidden;
     transition-duration: 0.5s;
 }
 
-.cmt-cmt-write{
+.reply-write{
     width: 758px;
     overflow-y: scroll;
     resize: none;
@@ -293,8 +373,7 @@ main {
     transition-duration: 0.3s;
 }
 
-.cmt-cmt-btn{
-    margin-left: 703px;
+.reply-btn{
     font-size: 12px;
     letter-spacing: -1px;
     background-color: white;
@@ -359,9 +438,31 @@ main {
     gap: 8px;
 }
 
+#reply-btn-box{
+    display: flex;
+    gap: 8px;
+}
+
 .cmt-content-update{
     resize: none;
     outline: none;
     width: 560px;
     height: 24px;
+}
+
+.reply-content-update{
+    resize: none;
+    outline: none;
+    width: 560px;
+    height: 24px;
+}
+
+.reply-main{
+    display: flex;
+    justify-content: space-between;
+}
+
+.reply-content{
+    display: block;
+    margin-left: 16px;
 }

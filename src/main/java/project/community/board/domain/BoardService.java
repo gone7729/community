@@ -6,6 +6,7 @@ import project.community.board.web.BoardDto;
 import project.community.board.web.InsertBoard;
 import project.community.board.web.UpdateBoard;
 import project.community.comment.CommentDto;
+import project.community.comment.ReplyDto;
 
 import java.util.List;
 
@@ -66,5 +67,9 @@ public class BoardService {
     public List<CommentDto> findCmt(CommentDto commentDto){
         return boardDao.findCmt(commentDto);
     }
+    public List<ReplyDto> findReply(ReplyDto replyDto){
+        return boardDao.findReply(replyDto);
+    }
     public void viewUp(int uid){this.boardDao.viewUp(uid);}
+    public void pointUp(int uid){this.boardDao.pointUp(uid);}
 }

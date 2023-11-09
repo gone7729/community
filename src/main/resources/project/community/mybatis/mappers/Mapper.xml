@@ -99,6 +99,13 @@
         WHERE comment_tb.board_uid = #{board_uid}
     </select>
 
+    <select id="findReply" resultType="project.community.comment.ReplyDto">
+        SELECT reply_tb.uid, member_tb.nickname AS writer,reply_tb.cmt_uid, reply_tb.content, reply_tb.up_point, reply_tb.down_point
+        FROM reply_tb
+        INNER JOIN member_tb ON member_tb.email = reply_tb.writer
+        WHERE reply_tb.cmt_uid = #{cmt_uid}
+    </select>
+
     <update id="updateMember">
         UPDATE member_tb
         SET nickname = #{nickName}
@@ -131,6 +138,18 @@
         WHERE uid = #{uid};
     </update>
 
+    <update id="pointUp">
+        update board_tb
+        set up_point = up_point +1
+        where uid = #{uid};
+    </update>
+
+    <update id="pointDown">
+        update board_tb
+        set down_point = down_point +1
+        where uid = #{uid};
+    </update>
+
     <update id="updateCmt">
         UPDATE comment_tb
         SET content = #{content}
@@ -139,6 +158,22 @@
 
     <delete id="deleteCmt">
         delete from comment_tb
+        where uid = #{uid}
+    </delete>
+
+    <insert id="insertReply">
+        INSERT INTO reply_tb(content, writer, cmt_uid)
+        VALUES(#{content}, #{writer}, #{cmt_uid})
+    </insert>
+
+    <update id="updateReply">
+        UPDATE reply_tb
+        SET content = #{content}
+        WHERE uid = #{uid};
+    </update>
+
+    <delete id="deleteReply">
+        delete from reply_tb
         where uid = #{uid}
     </delete>
 </mapper>
