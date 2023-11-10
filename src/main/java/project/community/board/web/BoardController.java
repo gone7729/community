@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import project.community.board.domain.BoardService;
 import project.community.comment.CommentDto;
 import project.community.comment.ReplyDto;
+import project.community.user.web.MemberDto;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -130,15 +131,19 @@ public class BoardController {
 
     @PostMapping("point-up")
     @ResponseBody
-    public boolean pointUp(HttpSession session, HttpServletRequest request,
-                          @RequestParam int uid){
-        int setUid = uid;
-        System.out.println(setUid);
+    public int pointUp(HttpSession session, HttpServletRequest request,
+                          @RequestBody RecDto recDto){
         session = request.getSession(false);
-        if (session.getAttribute("user") == null){
-            return false;
+        MemberDto memberDto = (MemberDto) session.getAttribute("user");
+        if (session.getAttribute("user") != null){
+            if(boardService.findRecEmail(memberDto.getEmail()) == 0) {
+                recDto.setEmail(memberDto.getEmail());
+                boardService.pointUp(recDto);
+                return 1;
+            } else {
+                return 2;
+            }
         }
-        boardService.pointUp(setUid);
-        return true;
+        return 3;
     }
 }

@@ -15,7 +15,7 @@ public class Board {
     private String content;
     private LocalDateTime regdate;
     private int view;
-    private int upPoint;
-    private int downPoint;
+    private int rec;
+    private int nrec;
     private int reporting;
 }

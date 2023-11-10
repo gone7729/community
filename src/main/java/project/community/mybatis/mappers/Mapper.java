@@ -22,6 +22,7 @@ public interface Mapper {
     void deleteBoard(Object obj);
     void viewUp(Object obj);
     void pointUp(Object obj);
+    int findRecEmail(Object obj);
 
     //user
     void insertMember(Object obj);

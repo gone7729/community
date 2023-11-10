@@ -14,19 +14,27 @@
     </select>
 
     <select id="findBoardList" resultType="project.community.board.web.BoardDto">
-        SELECT board_tb.uid, category_tb.category, member_tb.nickname AS writer, board_tb.title, board_tb.content, board_tb.regdate, board_tb.view, board_tb.up_point
+        SELECT board_tb.uid, category_tb.category, member_tb.nickname AS writer, board_tb.title, board_tb.content, board_tb.regdate, board_tb.view,
+        SUM(CASE WHEN recommend_tb.rec_nrec = 'R' THEN 1 ELSE 0 END) AS rec
         FROM board_tb
         INNER JOIN category_tb ON category_tb.uid = board_tb.category
         INNER JOIN member_tb ON member_tb.email = board_tb.writer
+        LEFT JOIN recommend_tb ON recommend_tb.board_uid = board_tb.uid
+        GROUP BY board_tb.uid, category_tb.category, member_tb.nickname, board_tb.title,
+        board_tb.content, board_tb.regdate, board_tb.view, rec
         ORDER BY board_tb.uid DESC
         LIMIT 15 OFFSET #{offSet}
     </select>
 
     <select id="findHomeBoardList" resultType="project.community.board.web.BoardDto">
-        SELECT board_tb.uid, category_tb.category, member_tb.nickname AS writer, board_tb.title, board_tb.content, board_tb.regdate, board_tb.view, board_tb.up_point
+        SELECT board_tb.uid, category_tb.category, member_tb.nickname AS writer, board_tb.title, board_tb.content, board_tb.regdate, board_tb.view,
+        SUM(CASE WHEN recommend_tb.rec_nrec = 'R' THEN 1 ELSE 0 END) AS rec
         FROM board_tb
         INNER JOIN category_tb ON category_tb.uid = board_tb.category
         INNER JOIN member_tb ON member_tb.email = board_tb.writer
+        LEFT JOIN recommend_tb ON recommend_tb.board_uid = board_tb.uid
+        GROUP BY board_tb.uid, category_tb.category, member_tb.nickname, board_tb.title,
+        board_tb.content, board_tb.regdate, board_tb.view, rec
         ORDER BY board_tb.uid DESC
         LIMIT 5 OFFSET #{offSet}
     </select>
@@ -37,11 +45,16 @@
     </insert>
 
     <select id="findBoard" resultType="project.community.board.web.BoardDto">
-        SELECT board_tb.uid, category_tb.category, member_tb.nickname AS writer, board_tb.title, board_tb.content, board_tb.regdate, board_tb.view, board_tb.up_point
+        SELECT board_tb.uid, category_tb.category, member_tb.nickname AS writer, board_tb.title, board_tb.content,
+        board_tb.regdate, board_tb.view,
+        SUM(CASE WHEN recommend_tb.rec_nrec = 'R' THEN 1 ELSE 0 END) AS rec
         FROM board_tb
         INNER JOIN category_tb ON category_tb.uid = board_tb.category
         INNER JOIN member_tb ON member_tb.email = board_tb.writer
-        WHERE board_tb.uid = #{uid};
+        LEFT JOIN recommend_tb ON recommend_tb.board_uid = board_tb.uid
+        WHERE board_tb.uid = #{uid}
+        GROUP BY board_tb.uid, category_tb.category, member_tb.nickname, board_tb.title,
+                board_tb.content, board_tb.regdate, board_tb.view;
     </select>
 
     <update id="updateBoard">
@@ -138,17 +151,15 @@
         WHERE uid = #{uid};
     </update>
 
-    <update id="pointUp">
-        update board_tb
-        set up_point = up_point +1
-        where uid = #{uid};
-    </update>
+    <insert id="pointUp">
+        insert into recommend_tb(member_email, board_uid, rec_nrec)
+        values(#{email}, #{board_uid}, 'R');
+    </insert>
 
-    <update id="pointDown">
-        update board_tb
-        set down_point = down_point +1
-        where uid = #{uid};
-    </update>
+    <select id="findRecEmail" resultType="int">
+        select count(*) from recommend_tb
+        where member_email = #{email}
+    </select>
 
     <update id="updateCmt">
         UPDATE comment_tb

@@ -18,7 +18,8 @@ public class BoardDto {
     private String content;
     private LocalDateTime regdate;
     private int view;
-    private int up_point;
+    private int rec;
+    private int nrec;
     private int downPoint;
     private int offSet;
 

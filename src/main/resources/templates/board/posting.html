@@ -31,7 +31,7 @@
         <span th:text="${posting.view}"></span>
       </li>
       <li class="post-top-item">
-        <span th:text="${posting.up_point}"></span>
+        <span th:text="${posting.rec}"></span>
       </li>
     </ul>
   </div>
@@ -553,7 +553,8 @@
             credentials: "include",
             headers: {
               "Content-Type": "application/json",
-            }
+            },
+            body: JSON.stringify({board_uid : postData.uid}),
           })
             .then((response) => {
               if (response.ok) {
@@ -563,13 +564,15 @@
               }
             })
             .then((data) => {
-              if (data == "false") {
+              if (data == 3) {
                 if (confirm("로그인 시 이용가능합니다. 로그인 페이지로 이동하시겠습니까?")) {
                   window.location.href = "login";
                 }
-              } else {
+              } else if(data == 1) {
                 alert("추천되었습니다.");
                 window.location.href = "posting?uid=" + postData.uid;
+              } else{
+                alert("이미 추천한 게시글입니다.");
               }
             })
             .catch((error) => console.log(error));
