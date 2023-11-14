@@ -8,14 +8,15 @@ public class Paging {
     private int endPage;
     private int nowPage;
     private int lastPage;
-    private int pageCount =10;
+    private int pageCount;
     private int pageSize;
     private int total; //불러온 게시글 개수
 
-    public Paging(int total, int nowPage, int pageSize) {
+    public Paging(int total, int nowPage, int pageSize, int pageCount) {
         this.total = total;
         this.nowPage = nowPage;
         this.pageSize = pageSize;
+        this.pageCount = pageCount;
         calcLastPage(getTotal(), getPageSize());
         calcStartEndPage(getNowPage(), pageCount);
         setStartPage(getStartPage());

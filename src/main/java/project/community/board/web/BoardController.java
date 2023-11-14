@@ -10,6 +10,7 @@ import project.community.board.domain.BoardService;
 import project.community.comment.CommentDto;
 import project.community.comment.ReplyDto;
 import project.community.user.web.MemberDto;
+import project.community.util.Paging;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -45,10 +46,11 @@ public class BoardController {
     @RequestMapping("boardpaging")
     public String boardList(Model model, HttpSession session, BoardDto boardDto,
                             @RequestParam(value = "nowPage", defaultValue = "1")int nowPage,
-                            @RequestParam(value = "pageSize", defaultValue = "10")int pageSize){
+                            @RequestParam(value = "pageSize", defaultValue = "15")int pageSize){
 
         int total = boardService.countBoard();
-        project.community.util.Paging paging = new project.community.util.Paging(total, nowPage, pageSize);
+        int pageCount = 10;
+        Paging paging = new Paging(total, nowPage, pageSize, pageCount);
         boardDto.setOffSet((nowPage - 1) * pageSize);
 
         model.addAttribute("boardPagingList", boardService.findBoardList(boardDto));
@@ -64,7 +66,8 @@ public class BoardController {
                           @RequestParam(value = "pageSize", defaultValue = "10")int pageSize,
                           @RequestParam (value = "uid") int uid){
         int total = boardService.countBoard();
-        project.community.util.Paging paging = new project.community.util.Paging(total, nowPage, pageSize);
+        int pageCount = 10;
+        Paging paging = new Paging(total, nowPage, pageSize, pageCount);
 
         commentDto.setBoard_uid(uid);
         List<CommentDto> commentList = boardService.findCmt(commentDto);
@@ -145,5 +148,41 @@ public class BoardController {
             }
         }
         return 3;
+    }
+
+    @GetMapping("search")
+    public String search(Model model, HttpSession session, SearchDto searchDto,
+                         @RequestParam(value = "nowPage", defaultValue = "1")int nowPage,
+                         @RequestParam(value = "pageSize", defaultValue = "5")int pageSize){
+        int total = boardService.searchCount(searchDto.getCtg(), searchDto.getText());
+        System.out.println(total);
+        int pageCount = 5;
+        Paging paging = new Paging(total, nowPage, pageSize, pageCount);
+        searchDto.setOffSet((nowPage - 1) * pageSize);
+        System.out.println(paging.getStartPage()+","+paging.getLastPage());
+
+        model.addAttribute("searchKey", searchDto);
+        model.addAttribute("searchList", boardService.searchBoardList(searchDto));
+        model.addAttribute("paging", paging);
+        model.addAttribute("member", session.getAttribute("user"));
+
+        return "board/searchpost";
+    }
+
+    @RequestMapping("searchpaging")
+    public String searchpaging(Model model, HttpSession session, SearchDto searchDto,
+                            @RequestParam(value = "nowPage", defaultValue = "1")int nowPage,
+                            @RequestParam(value = "pageSize", defaultValue = "5")int pageSize){
+
+        int total = boardService.searchCount(searchDto.getCtg(), searchDto.getText());
+        int pageCount = 5;
+        Paging paging = new Paging(total, nowPage, pageSize, pageCount);
+        searchDto.setOffSet((nowPage - 1) * pageSize);
+
+        model.addAttribute("searchKey", searchDto);
+        model.addAttribute("searchList", boardService.searchBoardList(searchDto));
+        model.addAttribute("paging", paging);
+        model.addAttribute("member", session.getAttribute("user"));
+        return "board/searchpost";
     }
 }

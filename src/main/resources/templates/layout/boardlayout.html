@@ -34,7 +34,7 @@
       <div th:replace="~{layout/asidelayout :: content}"></div>
     </div>
     <!--페이징-->
-    <form id="search" th:action="@{boardpaging}"  method="post">
+    <form id="paging" th:action="@{boardpaging}"  method="post">
       <div id="page">
         <ul id="page-box">
           <li class="page-btn-box">
@@ -49,8 +49,8 @@
           </li>
           <li clss="page-num-box" th:each="num : ${#numbers.sequence(paging.startPage, paging.endPage)}">
             <a class="page-link" th:href="@{/boardpaging(nowPage=${num})}">
-              <span class="page-now" th:unless="${num == paging.nowPage}" th:text="${num}"></span>
-              <span class="page-num" th:text="${num}"></span>
+              <span class="page-num" th:unless="${num == paging.nowPage}" th:text="${num}"></span>
+              <span class="page-now" th:unless="${num != paging.nowPage}" th:text="${num}"></span>
             </a>
           </li>
           <li class="page-btn-box">
@@ -70,24 +70,22 @@
           </a>
         </div>
       </div>
-      <div id="search-box">
-        <div id="search-category">
-          <button id="category-btn" type="button">
-            <p>작성자</p>
-          </button>
-          <ul id="category-box" style="height: 0px;">
-            <li class="category-item">
-              <p>내용</p>
-            </li>
-            <li class="category-item">
-              <p>제목</p>
-            </li>
-          </ul>
-        </div>
-        <div id="s-box">
+    </form>
+    <form id="search" th:action="@{search}" method="get">
+      <div id="search-category">
+        <button id="category-btn" type="button">검색 설정</button>
+        <ul id="category-box" style="height: 0px;">
+          <li value="content" class="category-item">내용</li>
+          <li value="title" class="category-item">제목</li>
+          <li value="writer" class="category-item">작성자</li>
+        </ul>
+        <input type="hidden" name="ctg" id="search-ctg" value="">
+      </div>
+      <div id="s-box">
+        <button id="s-btn">
           <img id="search-img" src="/img/Search.svg" alt="x">
-          <input id="search-bar" type="text" name="search">
-        </div>
+        </button>
+        <input id="search-bar" type="text" name="text">
       </div>
     </form>
   </div>

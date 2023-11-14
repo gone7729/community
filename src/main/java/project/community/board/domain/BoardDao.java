@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import project.community.board.web.BoardDto;
 import project.community.board.web.InsertBoard;
 import project.community.board.web.RecDto;
+import project.community.board.web.SearchDto;
 import project.community.comment.CommentDto;
 import project.community.comment.ReplyDto;
 import project.community.mybatis.mappers.Mapper;
@@ -56,4 +57,10 @@ public class BoardDao {
     public void viewUp(int uid){this.mapper.viewUp(uid);}
     public void pointUp(RecDto recDto){this.mapper.pointUp(recDto);}
     public int findRecEmail(String email){return mapper.findRecEmail(email);}
+    public List<SearchDto> searchBoardList(SearchDto searchDto){
+        return mapper.searchBoardList(searchDto);
+    }
+    public int searchCount(String ctg, String text){
+        return mapper.searchCount(ctg, text);
+    }
 }

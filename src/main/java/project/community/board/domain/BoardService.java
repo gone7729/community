@@ -2,10 +2,7 @@ package project.community.board.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import project.community.board.web.BoardDto;
-import project.community.board.web.InsertBoard;
-import project.community.board.web.RecDto;
-import project.community.board.web.UpdateBoard;
+import project.community.board.web.*;
 import project.community.comment.CommentDto;
 import project.community.comment.ReplyDto;
 
@@ -74,4 +71,10 @@ public class BoardService {
     public void viewUp(int uid){this.boardDao.viewUp(uid);}
     public void pointUp(RecDto recDto){this.boardDao.pointUp(recDto);}
     public int findRecEmail(String email){return boardDao.findRecEmail(email);}
+    public List<SearchDto> searchBoardList(SearchDto searchDto){
+        return boardDao.searchBoardList(searchDto);
+    }
+    public int searchCount(String ctg, String text){
+        return boardDao.searchCount(ctg, text);
+    }
 }

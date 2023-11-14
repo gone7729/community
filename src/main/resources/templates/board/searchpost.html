@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="UTF-8">
+    <title>자유 게시판</title>
+    <link rel="stylesheet" href="/css/searchpoststyle.css"/>
+    <link rel="stylesheet" href="/css/asidestyle.css"/>
+    <link rel="stylesheet" href="/css/boardstyle.css"/>
+    <link rel="stylesheet" href="/css/H&Fstyle.css"/>
+    <link rel="stylesheet" href="/css/topstyle.css"/>
+</head>
+<body>
+<header th:replace="/layout/layout :: header"></header>
+<main>
+    <div id="main-top">
+        <div id="main-top-title">
+            <span>통합 검색</span>
+        </div>
+        <div th:replace="/layout/toplayout :: content"></div>
+    </div>
+    <div id="free-board-search-box">
+        <div id="top-text">
+            자유 게시판
+        </div>
+        <ul th:each="list : ${searchList}">
+            <li class="free-board-search-item-box">
+                <a class="free-board-search-item-link" th:href="@{/posting(uid = ${list.uid})}">
+                    <span th:text="${list.writer}"></span>
+                    <span th:text="${list.title}"></span>
+                    <span th:utext="${list.content}"></span>
+                    <span th:text="${@TimeT.date(list.regdate.toString())}"></span>
+                </a>
+            </li>
+        </ul>
+        <form id="paging" th:action="@{searchpaging}"  method="post">
+            <div id="page">
+                <ul id="page-box">
+                    <li class="page-btn-box">
+                        <a id="pp-btn" th:href="@{/searchpaging(ctg=${searchKey.ctg},text=${searchKey.text},nowPage=${paging.startPage})}" th:unless="${paging.nowPage - 1 < 1}">
+                            <img src="/img/start.svg" alt="첫페이지">
+                        </a>
+                    </li>
+                    <li class="page-btn-box">
+                        <a id="p-btn" th:href="@{/searchpaging(ctg=${searchKey.ctg},text=${searchKey.text},nowPage=${paging.nowPage - 1})}" th:unless="${paging.nowPage - 1 < 1}">
+                            <img src="/img/left.svg" alt="이전">
+                        </a>
+                    </li>
+                    <li clss="page-num-box" th:each="num : ${#numbers.sequence(paging.startPage, paging.endPage)}">
+                        <a class="page-link" th:href="@{/searchpaging(ctg=${searchKey.ctg},text=${searchKey.text},nowPage=${num})}">
+                            <span class="page-num" th:unless="${num == paging.nowPage}" th:text="${num}"></span>
+                            <span class="page-now" th:unless="${num != paging.nowPage}" th:text="${num}"></span>
+                        </a>
+                    </li>
+                    <li class="page-btn-box">
+                        <a id="n-btn" th:href="@{/searchpaging(ctg=${searchKey.ctg},text=${searchKey.text},nowPage=${paging.nowPage + 1})}" th:unless="${paging.nowPage + 1 > paging.lastPage}">
+                            <img src="/img/right.svg" alt="다음">
+                        </a>
+                    </li>
+                    <li class="page-btn-box">
+                        <a id="nn-btn" th:href="@{/searchpaging(ctg=${searchKey.ctg},text=${searchKey.text},nowPage=${paging.endPage})}" th:if="${paging.endPage >= 1}">
+                            <img src="/img/end.svg" alt="끝페이지">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+
+    <div th:replace="/layout/asidelayout :: content"></div>
+
+</main>
+<footer th:replace="/layout/layout :: footer"></footer>
+</body>
+</html>

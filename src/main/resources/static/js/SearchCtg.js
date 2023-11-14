@@ -1,35 +1,22 @@
-const catBtn = document.querySelector("#category-btn");
-const catBox = document.querySelector("#category-box");
-const catItems = document.querySelectorAll(".category-item");
-const main = document.getElementsByTagName("main");
+const ctgBtn = document.querySelector("#category-btn");
+  const ctgBox = document.querySelector("#category-box");
+  const ctgItems = document.querySelectorAll(".category-item");
+  const ctgInput = document.querySelector("#search-ctg");
 
-catBtn.addEventListener("click", ()=> {
-    if(catBox.style.height == "0px"){
-        catBox.style.height = catBox.scrollHeight + "px";
+  ctgBtn.addEventListener("click", ()=> {
+    if(ctgBox.style.height == "0px"){
+        ctgBox.style.height = ctgBox.scrollHeight + "px";
     }else{
-        catBox.style.height = "0px";
+        ctgBox.style.height = "0px";
     }
-});
+  });
 
-catItems.forEach((item) => {
-    item.addEventListener("click", () =>{
-        if(catBtn.firstElementChild.textContent == "작성자" ){
-            catBtn.firstElementChild.textContent = item.firstElementChild.textContent;
-            item.firstElementChild.textContent = "작성자";
-            catBox.style.height = "0px";
-        }else if(catBtn.firstElementChild.textContent == "제목"){
-            catBtn.firstElementChild.textContent = item.firstElementChild.textContent;
-            item.firstElementChild.textContent = "제목";
-            catBox.style.height = "0px";
-        }else{
-            catBtn.firstElementChild.textContent = item.firstElementChild.textContent;
-            item.firstElementChild.textContent = "내용";
-            catBox.style.height = "0px";
-        }
-    });
-});
-
-
-
-
-
+  ctgItems.forEach((item) =>{
+    item.addEventListener("click", ()=>{
+        console.log(item.getAttribute('value'));
+        ctgBtn.textContent = item.textContent;
+        ctgInput.value = item.getAttribute('value');
+        console.log(ctgInput.value);
+        ctgBox.style.height = "0px";
+    })
+  })

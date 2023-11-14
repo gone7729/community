@@ -51,3 +51,33 @@ main{
     position: relative;
 }
 
+#free-board-search-box{
+    width:836px;
+}
+
+#top-text{
+    font-size: 24px;
+    padding-bottom: 8px;
+    border-bottom: 1px #EDAD70 solid;
+}
+
+.free-board-search-item-box{
+    margin: 0 auto;
+    width: 804px;
+    padding: 16px 8px;
+    border-bottom: 1px #BABABA solid;
+}
+
+.free-board-search-item-link{
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr 1fr 0.5fr;
+    text-decoration: none;
+    color: black;
+}
+
+#page{
+    display: flex;
+    justify-content: center;
+    width: 836px;
+}
+

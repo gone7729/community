@@ -187,4 +187,39 @@
         delete from reply_tb
         where uid = #{uid}
     </delete>
+
+    <select id="searchBoardList" resultType="project.community.board.web.SearchDto">
+        SELECT board_tb.uid, member_tb.nickname AS writer, board_tb.title, board_tb.content, board_tb.regdate
+        FROM board_tb
+        INNER JOIN member_tb ON member_tb.email = board_tb.writer
+        <where>
+            <if test="ctg == 'title'">
+                AND title LIKE CONCAT('%', #{text}, '%')
+            </if>
+            <if test="ctg == 'writer'">
+                AND writer LIKE CONCAT('%', #{text}, '%')
+            </if>
+            <if test="ctg == 'content'">
+                AND board_tb.content LIKE CONCAT('%', #{text}, '%')
+            </if>
+        </where>
+        ORDER BY board_tb.uid DESC
+        LIMIT 5 OFFSET #{offSet}
+    </select>
+
+    <select id="searchCount" resultType="int">
+        SELECT COUNT(*)
+        FROM board_tb
+        <where>
+            <if test="ctg == 'title'">
+                AND title LIKE CONCAT('%', #{text}, '%')
+            </if>
+            <if test="ctg == 'writer'">
+                AND writer LIKE CONCAT('%', #{text}, '%')
+            </if>
+            <if test="ctg == 'content'">
+                AND board_tb.content LIKE CONCAT('%', #{text}, '%')
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -1,6 +1,7 @@
 package project.community.mybatis.mappers;
 
 import project.community.board.web.BoardDto;
+import project.community.board.web.SearchDto;
 import project.community.comment.CommentDto;
 import project.community.comment.ReplyDto;
 import project.community.user.domain.Code;
@@ -23,6 +24,8 @@ public interface Mapper {
     void viewUp(Object obj);
     void pointUp(Object obj);
     int findRecEmail(Object obj);
+    List<SearchDto> searchBoardList(Object obj);
+    int searchCount(String ctg, String text);
 
     //user
     void insertMember(Object obj);

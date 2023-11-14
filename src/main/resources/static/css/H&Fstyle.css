@@ -115,7 +115,7 @@ main{
     width: 1184px;
     margin: 0 auto;
     padding: 0px 8px;
-    min-height: calc(100vh);
+    min-height: calc(120vh);
 }
 
 footer{

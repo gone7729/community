@@ -119,8 +119,8 @@ table {
 
 #board-box{
     width: 872px;
-    height: 850px;
-    border-bottom: 1px #E79141 solid;
+    height: 820px;
+    border-bottom: 2px #E79141 solid;
 }
 
 #guide-list{
@@ -244,6 +244,7 @@ table {
 }
 
 #search-category{
+    height: 32px;
     border-radius: 7px;
     border: 1px #e79141 solid;
 }
@@ -323,17 +324,17 @@ table {
 #search-img{
     width: 24px;
     height: 24px;
-    position: absolute;
-    left: 16px;
-    top: 8px;
 }
 
-#search-box{
+#search{
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     padding-right: 46px;
     width: 872px;
     gap: 24px;
+    flex-direction: row;
+    margin-top: 16px;
 }
 
 #pp-btn{
@@ -370,4 +371,14 @@ table {
 
 .page-num{
     color: #ffa569;
+}
+
+#s-btn{
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 24px;
+    top: 8px;
+    border: none;
+    background-color: white;
 }
