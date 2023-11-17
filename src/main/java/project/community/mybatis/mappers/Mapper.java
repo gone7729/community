@@ -2,8 +2,8 @@ package project.community.mybatis.mappers;
 
 import project.community.board.web.BoardDto;
 import project.community.board.web.SearchDto;
-import project.community.comment.CommentDto;
-import project.community.comment.ReplyDto;
+import project.community.comment.web.CommentDto;
+import project.community.comment.web.ReplyDto;
 import project.community.user.domain.Code;
 import project.community.user.web.MemberDto;
 
@@ -22,8 +22,9 @@ public interface Mapper {
     void updateBoard(Object obj);
     void deleteBoard(Object obj);
     void viewUp(Object obj);
-    void pointUp(Object obj);
-    int findRecEmail(Object obj);
+    void boardPointUp(Object obj);
+    void boardPointDown(Object obj);
+    int findRecEmail(String email, int board_uid);
     List<SearchDto> searchBoardList(Object obj);
     int searchCount(String ctg, String text);
 
@@ -50,4 +51,7 @@ public interface Mapper {
     void insertReply(Object obj);
     void updateReply(Object obj);
     void deleteReply(Object obj);
+    void cmtPointUp(Object obj);
+    void cmtPointDown(Object obj);
+    int findCmtRecEmail(String email, int cmt_uid);
 }

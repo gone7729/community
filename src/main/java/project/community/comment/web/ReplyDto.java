@@ -1,4 +1,4 @@
-package project.community.comment;
+package project.community.comment.web;
 
 import lombok.Data;
 

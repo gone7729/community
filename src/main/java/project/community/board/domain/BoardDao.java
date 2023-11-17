@@ -3,11 +3,10 @@ package project.community.board.domain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import project.community.board.web.BoardDto;
-import project.community.board.web.InsertBoard;
-import project.community.board.web.RecDto;
+import project.community.board.web.BoardRecDto;
 import project.community.board.web.SearchDto;
-import project.community.comment.CommentDto;
-import project.community.comment.ReplyDto;
+import project.community.comment.web.CommentDto;
+import project.community.comment.web.ReplyDto;
 import project.community.mybatis.mappers.Mapper;
 
 import java.util.List;
@@ -55,8 +54,9 @@ public class BoardDao {
         return mapper.findReply(replyDto);
     }
     public void viewUp(int uid){this.mapper.viewUp(uid);}
-    public void pointUp(RecDto recDto){this.mapper.pointUp(recDto);}
-    public int findRecEmail(String email){return mapper.findRecEmail(email);}
+    public void boardPointUp(BoardRecDto boardRecDto){this.mapper.boardPointUp(boardRecDto);}
+    public void boardPointDown(BoardRecDto boardRecDto){this.mapper.boardPointDown(boardRecDto);}
+    public int findRecEmail(String email, int board_uid){return mapper.findRecEmail(email, board_uid);}
     public List<SearchDto> searchBoardList(SearchDto searchDto){
         return mapper.searchBoardList(searchDto);
     }

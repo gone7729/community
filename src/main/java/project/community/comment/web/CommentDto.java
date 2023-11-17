@@ -1,4 +1,4 @@
-package project.community.comment;
+package project.community.comment.web;
 
 import lombok.Data;
 
@@ -13,7 +13,7 @@ public class CommentDto {
     @NotBlank(message = "내용을 입력해주세요.")
     private String content;
     private LocalDate regdate;
-    private int up_point;
-    private int down_point;
+    private int rec;
+    private int nrec;
     private int reporting;
 }

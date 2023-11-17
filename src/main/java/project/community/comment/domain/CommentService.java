@@ -1,11 +1,10 @@
-package project.community.comment;
+package project.community.comment.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import project.community.board.domain.BoardService;
-import project.community.board.web.BoardController;
-import project.community.comment.CommentDao;
-import project.community.comment.CommentDto;
+import project.community.comment.web.CmtRecDto;
+import project.community.comment.web.CommentDto;
+import project.community.comment.web.ReplyDto;
 
 @Service
 public class CommentService {
@@ -33,6 +32,8 @@ public class CommentService {
     public void deleteReply(ReplyDto replyDto){
         this.commentDao.deleteReply(replyDto);
     }
-
+    public void cmtPointUp(CmtRecDto cmtRecDto){this.commentDao.cmtPointUp(cmtRecDto);}
+    public void cmtPointDown(CmtRecDto cmtRecDto){this.commentDao.cmtPointDown(cmtRecDto);}
+    public int findCmtRecEmail(String email, int cmt_uid){return commentDao.findCmtRecEmail(email, cmt_uid);}
 
 }

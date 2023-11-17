@@ -7,8 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import project.community.board.domain.BoardService;
-import project.community.comment.CommentDto;
-import project.community.comment.ReplyDto;
+import project.community.comment.web.CommentDto;
+import project.community.comment.web.ReplyDto;
 import project.community.user.web.MemberDto;
 import project.community.util.Paging;
 
@@ -70,12 +70,15 @@ public class BoardController {
         Paging paging = new Paging(total, nowPage, pageSize, pageCount);
 
         commentDto.setBoard_uid(uid);
-        List<CommentDto> commentList = boardService.findCmt(commentDto);
+        List<CommentDto> commentList = new ArrayList<>();
         List<ReplyDto> replyList = new ArrayList<>();
-        for (CommentDto comment : commentList) {
-            replyDto.setCmt_uid(comment.getUid());
-            List<ReplyDto> repliesForComment = boardService.findReply(replyDto);
-            replyList.addAll(repliesForComment);
+        if (boardService.findCmt(commentDto) != null){
+            commentList = boardService.findCmt(commentDto);
+            for (CommentDto comment : commentList) {
+                replyDto.setCmt_uid(comment.getUid());
+                List<ReplyDto> repliesForComment = boardService.findReply(replyDto);
+                replyList.addAll(repliesForComment);
+            }
         }
 
         boardDto.setUid(uid);
@@ -135,13 +138,14 @@ public class BoardController {
     @PostMapping("point-up")
     @ResponseBody
     public int pointUp(HttpSession session, HttpServletRequest request,
-                          @RequestBody RecDto recDto){
+                          @RequestBody BoardRecDto boardRecDto){
         session = request.getSession(false);
-        MemberDto memberDto = (MemberDto) session.getAttribute("user");
+
         if (session.getAttribute("user") != null){
-            if(boardService.findRecEmail(memberDto.getEmail()) == 0) {
-                recDto.setEmail(memberDto.getEmail());
-                boardService.pointUp(recDto);
+            MemberDto memberDto = (MemberDto) session.getAttribute("user");
+            if(boardService.findRecEmail(memberDto.getEmail(), boardRecDto.getBoard_uid()) == 0) {
+                boardRecDto.setEmail(memberDto.getEmail());
+                boardService.boardPointUp(boardRecDto);
                 return 1;
             } else {
                 return 2;
@@ -149,7 +153,24 @@ public class BoardController {
         }
         return 3;
     }
+    @PostMapping("point-down")
+    @ResponseBody
+    public int pointDown(HttpSession session, HttpServletRequest request,
+                       @RequestBody BoardRecDto boardRecDto){
+        session = request.getSession(false);
 
+        if (session.getAttribute("user") != null){
+            MemberDto memberDto = (MemberDto) session.getAttribute("user");
+            if(boardService.findRecEmail(memberDto.getEmail(), boardRecDto.getBoard_uid()) == 0) {
+                boardRecDto.setEmail(memberDto.getEmail());
+                boardService.boardPointDown(boardRecDto);
+                return 1;
+            } else {
+                return 2;
+            }
+        }
+        return 3;
+    }
     @GetMapping("search")
     public String search(Model model, HttpSession session, SearchDto searchDto,
                          @RequestParam(value = "nowPage", defaultValue = "1")int nowPage,

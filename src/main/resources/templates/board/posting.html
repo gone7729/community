@@ -51,16 +51,16 @@
       <span>주소 복사</span>
     </button>
     <div id="up-down-btn">
-      <button type="button" id="post-up-btn">
+      <button type="button" class="post-btm-btn" id="post-up-btn">
         <img class="btm-btn-img" src="/img/up.svg" alt="x">
       </button>
-      <button class="post-btm-btn">
+      <button type="button" class="post-btm-btn" id="post-down-btn">
         <img class="btm-btn-img" src="/img/down.svg" alt="x">
       </button>
     </div>
   </form>
   <div id="post-cmt-box">
-    <form id="cmt-box" th:object="${commentDto}" th:action="@{write-cmt}" method="post" onsubmit="return set()">
+    <form id="cmt-box" th:object="${commentDto}" th:action="@{write-cmt}" method="post">
       <div id="cmt-top">
         <div id="cmt-top-title">
           <span>댓글</span>
@@ -95,8 +95,8 @@
             </div>
           </div>
           <div class="cmt-main-num">
-            <span th:text="${cmtList.up_point}"></span>
-            <span th:text="${cmtList.down_point}"></span>
+            <span th:text="${cmtList.rec}"></span>
+            <span th:text="${cmtList.nrec}"></span>
           </div>
         </div>
         <div class="cmt-main-content-box">
@@ -108,14 +108,13 @@
             <p class="cmt-content" style="display: block;" th:utext="${cmtList.content}"></p>
           </form>
           <div class="cmt-main-btn-box">
-            <button type="button" class="cmt-main-btn">
+            <button type="button" class="cmt-up-btn">
               <img class="cmt-up-img" src="/img/minup.svg" alt="x">
             </button>
-            <button type="button" class="cmt-main-btn">
+            <button type="button" class="cmt-down-btn">
               <img class="cmt-down-img" src="/img/mindown.svg" alt="x">
             </button>
             <button type="button" class="reply-btn">답글</button>
-            <button type="button" class="cmt-report-btn">신고</button>
           </div>
         </div>
         <form class="reply-form" th:action="@{write-reply}" method="post">
@@ -212,6 +211,9 @@
         const replyUpdateForms = document.querySelectorAll(".reply-main-content");
 
         const postUpBtn = document.querySelector("#post-up-btn");
+        const postDownBtn = document.querySelector("#post-down-btn");
+        const cmtUpBtns = document.querySelectorAll(".cmt-up-btn");
+        const cmtDownBtns = document.querySelectorAll(".cmt-down-btn");
 
         cmtBtn.addEventListener("click", function(){
           fetch("/cmt-session-check", {
@@ -424,8 +426,6 @@
           })
         })
 
-
-
         replyConfirmBtns.forEach(function(replyConfirmBtn, index){
           replyConfirmBtn.addEventListener("click", function(){
             const text = replyUpdates[index].value;
@@ -474,8 +474,6 @@
           })
         })
 
-
-
         replyDeleteBtns.forEach(function(replyDeleteBtn, index){
           replyDeleteBtn.addEventListener("click", function(){
           if(confirm("삭제하시겠습니까?")){
@@ -506,8 +504,6 @@
             }
           })
         })
-
-
 
         replyBtns.forEach(function(replyBtn, index){
         replyBtn.addEventListener("click", function(){
@@ -572,19 +568,121 @@
                 alert("추천되었습니다.");
                 window.location.href = "posting?uid=" + postData.uid;
               } else{
-                alert("이미 추천한 게시글입니다.");
+                alert("이미 추천 또는 비추천한 게시글입니다.");
               }
             })
             .catch((error) => console.log(error));
         });
 
+        postDownBtn.addEventListener("click", () => {
+          fetch("/point-down?uid=" + postData.uid, {
+            method: "POST",
+            mode: "cors",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({board_uid : postData.uid}),
+          })
+            .then((response) => {
+              if (response.ok) {
+                return response.text();
+              } else {
+                throw new Error("서버 응답 오류");
+              }
+            })
+            .then((data) => {
+              if (data == 3) {
+                if (confirm("로그인 시 이용가능합니다. 로그인 페이지로 이동하시겠습니까?")) {
+                  window.location.href = "login";
+                }
+              } else if(data == 1) {
+                alert("비추천되었습니다.");
+                window.location.href = "posting?uid=" + postData.uid;
+              } else{
+                alert("이미 추천 또는 비추천한 게시글입니다.");
+              }
+            })
+            .catch((error) => console.log(error));
+        });
+
+        cmtUpBtns.forEach((cmtUpBtn, index)=>{
+          cmtUpBtn.addEventListener("click", () => {
+          fetch("/cmt-up", {
+            method: "POST",
+            mode: "cors",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              board_uid : postData.uid,
+              cmt_uid : cmtData[index].uid
+            }),
+          })
+            .then((response) => {
+              if (response.ok) {
+                return response.text();
+              } else {
+                throw new Error("서버 응답 오류");
+              }
+            })
+            .then((data) => {
+              if (data == 3) {
+                if (confirm("로그인 시 이용가능합니다. 로그인 페이지로 이동하시겠습니까?")) {
+                  window.location.href = "login";
+                }
+              } else if(data == 1) {
+                alert("추천되었습니다.");
+                window.location.href = "posting?uid=" + postData.uid;
+              } else{
+                alert("이미 추천 또는 비추천한 게시글입니다.");
+              }
+            })
+            .catch((error) => console.log(error));
+        })
+        });
 
 
-        const set = () =>{
-        const text = cmtWrite.innerHTML;
-          console.log(text);
-          content.value = text;
-        }
+        cmtDownBtns.forEach((cmtDownBtn, index)=>{
+          cmtDownBtn.addEventListener("click", () => {
+          fetch("/cmt-down?uid=" + cmtData[index].uid, {
+            method: "POST",
+            mode: "cors",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              board_uid : postData.uid,
+              cmt_uid : cmtData[index].uid
+            }),
+          })
+            .then((response) => {
+              if (response.ok) {
+                return response.text();
+              } else {
+                throw new Error("서버 응답 오류");
+              }
+            })
+            .then((data) => {
+              if (data == 3) {
+                if (confirm("로그인 시 이용가능합니다. 로그인 페이지로 이동하시겠습니까?")) {
+                  window.location.href = "login";
+                }
+              } else if(data == 1) {
+                alert("추천되었습니다.");
+                window.location.href = "posting?uid=" + postData.uid;
+              } else{
+                alert("이미 추천 또는 비추천한 게시글입니다.");
+              }
+            })
+            .catch((error) => console.log(error));
+        })
+         });
+
+
+
 </script>
 </body>
 </html>

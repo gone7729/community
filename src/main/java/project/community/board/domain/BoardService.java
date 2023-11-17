@@ -3,8 +3,8 @@ package project.community.board.domain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.community.board.web.*;
-import project.community.comment.CommentDto;
-import project.community.comment.ReplyDto;
+import project.community.comment.web.CommentDto;
+import project.community.comment.web.ReplyDto;
 
 import java.util.List;
 
@@ -69,8 +69,9 @@ public class BoardService {
         return boardDao.findReply(replyDto);
     }
     public void viewUp(int uid){this.boardDao.viewUp(uid);}
-    public void pointUp(RecDto recDto){this.boardDao.pointUp(recDto);}
-    public int findRecEmail(String email){return boardDao.findRecEmail(email);}
+    public void boardPointUp(BoardRecDto boardRecDto){this.boardDao.boardPointUp(boardRecDto);}
+    public void boardPointDown(BoardRecDto boardRecDto){this.boardDao.boardPointDown(boardRecDto);}
+    public int findRecEmail(String email, int board_uid){return boardDao.findRecEmail(email, board_uid);}
     public List<SearchDto> searchBoardList(SearchDto searchDto){
         return boardDao.searchBoardList(searchDto);
     }

@@ -15,26 +15,28 @@
 
     <select id="findBoardList" resultType="project.community.board.web.BoardDto">
         SELECT board_tb.uid, category_tb.category, member_tb.nickname AS writer, board_tb.title, board_tb.content, board_tb.regdate, board_tb.view,
-        SUM(CASE WHEN recommend_tb.rec_nrec = 'R' THEN 1 ELSE 0 END) AS rec
+        SUM(CASE WHEN board_rec_tb.rec_nrec = 'R' THEN 1 ELSE 0 END) AS rec,
+        SUM(CASE WHEN board_rec_tb.rec_nrec = 'N' THEN 1 ELSE 0 END) AS nrec
         FROM board_tb
         INNER JOIN category_tb ON category_tb.uid = board_tb.category
         INNER JOIN member_tb ON member_tb.email = board_tb.writer
-        LEFT JOIN recommend_tb ON recommend_tb.board_uid = board_tb.uid
+        LEFT JOIN board_rec_tb ON board_rec_tb.board_uid = board_tb.uid
         GROUP BY board_tb.uid, category_tb.category, member_tb.nickname, board_tb.title,
-        board_tb.content, board_tb.regdate, board_tb.view, rec
+        board_tb.content, board_tb.regdate, board_tb.view, rec, nrec
         ORDER BY board_tb.uid DESC
         LIMIT 15 OFFSET #{offSet}
     </select>
 
     <select id="findHomeBoardList" resultType="project.community.board.web.BoardDto">
         SELECT board_tb.uid, category_tb.category, member_tb.nickname AS writer, board_tb.title, board_tb.content, board_tb.regdate, board_tb.view,
-        SUM(CASE WHEN recommend_tb.rec_nrec = 'R' THEN 1 ELSE 0 END) AS rec
+        SUM(CASE WHEN board_rec_tb.rec_nrec = 'R' THEN 1 ELSE 0 END) AS rec,
+        SUM(CASE WHEN board_rec_tb.rec_nrec = 'N' THEN 1 ELSE 0 END) AS nrec
         FROM board_tb
         INNER JOIN category_tb ON category_tb.uid = board_tb.category
         INNER JOIN member_tb ON member_tb.email = board_tb.writer
-        LEFT JOIN recommend_tb ON recommend_tb.board_uid = board_tb.uid
+        LEFT JOIN board_rec_tb ON board_rec_tb.board_uid = board_tb.uid
         GROUP BY board_tb.uid, category_tb.category, member_tb.nickname, board_tb.title,
-        board_tb.content, board_tb.regdate, board_tb.view, rec
+        board_tb.content, board_tb.regdate, board_tb.view, rec, nrec
         ORDER BY board_tb.uid DESC
         LIMIT 5 OFFSET #{offSet}
     </select>
@@ -47,14 +49,15 @@
     <select id="findBoard" resultType="project.community.board.web.BoardDto">
         SELECT board_tb.uid, category_tb.category, member_tb.nickname AS writer, board_tb.title, board_tb.content,
         board_tb.regdate, board_tb.view,
-        SUM(CASE WHEN recommend_tb.rec_nrec = 'R' THEN 1 ELSE 0 END) AS rec
+        SUM(CASE WHEN board_rec_tb.rec_nrec = 'R' THEN 1 ELSE 0 END) AS rec,
+        SUM(CASE WHEN board_rec_tb.rec_nrec = 'N' THEN 1 ELSE 0 END) AS nrec
         FROM board_tb
         INNER JOIN category_tb ON category_tb.uid = board_tb.category
         INNER JOIN member_tb ON member_tb.email = board_tb.writer
-        LEFT JOIN recommend_tb ON recommend_tb.board_uid = board_tb.uid
+        LEFT JOIN board_rec_tb ON board_rec_tb.board_uid = board_tb.uid
         WHERE board_tb.uid = #{uid}
         GROUP BY board_tb.uid, category_tb.category, member_tb.nickname, board_tb.title,
-                board_tb.content, board_tb.regdate, board_tb.view;
+                board_tb.content, board_tb.regdate, board_tb.view, rec, nrec;
     </select>
 
     <update id="updateBoard">
@@ -105,14 +108,17 @@
         VALUES(#{content}, #{writer}, #{board_uid})
     </insert>
 
-    <select id="findCmt" resultType="project.community.comment.CommentDto">
-        SELECT comment_tb.uid, member_tb.nickname AS writer,comment_tb.board_uid, comment_tb.content, comment_tb.up_point, comment_tb.down_point
+    <select id="findCmt" resultType="project.community.comment.web.CommentDto">
+        SELECT comment_tb.uid, member_tb.nickname AS writer, comment_tb.board_uid, comment_tb.content,
+        SUM(CASE WHEN cmt_rec_tb.rec_nrec = 'R' THEN 1 ELSE 0 END) AS rec,
+        SUM(CASE WHEN cmt_rec_tb.rec_nrec = 'N' THEN 1 ELSE 0 END) AS nrec
         FROM comment_tb
         INNER JOIN member_tb ON member_tb.email = comment_tb.writer
+        LEFT JOIN cmt_rec_tb ON cmt_rec_tb.cmt_uid = comment_tb.uid
         WHERE comment_tb.board_uid = #{board_uid}
     </select>
 
-    <select id="findReply" resultType="project.community.comment.ReplyDto">
+    <select id="findReply" resultType="project.community.comment.web.ReplyDto">
         SELECT reply_tb.uid, member_tb.nickname AS writer,reply_tb.cmt_uid, reply_tb.content, reply_tb.up_point, reply_tb.down_point
         FROM reply_tb
         INNER JOIN member_tb ON member_tb.email = reply_tb.writer
@@ -151,14 +157,36 @@
         WHERE uid = #{uid};
     </update>
 
-    <insert id="pointUp">
-        insert into recommend_tb(member_email, board_uid, rec_nrec)
+    <insert id="boardPointUp">
+        insert into board_rec_tb(email, board_uid, rec_nrec)
         values(#{email}, #{board_uid}, 'R');
     </insert>
 
+    <insert id="boardPointDown">
+        insert into board_rec_tb(email, board_uid, rec_nrec)
+        values(#{email}, #{board_uid}, 'N');
+    </insert>
+
     <select id="findRecEmail" resultType="int">
-        select count(*) from recommend_tb
-        where member_email = #{email}
+        SELECT COUNT(*)
+        FROM board_rec_tb
+        WHERE email = #{email} AND board_uid = #{board_uid};
+    </select>
+
+    <insert id="cmtPointUp">
+        insert into cmt_rec_tb(email, cmt_uid, rec_nrec)
+        values(#{email}, #{cmt_uid}, 'R');
+    </insert>
+
+    <insert id="cmtPointDown">
+        insert into cmt_rec_tb(email, cmt_uid, rec_nrec)
+        values(#{email}, #{cmt_uid}, 'N');
+    </insert>
+
+    <select id="findCmtRecEmail" resultType="int">
+        SELECT COUNT(*)
+        FROM cmt_rec_tb
+        WHERE email = #{email} AND cmt_uid = #{cmt_uid};
     </select>
 
     <update id="updateCmt">

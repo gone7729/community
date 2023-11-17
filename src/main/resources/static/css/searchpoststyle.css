@@ -76,8 +76,8 @@ main{
 }
 
 #page{
-    display: flex;
-    justify-content: center;
-    width: 836px;
+    display: flex !important;
+    justify-content: center !important;
+    width: 836px !important;
 }
 

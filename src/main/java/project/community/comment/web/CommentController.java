@@ -1,12 +1,12 @@
-package project.community.comment;
+package project.community.comment.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import project.community.board.domain.BoardService;
-import project.community.board.web.BoardDto;
+import project.community.board.web.BoardRecDto;
+import project.community.comment.domain.CommentService;
 import project.community.user.web.MemberDto;
 
 import javax.servlet.http.HttpServletRequest;
@@ -114,5 +114,40 @@ public class CommentController {
         }
         commentService.deleteReply(replyDto);
         return "삭제되었습니다.";
+    }
+
+    @PostMapping("cmt-up")
+    @ResponseBody
+    public int cmtUp(HttpSession session, HttpServletRequest request,
+                       @RequestBody CmtRecDto cmtRecDto){
+        session = request.getSession(false);
+        if (session.getAttribute("user") != null){
+            MemberDto memberDto = (MemberDto) session.getAttribute("user");
+            if(commentService.findCmtRecEmail(memberDto.getEmail(), cmtRecDto.getCmt_uid()) == 0) {
+                cmtRecDto.setEmail(memberDto.getEmail());
+                commentService.cmtPointUp(cmtRecDto);
+                return 1;
+            } else {
+                return 2;
+            }
+        }
+        return 3;
+    }
+    @PostMapping("cmt-down")
+    @ResponseBody
+    public int cmtDown(HttpSession session, HttpServletRequest request,
+                         @RequestBody CmtRecDto cmtRecDto){
+        session = request.getSession(false);
+        MemberDto memberDto = (MemberDto) session.getAttribute("user");
+        if (session.getAttribute("user") != null){
+            if(commentService.findCmtRecEmail(memberDto.getEmail(), cmtRecDto.getCmt_uid()) == 0) {
+                cmtRecDto.setEmail(memberDto.getEmail());
+                commentService.cmtPointDown(cmtRecDto);
+                return 1;
+            } else {
+                return 2;
+            }
+        }
+        return 3;
     }
 }
