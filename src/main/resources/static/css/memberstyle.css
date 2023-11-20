@@ -122,7 +122,6 @@ table {
     display: flex;
     width: 100px;
     height: 28px;
-    border-right: 1px #f3bd86 solid;
     border-radius: 7px;
     align-items: center;
 }
@@ -182,10 +181,11 @@ table {
     width: 816px;
     margin: 0 auto;
     justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
 }
 
 #btn{
-    display: block;
     width: 84px;
     height: 30px;
     border-radius: 12px;
@@ -195,7 +195,15 @@ table {
 }
 
 #update-btn{
-    display: none;
+    width: 84px;
+    height: 30px;
+    border-radius: 12px;
+    background-color: white;
+    border: 1px #a1a0a0 solid;
+    letter-spacing: -1px;
+}
+
+#check-btn{
     width: 84px;
     height: 30px;
     border-radius: 12px;
@@ -214,4 +222,10 @@ table {
     border-radius: 6px;
     outline: none;
     border: 1px #c7c7c7 solid;
+}
+
+#nick-valid-msg{
+    font-size: 14px;
+    color: red;
+    letter-spacing: -1px;
 }

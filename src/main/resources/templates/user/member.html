@@ -10,12 +10,13 @@
 <header th:replace="~{layout/layout :: header}"></header>
 <main>
   <div id="main-top">
-    <div id="main-top-box">
+    <form id="main-top-box" th:action="@{deleteuser}" method="post">
       <div id="main-top-title">
         <span>회원 정보</span>
       </div>
-      <button id="main-top-btn">변경 하기</button>
-    </div>
+      <button type="button" id="main-top-btn">계정 삭제</button>
+      <input class="email-input" type="hidden" name="email" th:value="${member.email}">
+    </form>
     <div id="main-top-profile">
       <div id="profile-img-box">
         <img id="profile-img" src="" alt="x">
@@ -31,7 +32,7 @@
       </li>
     </ul>
   </div>
-  <form id="main-ct" th:action="@{userupdate}" method="post" onsubmit="return update()">
+  <form id="main-ct" th:action="@{userupdate}" method="post" th:object="${memberDto}">
     <div id="main-ct-ctn">
       <div id="main-ct-box">
         <div class="main-ct">
@@ -45,7 +46,7 @@
           <span class="ct-title">닉네임</span>
           <div class="ct-box">
             <span id="ct-nick" th:text="${member.nickName}"></span>
-            <input class="nick-input" type="hidden" name="nickName" value="">
+            <input id="nick-input" type="hidden" name="nickName" value="">
           </div>
         </div>
         <div class="main-ct">
@@ -55,35 +56,102 @@
           </div>
         </div>
       </div>
-      <div id="btn-box">
-        <button id="update-btn">수정하기</button>
-        <button type="button" id="btn" onclick="input()">수정</button>
+      <div id="btn-box" >
+        <div th:if="${#fields.hasGlobalErrors()}">
+          <p class="nick-valid-msg" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
+        </div>
+        <p class="nick-valid-msg"></p>
+        <button id="update-btn" style="display: none;">수정하기</button>
+        <button type="button" id="check-btn" style="display: none;">중복확인</button>
+        <button type="button" id="btn" style="display: block;">수정</button>
       </div>
     </div>
   </form>
 </main>
 <footer th:replace="~{layout/layout :: footer}"></footer>
-<script th:inline="javascript">
-  const btn = document.querySelector("#btn");
+<script th:inline="javascript" nonce="my_nonce">
+  const nick = /*[[${member.nickName}]]*/;
+  const email = /*[[${member.email}]]*/;
+  const setBtn = document.querySelector("#btn");
   const updateBtn = document.querySelector("#update-btn");
-  const nickText = document.querySelector("#ct-nick");
-  const nickInput = document.querySelector(".nick-input");
-  const nick = /*[[${member.nickName}]]*/
+  const checkBtn = document.querySelector("#check-btn");
+  const divNick = document.querySelector("#ct-nick");
+  const inputNick = document.querySelector("#nick-input");
+  const nickUpdateForm = document.querySelector("#main-ct");
+  const nickMsg = document.querySelectorAll(".nick-valid-msg");
+  const deleteBtn = document.querySelector("#main-top-btn");
+  const deleteFrm = document.querySelector("#main-top-box");
+  const nickRegex = /^\S+$/;
 
-  const input = () =>{
-    btn.style.display = 'none';
-    updateBtn.style.display = 'block';
-    nickText.style.display = 'none';
-    nickInput.setAttribute("type", "text");
-    nickInput.value= nick;
-  }
+  setBtn.addEventListener("click", ()=>{
+    setBtn.style.display = "none";
+    divNick.style.display = "none";
+    checkBtn.style.display = "block";
+    inputNick.value = nick;
+    inputNick.setAttribute("type", "text");
+  });
 
-  const update = () =>{
-    btn.style.display = 'block';
-    updateBtn.style.display = 'none';
-    nickText.style.display = 'block';
-    nickInput.setAttribute("type", "hidden");
-  }
+  checkBtn.addEventListener("click", function () {
+  const nickName = inputNick.value;
+  fetch("/nickcheck", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nickName }),
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.text(); // 서버로부터 받은 text 데이터
+      } else {
+        throw new Error("서버 응답 오류");
+      }
+    })
+    .then((data) => {
+      if (nickRegex.test(nickName)) {
+        if (data == "true") {
+          nickMsg.textContent = "사용 가능합니다.";
+          checkBtn.style.display = "none";
+          updateBtn.style.display = "block";
+          return true;
+        } else {
+          nickMsg.textContent = "이미 사용중인 닉네임입니다.";
+          return false;
+        }
+      }
+    })
+    .catch((error) => console.log(error));
+});
+
+  deleteBtn.addEventListener("click", function () {
+  let inputPw = prompt("비밀번호를 입력해주세요."+"");
+  alert(inputPw);
+  alert(email);
+  fetch("/deletepwcheck", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      password : inputPw,
+      email : email
+    }),
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json(); // 서버로부터 받은 JSON 데이터
+      } else {
+        throw new Error("서버 응답 오류");
+      }
+    })
+    .then((data) => {
+      if (data === false) {
+        alert("비밀번호가 맞지 않습니다.");
+      } else if (confirm("정말 삭제하시겠습니까?")) {
+        deleteFrm.submit();
+      }
+    })
+    .catch((error) => console.log(error));
+});
+
+
+
 
 </script>
 </body>

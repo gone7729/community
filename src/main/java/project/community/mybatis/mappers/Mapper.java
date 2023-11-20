@@ -41,6 +41,7 @@ public interface Mapper {
     Code checkCode(String code);
     int findCode(String code);
     void deleteCode(String code);
+    void deleteUser(String email);
 
     //코맨트
     void insertComment(Object obj);

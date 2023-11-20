@@ -27,43 +27,33 @@
           <div id="find-box">
             <a id="find">아이디/비밀번호 찾기</a>
           </div>
-          <div id="save-box">
-            <div id="save-email-box">
-              <input id="save-email" type="checkbox" name="save-email">
-              <span>이메일 저장하기</span>
-            </div>
-            <div id="save-login-box">
-              <input id="save-login" type="checkbox" name="save-login">
-              <span>로그인 유지하기</span>
-            </div>
-          </div>
           <div id="login-btn-box">
             <button class="login-btn">로그인</button>
             <button formaction="/account" class="login-btn">회원 가입</button>
           </div>
         </div>
       </div>
-      <div class="email-login-box">
-        <div id="sns-login-title">
-          <span>소셜 로그인</span>
-        </div>
-        <div id="sns-box">
-          <button type="button" class="sns-btn">
-            <a th:href="@{/account/auth/{Sosial}/callback(Sosial=${google}}">
-            <img class="sns-btn-img" src="/img/GoogleLogo.svg">
-            <span class="sns-btn-text">구글 로그인</span>
-            </a>
-          </button>
-          <button type="button" class="sns-btn">
-            <img class="sns-btn-img" src="/img/GoogleLogo.svg">
-            <span class="sns-btn-text">구글 로그인</span>
-          </button>
-          <button type="button" class="sns-btn">
-            <img class="sns-btn-img" src="/img/GoogleLogo.svg">
-            <span class="sns-btn-text">구글 로그인</span>
-          </button>
-        </div>
-      </div>
+<!--      <div class="email-login-box">-->
+<!--        <div id="sns-login-title">-->
+<!--          <span>소셜 로그인</span>-->
+<!--        </div>-->
+<!--        <div id="sns-box">-->
+<!--          <button type="button" class="sns-btn">-->
+<!--            <a th:href="@{/account/auth/{Sosial}/callback(Sosial=${google}}">-->
+<!--            <img class="sns-btn-img" src="/img/GoogleLogo.svg">-->
+<!--            <span class="sns-btn-text">구글 로그인</span>-->
+<!--            </a>-->
+<!--          </button>-->
+<!--          <button type="button" class="sns-btn">-->
+<!--            <img class="sns-btn-img" src="/img/GoogleLogo.svg">-->
+<!--            <span class="sns-btn-text">구글 로그인</span>-->
+<!--          </button>-->
+<!--          <button type="button" class="sns-btn">-->
+<!--            <img class="sns-btn-img" src="/img/GoogleLogo.svg">-->
+<!--            <span class="sns-btn-text">구글 로그인</span>-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </div>-->
     </form>
   </main>
 </body>

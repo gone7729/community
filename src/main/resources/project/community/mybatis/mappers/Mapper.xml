@@ -250,4 +250,9 @@
             </if>
         </where>
     </select>
+
+    <delete id="deleteUser">
+        delete from member_tb
+        where email = #{email};
+    </delete>
 </mapper>

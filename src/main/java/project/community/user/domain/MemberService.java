@@ -54,4 +54,7 @@ public class MemberService {
         return memberDao.checkCode(code);
     }
     public int findCode(String code){return memberDao.findCode(code);}
+    public void deleteUser(String email){
+        this.memberDao.deleteUser(email);
+    }
 }

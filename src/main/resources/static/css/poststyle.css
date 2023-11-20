@@ -116,12 +116,17 @@ main {
 }
 
 .post-btm-btn{
-    width: 70px;
-    height: 36px;
+    width: 60px;
+    height: 34px;
     letter-spacing: -1px;
     background-color: white;
     border: 1px #7B7777 solid;
     border-radius: 12px;
+}
+
+.post-btm-btn:hover{
+    cursor:pointer;
+    background-color: #ededed;
 }
 
 #post-cmt-box{
@@ -465,3 +470,26 @@ display: flex;
     display: block;
     margin-left: 16px;
 }
+
+.cmt-up-btn{
+    border-radius: 7px;
+    border: 1px black solid;
+    background-color: white;
+}
+
+.cmt-down-btn{
+    border-radius: 7px;
+    border: 1px black solid;
+    background-color: white;
+}
+
+.cmt-up-btn:hover{
+    cursor:pointer;
+    background-color: #ededed;
+}
+
+.cmt-down-btn:hover{
+    cursor:pointer;
+    background-color: #ededed;
+}
+

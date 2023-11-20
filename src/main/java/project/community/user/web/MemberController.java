@@ -1,6 +1,7 @@
 package project.community.user.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +11,7 @@ import project.community.user.domain.Code;
 import project.community.user.domain.MemberDao;
 import project.community.user.domain.MemberService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.SecureRandom;
@@ -21,6 +23,8 @@ import java.util.UUID;
 public class MemberController {
     MemberService memberService;
     MailManager mailManager;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public MemberController(MemberService memberService, MailManager mailManager) {
@@ -101,13 +105,28 @@ public class MemberController {
         return result;
     }
 
-    @PostMapping("userupdate")
-    public String userUpdate(Model model, MemberDto memberDto, HttpSession session) {
+    @PostMapping("nickcheck")
+    @ResponseBody
+    public boolean nickCheck(@RequestBody MemberDto memberDto, BindingResult bindingResult){
+        if (memberService.findNick(memberDto.getNickName()) == 1) {
+            return false;
+        }
+        return true;
+    }
 
+    @PostMapping("userupdate")
+    public String userUpdate(@Valid MemberDto memberDto, BindingResult bindingResult, Model model, HttpSession session, HttpServletRequest request) {
+        System.out.println(memberDto.getEmail());
+        if (memberService.findNick(memberDto.getNickName()) == 1) {
+            bindingResult.reject("nick",  "이미 존재하는 닉네임입니다.");
+            return "user/member";
+        }
         memberService.updateMember(memberDto);
         memberDto = memberService.memberInfo(memberDto);
+
+        session = request.getSession(false);
         session.setAttribute("user", memberDto);
-        model.addAttribute("member", session.getAttribute("user"));
+        model.addAttribute("member", memberDto);
         return "user/member";
     }
 
@@ -151,5 +170,26 @@ public class MemberController {
             return "인증 되었습니다.";
         }
         return "코드가 올바르지 않습니다.";
+    }
+
+    @PostMapping("deletepwcheck")
+    @ResponseBody
+    public boolean userDelete(@RequestBody MemberDto memberDto){
+        String password = memberDto.getPassword();
+        System.out.println(!bCryptPasswordEncoder.matches(password+memberDto.getSalt(), memberDto.getPassword()));
+        memberDto = memberService.memberInfo(memberDto);
+        System.out.println(memberDto);
+        if (!bCryptPasswordEncoder.matches(password+memberDto.getSalt(), memberDto.getPassword())){
+            return false;
+        }
+        return true;
+    }
+
+    @PostMapping("deleteuser")
+    public String deleteUser(MemberDto memberDto, HttpSession session, HttpServletRequest request){
+        memberService.deleteUser(memberDto.getEmail());
+        session = request.getSession(false);
+        session.removeAttribute("user");
+        return "redirect:"+"/";
     }
 }

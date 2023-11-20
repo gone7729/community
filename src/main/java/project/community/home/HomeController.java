@@ -49,9 +49,10 @@ public class HomeController {
     }
 
     @RequestMapping("member")
-    public String member(HttpSession session, HttpServletRequest request, Model model){
+    public String member(HttpSession session, HttpServletRequest request, MemberDto memberDto, Model model){
         session = request.getSession(false);
-        model.addAttribute("member", session.getAttribute("user"));
+        memberDto = (MemberDto) session.getAttribute("user");
+        model.addAttribute("member", memberDto);
         return "user/member";
     }
 

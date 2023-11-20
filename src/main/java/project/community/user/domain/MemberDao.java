@@ -43,4 +43,7 @@ public class MemberDao {
     public void deleteCode(String code){
         this.mapper.deleteCode(code);
     }
+    public void deleteUser(String email){
+        this.mapper.deleteUser(email);
+    }
 }
