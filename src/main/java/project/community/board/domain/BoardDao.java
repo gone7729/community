@@ -47,11 +47,11 @@ public class BoardDao {
     public void deleteBoard(BoardDto boardDto){
         this.mapper.deleteBoard(boardDto);
     }
-    public List<CommentDto> findCmt(CommentDto commentDto){
-        return mapper.findCmt(commentDto);
+    public List<CommentDto> findCmt(int board_uid){
+        return mapper.findCmt(board_uid);
     }
     public List<ReplyDto> findReply(ReplyDto replyDto){
-        return mapper.findReply(replyDto);
+        return mapper.findReply(replyDto.getCmt_uid());
     }
     public void viewUp(int uid){this.mapper.viewUp(uid);}
     public void boardPointUp(BoardRecDto boardRecDto){this.mapper.boardPointUp(boardRecDto);}

@@ -47,8 +47,8 @@ public interface Mapper {
     void insertComment(Object obj);
     void updateCmt(Object obj);
     void deleteCmt(Object obj);
-    List<CommentDto> findCmt(CommentDto commentDto);
-    List<ReplyDto> findReply(ReplyDto replyDto);
+    List<CommentDto> findCmt(int board_uid);
+    List<ReplyDto> findReply(int cmt_uid);
     void insertReply(Object obj);
     void updateReply(Object obj);
     void deleteReply(Object obj);

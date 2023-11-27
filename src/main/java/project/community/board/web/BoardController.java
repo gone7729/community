@@ -69,15 +69,22 @@ public class BoardController {
         int pageCount = 10;
         Paging paging = new Paging(total, nowPage, pageSize, pageCount);
 
-        commentDto.setBoard_uid(uid);
+
         List<CommentDto> commentList = new ArrayList<>();
         List<ReplyDto> replyList = new ArrayList<>();
-        if (boardService.findCmt(commentDto) != null){
-            commentList = boardService.findCmt(commentDto);
+        commentList = boardService.findCmt(uid);
+        System.out.println(commentList);
+        System.out.println(commentList.iterator().next().getUid());
+
+        if (commentList.get(0) != null){
+            model.addAttribute("cmt", commentList);
             for (CommentDto comment : commentList) {
                 replyDto.setCmt_uid(comment.getUid());
-                List<ReplyDto> repliesForComment = boardService.findReply(replyDto);
-                replyList.addAll(repliesForComment);
+                if (boardService.findReply(replyDto) != null){
+                    List<ReplyDto> repliesForComment = boardService.findReply(replyDto);
+                    replyList.addAll(repliesForComment);
+                    model.addAttribute("reply", replyList);
+                }
             }
         }
 
@@ -96,8 +103,6 @@ public class BoardController {
         model.addAttribute("boardPagingList", boardService.findBoardList(boardDto));
         model.addAttribute("paging", paging);
         model.addAttribute("posting", boardService.findBoard(boardDto));
-        model.addAttribute("cmt", commentList);
-        model.addAttribute("reply", replyList);
         model.addAttribute("member", session.getAttribute("user"));
         return "board/posting";
     }

@@ -22,6 +22,4 @@ public class AsyncInterceptor implements AsyncHandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         AsyncHandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
     }
-
-
 }

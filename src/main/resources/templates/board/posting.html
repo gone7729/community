@@ -85,7 +85,7 @@
         <div class="cmt-main">
           <div class="cmt-main-left">
             <div class="cmt-main-nick">
-              <span th:text="${cmtList.writer}">닉네임</span>
+              <span th:text="${cmtList.writer}"></span>
             </div>
             <div id="btn-box" th:if="${member != null && (member.nickName == cmtList.writer)}">
             <button style="display: block;" type="button" class="cmt-main-update"> 수정</button>
@@ -153,10 +153,10 @@
                 <p class="reply-content" style="display: block;" th:utext="${replyList.content}"></p>
               </form>
               <div class="cmt-main-btn-box">
-                <button class="cmt-main-btn">
+                <button class="rpl-up-btn">
                   <img class="cmt-up-img" src="/img/minup.svg" alt="x">
                 </button>
-                <button class="cmt-main-btn">
+                <button class="rpl-down-btn">
                   <img class="cmt-down-img" src="/img/mindown.svg" alt="x">
                 </button>
                 <button type="button" class="cmt-report-btn">신고</button>

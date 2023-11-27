@@ -483,6 +483,18 @@ display: flex;
     background-color: white;
 }
 
+.rpl-up-btn{
+    border-radius: 7px;
+    border: 1px black solid;
+    background-color: white;
+}
+
+.rpl-down-btn{
+    border-radius: 7px;
+    border: 1px black solid;
+    background-color: white;
+}
+
 .cmt-up-btn:hover{
     cursor:pointer;
     background-color: #ededed;

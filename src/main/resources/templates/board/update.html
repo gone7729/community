@@ -51,9 +51,9 @@
             </div>
         </div>
         <div id="content-btm">
-            <button class="btm-btn" th:formaction="@{/boardpaging}">
+            <a class="btm-btn" th:href="@{/boardpaging}">
                 <span>취소</span>
-            </button>
+            </a>
             <input type="hidden" name="uid" th:value="${posting.uid}">
             <button type="button" class="btm-btn" id="insert_btn">수정</button>
         </div>

@@ -36,7 +36,6 @@ public class AuthController {
 
         memberDto = authService.singIn(memberDto);
         String prevPage = (String) request.getSession().getAttribute("prevPage");
-        System.out.println(prevPage);
 
         if (memberService.findEmail(email) == 0) {
             bindingResult.reject("loginEmail",  "이메일 혹은 비밀번호를 틀렸습니다.");

@@ -62,8 +62,8 @@ public class BoardService {
     public void deleteBoard(BoardDto boardDto){
         this.boardDao.deleteBoard(boardDto);
     }
-    public List<CommentDto> findCmt(CommentDto commentDto){
-        return boardDao.findCmt(commentDto);
+    public List<CommentDto> findCmt(int board_uid){
+        return boardDao.findCmt(board_uid);
     }
     public List<ReplyDto> findReply(ReplyDto replyDto){
         return boardDao.findReply(replyDto);

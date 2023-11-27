@@ -51,7 +51,7 @@
             <p class="write-valid" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
         </div>
         <div id="content-btm">
-            <button class="btm-btn" th:formaction="@{/boardpaging}">
+            <button  class="btm-btn" th:formaction="@{/boardpaging}">
                 <span>취소</span>
             </button>
             <button type="button" id="insert_btn" class="btm-btn">
